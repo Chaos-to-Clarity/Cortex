@@ -136,7 +136,7 @@ For free plans, or if you only want some skills:
 
 **Claude Code:** `/plugin install cortex --marketplace chaostoclarity/cortex`
 
-Cortex is also in the [Chaos to Clarity skills marketplace](https://github.com/chaostoclarity/Claude-skills), next to **Founder OS**, the weekly operating system that runs on it.
+Cortex is also in the [Chaos to Clarity skills marketplace](https://github.com/chaostoclarity/C2C-skills), next to **Founder OS**, the weekly operating system that runs on it.
 
 ## The spec
 
