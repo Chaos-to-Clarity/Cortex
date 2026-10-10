@@ -84,7 +84,15 @@ Create the Cortex Map page or file at the top of the parent, in the exact format
 
 ## Step 8. Custom instructions
 
-Generate the custom-instructions text from spec section 12 with the direct link to their Map filled in. Show it in a code block and tell them where to paste it: Claude (Settings, then Profile) and ChatGPT (Custom instructions). This is what makes every conversation start from the Map instead of searching.
+This step gives every AI conversation, on any platform, awareness of the Cortex without a lookup in every chat.
+
+1. Fill in the template from spec section 12: the backend, the Map's direct link, and a two-line Snapshot from the Synthesis and the top Active people and initiatives. Keep the whole text under 1,000 characters.
+2. Show it in a code block, ready to copy.
+3. Tell them where it goes, in one short list:
+   - **Claude:** Settings, then Profile, in the preferences field
+   - **ChatGPT, Gemini, Grok, or any other assistant:** its custom instructions or personalization setting
+   - Each assistant also needs a connector to wherever the Cortex lives (Notion or Google Drive, for example), or it can't read the Map. Obsidian and local folders are reachable only from assistants with access to that computer.
+4. Ask them to paste it now, before moving on. It's the step that makes the Cortex work everywhere.
 
 ## Step 9. Offer the weekly routine
 

@@ -2,29 +2,92 @@
 
 **The context layer your AI reads first.**
 
-Every AI conversation starts from zero: who your people are, what you're driving, what you already decided. Cortex gives your AI a structured, always-current memory of your business that lives in your own tools, and a Map that tells any assistant exactly where to look and where to file things.
+Every AI conversation starts from zero: who your people are, what you're driving, what you already decided. Cortex gives every assistant you use (Claude, ChatGPT, Gemini, Grok) one shared, always-current memory of your business. It lives in your own tools, and a Map tells any AI exactly where to look and where to file things.
 
 Built by Eric Weiss at [Chaos to Clarity](https://chaostoclarity.io).
 
-## Why a Map
+## Quick start: 3 steps, about 30 minutes
 
-Writing context into a store is easy. Finding the right context in a store that keeps growing, that's shaped differently for every business, and that many agents write to is the hard part. Without structure, every conversation sifts the whole thing, burns tokens, and still answers from the wrong or incomplete pieces.
+**1. Install Cortex in Claude** (paid plan)
+
+In the Claude app, open **Customize**, then **Plugins**, then **Add**, **Add marketplace**, **Add from a repository**. Enter:
+
+```
+chaostoclarity/Cortex
+```
+
+Then add the **Cortex** plugin. On a free plan, or if you prefer single skills, see [Install one skill at a time](#install-one-skill-at-a-time).
+
+**2. Build your Cortex**
+
+Start a new chat and say:
+
+> Set up my Cortex.
+
+Claude asks where to keep it (Notion, Obsidian, or Google Drive), connects your calendar, meeting notes, and email, builds everything, and interviews you to fill it. Answer in your own words; it pushes for specifics. When it's done, it hands you your custom instructions, filled in.
+
+**3. Paste your custom instructions everywhere you use AI**
+
+This is what makes Cortex universal. See the next section. Paste once per assistant and you're done.
+
+That's it. From then on, ask anything: "Prep me for my call with Sam," "What's at risk this week?", "Here's a doc, add it to my Cortex." Schedule **cortex-update** weekly when setup offers, and the Cortex keeps itself current.
+
+Already have a "second brain" in Notion or Obsidian? In step 2, say **"Adopt my existing setup as a Cortex"** instead. Nothing gets moved or renamed.
+
+## Custom instructions: make every AI aware of your Cortex
+
+Setup gives you this text with your details and Map link already filled in. Here's the template:
+
+```text
+## My Cortex
+My business context lives in my Cortex, a structured knowledge base in [Notion]. Map: [link to your Cortex Map]
+
+Snapshot (no lookup needed): [Name], [role] at [company]. Focus now: [top 2-3 priorities]. Key people: [3-5 names].
+
+When to look: only when my request is about my business, people, clients, projects, decisions, or priorities AND the answer would be clearly better or safer with that context (I name someone or something, want advice on my situation, or ask you to draft, plan, or prep). Skip it for general questions, generic writing, or code, or when this chat already has what you need. If unsure, ask me in one line instead of looking.
+
+How: read the Map once per chat and reuse it. Use its Glossary and Catalogs to open only the few records you need; never search my whole workspace. Cite what you used and its date. If it isn't there, say so. If you can't reach it, tell me once and carry on.
+```
+
+**Where to paste it**
+
+| Assistant | Where |
+| --- | --- |
+| Claude | Settings, then Profile, in the preferences field |
+| ChatGPT | Settings, then Personalization, in Custom instructions |
+| Gemini, Grok, and others | The custom instructions or personalization setting |
+| Any project or custom GPT | Its project instructions, if you want Cortex there too |
+
+**Each assistant needs a connector** to wherever your Cortex lives, Notion or Google Drive for example, or it can't read the Map. Obsidian and local folders are only reachable from assistants that can see that computer.
+
+**Why it stays lightweight**
+
+Most chats don't need your business context, and none should pay for a lookup they don't need. The instructions are built for that:
+
+- **The Snapshot** answers basic "who am I, what's my focus" context with no lookup at all.
+- **The gate** means the AI looks only when your request is about your business and the answer would be clearly better with the context. If it's unsure, it asks you in one line instead of fetching.
+- **Cheapest step first.** One Map read per chat, reused after that. Catalogs only for names that matched, and records only for the few that matter. No searching your workspace.
+- **It fits.** Under 1,000 characters, so it fits every platform's limit with room for your other preferences.
+
+When your priorities shift, the weekly update gives you a refreshed Snapshot line to paste.
+
+## How it works
+
+Writing context into a store is easy. Finding the right context in a store that keeps growing, that's shaped differently for every business, and that many agents write to is the hard part. Without structure, every conversation sifts everything, burns tokens, and still answers from the wrong or incomplete pieces.
 
 Cortex reads in three layers, top-down:
 
 | Layer | What it is | Read |
 | --- | --- | --- |
-| **Map** | One page: every collection and where it lives, routing rules for finding and filing, a glossary of your names and nicknames, and how fresh everything is | First, every time |
+| **Map** | One page: every collection and where it lives, routing rules for finding and filing, a glossary of your names and nicknames, and how fresh everything is | First, once per chat |
 | **Catalogs** | One compact line per record: name, aliases, status, one-line summary | To pick records |
 | **Records** | The full detail, current state on top, dated history below | Only the ones picked |
-
-A typical question costs one Map read, a catalog or two, and two or three records. No searching.
 
 Writes follow the same Map: route it, match it to the existing record by name or alias, update it in place, update its catalog line, log it. Anything unclear goes to an **Inbox** instead of being guessed. A weekly health check keeps catalogs accurate, flags stale records and likely duplicates, and keeps the Map small.
 
 The rules are universal and live in the skills. Your Map, catalogs, and glossary are unique to your business and grow with it.
 
-## What it stores
+### What it stores
 
 | Collection | Holds |
 | --- | --- |
@@ -36,23 +99,11 @@ The rules are universal and live in the skills. Your Map, catalogs, and glossary
 
 Plus **Strategy** and **Standing Context** pages, and any collections you add (Customers, Pipeline, Portfolio). Register them on the Map and every skill uses them.
 
-## Where it lives
+### Where it lives
 
 You choose during setup: **Notion**, **Obsidian**, **Markdown in Google Drive**, a local folder, or another tool Claude can connect to. Same structure and rules everywhere.
 
-## Install
-
-**Claude app** (paid plans): open **Customize**, then **Plugins**, then **Add**, **Add marketplace**, **Add from a repository**, and enter `chaostoclarity/Cortex`. Then add the Cortex plugin.
-
-**Claude Code**
-
-```
-/plugin install cortex --marketplace chaostoclarity/cortex
-```
-
-Cortex is also listed in the [Chaos to Clarity skills marketplace](https://github.com/chaostoclarity/Claude-skills), alongside Founder OS, which runs on it.
-
-**One skill at a time:** download a ZIP below, then in Claude open **Customize**, **Skills**, **Create skill**, **Upload a skill**.
+### The skills
 
 | Skill | Use it | Download |
 | --- | --- | --- |
@@ -63,14 +114,17 @@ Cortex is also listed in the [Chaos to Clarity skills marketplace](https://githu
 | cortex-update | Weekly, on a schedule | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-update.zip) |
 | ask-cortex | Any question about your work | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/ask-cortex.zip) |
 
-## Get started
+## Install one skill at a time
 
-1. Say **"Set up my Cortex."** It asks where to store it, connects your sources, builds everything, and interviews you to fill it.
-2. Paste the custom instructions it gives you into Claude (Settings, then Profile) and ChatGPT (Custom instructions). Every conversation then starts from your Map, with a direct link, so nothing searches.
-3. Say **"Digest my strategy docs"**, then ask anything: **"Prep me for my call with Sam."**
-4. Let **cortex-update** run weekly. It keeps everything current and clean.
+For free plans, or if you only want some skills:
 
-Already have a "second brain" in Notion or Obsidian? Say **"Adopt my existing setup as a Cortex."** cortex-map registers what's there without moving anything.
+1. Click a **ZIP** link in the table above. Don't unzip it.
+2. In Claude, open **Customize**, then **Skills**, then **Create skill**, then **Upload a skill**, and choose the ZIP.
+3. Repeat for each skill. Start with cortex-setup.
+
+**Claude Code:** `/plugin install cortex --marketplace chaostoclarity/cortex`
+
+Cortex is also in the [Chaos to Clarity skills marketplace](https://github.com/chaostoclarity/Claude-skills), next to **Founder OS**, the weekly operating system that runs on it.
 
 ## The spec
 

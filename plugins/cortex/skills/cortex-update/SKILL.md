@@ -78,7 +78,7 @@ Run every check in spec section 10. Fix what's safe: catalog drift, missing Summ
 ## Step 9. Refresh the Map
 
 - **Freshness:** last processed date per source, record counts, Inbox count, today's date.
-- **Synthesis:** if the week shifted the big picture, rewrite the paragraph. Otherwise leave it.
+- **Synthesis:** if the week shifted the big picture, rewrite the paragraph and draft a refreshed Snapshot for the user's custom instructions (spec section 12). Otherwise leave it.
 
 Don't change the Map's structure here. If a new collection or broken pointer needs it, recommend cortex-map.
 
@@ -91,3 +91,4 @@ A short table or a tight paragraph:
 - Inbox: filed, discarded, waiting (with the questions)
 - Health: fixed, and what needs the user (stale records, likely duplicates)
 - Sources that were unavailable
+- If priorities shifted: the refreshed Snapshot line, ready to paste into their custom instructions

@@ -318,12 +318,30 @@ These apply to every read and write. If the user keeps a Cortex Schema page with
 - **Durable only.** Task noise belongs in Founder OS or a task tool.
 - **Cite and date.** Answers name the records they used and how fresh they are.
 
-## 12. Using a Cortex outside these skills
+## 12. Global awareness: custom instructions
 
-Any assistant with a connector to the user's store can use a Cortex: the Map tells it how. Setup generates custom instructions with a direct link to the Map so no one has to search for it:
+Any AI assistant that can reach the user's store can use a Cortex. Custom instructions give every conversation, on any platform, awareness that the Cortex exists, without making every chat pay for a lookup.
+
+**Design rules**
+
+- **Aware always, fetch rarely.** Most chats don't need business context. The instructions carry a tiny Snapshot the assistant can use with no lookup, plus a gate for when a lookup is worth it.
+- **The gate.** Look only when the request is about the user's business, people, clients, projects, decisions, or priorities, *and* the answer would be clearly better or safer with that context. If unsure, ask in one line instead of fetching.
+- **Cheapest step first.** The Map, once per conversation, reused after that. Catalogs only for names or topics that matched. Records only for the few that matter.
+- **Direct link.** The Map's URL is in the instructions, so finding it never takes a search.
+- **Under 1,000 characters,** so it fits every platform's custom-instructions limit with room for the user's own preferences.
+- **Fail quietly.** If the assistant can't reach the store, it says so once and carries on.
+
+**Template.** cortex-setup fills in the brackets: the backend, the Map's direct link, and a Snapshot drawn from the Map's Synthesis and the top Active people and initiatives. Keep the Snapshot to two short lines.
 
 ```text
-My business context lives in my Cortex. For anything that needs context about my work, people, priorities, or past decisions, first read my Cortex Map: <direct link>. Follow its Glossary, Routing, and Catalogs to open only the records you need; don't search my workspace. Cite the records you used and their dates. If something isn't in the Cortex, say so. When I share something worth keeping, file it the way the Map's Writing rules say.
+## My Cortex
+My business context lives in my Cortex, a structured knowledge base in [Notion]. Map: [link to your Cortex Map]
+
+Snapshot (no lookup needed): [Name], [role] at [company]. Focus now: [top 2-3 priorities]. Key people: [3-5 names].
+
+When to look: only when my request is about my business, people, clients, projects, decisions, or priorities AND the answer would be clearly better or safer with that context (I name someone or something, want advice on my situation, or ask you to draft, plan, or prep). Skip it for general questions, generic writing, or code, or when this chat already has what you need. If unsure, ask me in one line instead of looking.
+
+How: read the Map once per chat and reuse it. Use its Glossary and Catalogs to open only the few records you need; never search my whole workspace. Cite what you used and its date. If it isn't there, say so. If you can't reach it, tell me once and carry on.
 ```
 
-Paste it into Claude (Settings, then Profile, in the instructions field) and into ChatGPT (Custom instructions). Keep the link current if the Map moves.
+**Keeping it current.** The Snapshot is the only part that goes stale. When cortex-update rewrites the Synthesis because priorities shifted, it includes a refreshed Snapshot line in its report for the user to paste. The Map link changes only if the Map moves; cortex-map reports the new text when it does.
