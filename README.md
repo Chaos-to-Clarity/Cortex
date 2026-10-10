@@ -6,6 +6,8 @@ Every AI conversation starts from zero: who your people are, what you're driving
 
 Built by Eric Weiss at [Chaos to Clarity](https://chaostoclarity.io).
 
+Want help putting this to work in your company? [Work with Eric.](#work-with-eric)
+
 ## Quick start: 3 steps, about 30 minutes
 
 **1. Install Cortex in Claude** (paid plan)
@@ -136,6 +138,22 @@ Cortex is also in the [Chaos to Clarity skills marketplace](https://github.com/c
 ## The spec
 
 [`spec/cortex-spec.md`](spec/cortex-spec.md) is the full contract: the Map format, record and catalog formats, the reading and writing protocols, backends, and the health check. Any agent that follows it can use a Cortex.
+
+## Work with Eric
+
+Cortex is one of the systems teams build in the Full-Stack AI Operating System, alongside a working AI strategy for the whole company.
+
+I'm Eric Weiss, founder of Chaos to Clarity. I've spent ten years coaching more than 70 technical founders and CTOs at venture-backed companies, and every skill here came out of that work. There are a few ways I can help you go further.
+
+**Executive coaching.** I coach founders and CTOs whose companies are growing faster than their leadership. Together we find the real bottleneck, name what you're tolerating, and build the habits and systems that let the company scale without routing everything through you.
+
+**AI strategy.** I help leadership teams decide where AI belongs in the business, set the guardrails, and get their people using it well. I was an engineering leader and CTO before I became a coach, and I helped OpenAI operationalize its GPT models.
+
+**AI products with a human edge.** I work with product teams to build AI into what they ship while keeping judgment, taste, and relationships in human hands.
+
+**The Full-Stack AI Operating System.** This 12-week bootcamp is for founders and their executive teams. You'll build an AI strategy, an AI-native product roadmap, working systems with human checkpoints, and adoption guidelines for your team, and you'll leave with a library of AI skills and a 90-day plan. The program runs as six live workshops and six office hours in small cohorts. [See the program.](https://chaostoclarity.io/ai-os/)
+
+**Let's talk.** [Book a call](https://calendly.com/emweiss/clarity), or email me at [eric@chaostoclarity.io](mailto:eric@chaostoclarity.io). Tell me what you're building and where you're stuck, and I'll reply personally.
 
 ## License
 
