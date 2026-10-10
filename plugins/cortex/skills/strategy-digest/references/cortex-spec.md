@@ -263,6 +263,8 @@ Write in the user's words. Condense. Drop marketing language and filler.
 | Log | Create an Ingest Log row | Append a row to `Ingest Log.md` |
 | Rebuild a catalog | Query the database through a saved view (SQL queries count against usage limits on some Notion plans), write the catalog page | List the folder, read frontmatter, write `_catalog.md` |
 
+**Notion catalogs.** Notion returns page mentions without their titles when a page is read back, so a catalog's Name column is always plain text and the link goes in its own Link cell. Never rely on a mention to carry a name.
+
 **Concurrency.** Several agents may write the same Cortex. Re-read a record or catalog immediately before changing it, and change only your rows. The weekly health check repairs any drift.
 
 ## 9. Markdown layout
