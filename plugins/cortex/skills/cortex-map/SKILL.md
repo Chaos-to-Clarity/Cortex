@@ -82,7 +82,7 @@ Write the Map in the exact format in spec section 4:
 - Routing: the core rules plus one find and one file rule per extension.
 - Glossary from Step 6. Freshness from the Ingest Log's latest date per source type, plus record counts.
 - Keep the existing Synthesis if there is one.
-- Check the size. Over 6,000 characters: trim the glossary to the most-referenced terms and tighten Synthesis.
+- Check the size. Over 10,000 characters: trim the glossary to the most-referenced terms and tighten Synthesis.
 
 ## Import mode
 

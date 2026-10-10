@@ -12,7 +12,7 @@ Writing to a store is easy. Finding the right context in a growing, unique, many
 
 | Layer | What it is | Size | When it's read |
 | --- | --- | --- | --- |
-| **Map** | One page: settings, every collection and where it lives, routing rules, a glossary of key names, freshness | Under 6,000 characters | First, on every use |
+| **Map** | One page: settings, every collection and where it lives, routing rules, a glossary of key names, freshness | Under 10,000 characters (about 2,500 tokens) | First, on every use |
 | **Catalogs** | One compact table per collection, one line per record | About 150 characters per row | To choose which records to open |
 | **Records** | The full detail on one person, initiative, decision, or item | Any | Only the records chosen |
 
@@ -186,7 +186,7 @@ Records: <People 42 active, 10 archived; Initiatives 9 active; ...>. Inbox: <n> 
 
 ### Budget and ownership
 
-- Keep the Map under 6,000 characters. The glossary holds the 50 terms that matter most; when it's full, the least-referenced Archived or Dormant terms drop first (their records keep their Aliases, so catalogs still find them).
+- Keep the Map under 10,000 characters (about 2,500 tokens), counting any table markup the backend adds. The glossary holds the 50 terms that matter most; when it's full, the least-referenced Archived or Dormant terms drop first (their records keep their Aliases, so catalogs still find them).
 - **Structure** (Settings, Collections, Routing, Field map) changes only through cortex-setup or cortex-map, or when a user approves a new collection.
 - **Any writer** may add a Glossary row for a new key entity or nickname, while the glossary has room.
 - **cortex-update** maintains Synthesis and Freshness.
@@ -261,7 +261,7 @@ Write in the user's words. Condense. Drop marketing language and filler.
 | Update a record | Fetch fresh, update only changed fields, append to History | Read, change frontmatter and body, write back |
 | Update a catalog row | Edit that row on the catalog page | Edit that row in `_catalog.md` |
 | Log | Create an Ingest Log row | Append a row to `Ingest Log.md` |
-| Rebuild a catalog | Query the database, write the catalog page | List the folder, read frontmatter, write `_catalog.md` |
+| Rebuild a catalog | Query the database through a saved view (SQL queries count against usage limits on some Notion plans), write the catalog page | List the folder, read frontmatter, write `_catalog.md` |
 
 **Concurrency.** Several agents may write the same Cortex. Re-read a record or catalog immediately before changing it, and change only your rows. The weekly health check repairs any drift.
 
@@ -333,7 +333,7 @@ Run by cortex-update each week and by cortex-map on demand. Fix what's safe to f
 | Active records not updated in `health.stale_after_days` | List them for the user to confirm, close, or refresh |
 | Alias collisions (two records share a name or alias) | Report as likely duplicates; merge only with a yes |
 | Inbox items waiting | Triage: file the clear ones, report the rest |
-| Map over 6,000 characters | Trim the glossary and Synthesis |
+| Map over 10,000 characters | Trim the glossary and Synthesis |
 | Collections in the store that the Map doesn't list | Report them; offer cortex-map to register them |
 | Broken Map pointers | Report; offer cortex-map to repair |
 
