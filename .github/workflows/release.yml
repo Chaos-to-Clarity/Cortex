@@ -12,6 +12,7 @@ on:
       - "plugins/**"
       - "spec/**"
       - ".claude-plugin/**"
+      - "LICENSE.md"
   workflow_dispatch:
 
 permissions:

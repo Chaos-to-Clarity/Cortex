@@ -132,6 +132,9 @@ def build(folder: Path) -> Path:
             if path.is_dir() or any(part in SKIP_NAMES for part in path.parts):
                 continue
             zf.write(path, Path(folder.name) / path.relative_to(folder))
+        license_file = ROOT / "LICENSE.md"
+        if license_file.exists():
+            zf.write(license_file, Path(folder.name) / "LICENSE.md")
     return out
 
 

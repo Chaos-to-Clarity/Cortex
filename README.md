@@ -76,6 +76,17 @@ Already have a "second brain" in Notion or Obsidian? Say **"Adopt my existing se
 
 [`spec/cortex-spec.md`](spec/cortex-spec.md) is the full contract: the Map format, record and catalog formats, the reading and writing protocols, backends, and the health check. Any agent that follows it can use a Cortex.
 
+## License
+
+Free to use and adapt inside your own business. Not for resale, redistribution, or sharing.
+
+These skills are licensed under the [PolyForm Internal Use License 1.0.0](LICENSE.md). In plain terms:
+
+- **You can** install them, run them for your own company's internal operations, and change them to fit how you work.
+- **You can't** share or distribute them, sublicense them, sell them, or package them into a product or service for others.
+
+For other uses, such as rolling them out to clients or teaching them, contact Eric at [chaostoclarity.io](https://chaostoclarity.io).
+
 ## For maintainers
 
 - Skills live in `plugins/cortex/skills/<name>/SKILL.md`.
