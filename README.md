@@ -62,7 +62,7 @@ How: read the Map once per chat and reuse it. Use its Glossary and Catalogs to o
 
 | Assistant | Where |
 | --- | --- |
-| Claude | Settings, then Profile, in the preferences field |
+| Claude | Settings, in "Instructions for Claude" |
 | ChatGPT | Settings, then Personalization, in Custom instructions |
 | Gemini, Grok, and others | The custom instructions or personalization setting |
 | Any project or custom GPT | Its project instructions, if you want Cortex there too |

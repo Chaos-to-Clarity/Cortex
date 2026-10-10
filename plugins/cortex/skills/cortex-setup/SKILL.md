@@ -92,7 +92,7 @@ This step gives every AI conversation, on any platform, awareness of the Cortex 
 1. Fill in the template from spec section 14: the backend, the Map's direct link, and one durable line about the user (name, role, company, what it does). No priorities or names of clients or people: those change and belong in the Cortex. Keep the whole text under 1,000 characters.
 2. Show it in a code block, ready to copy.
 3. Tell them where it goes, in one short list:
-   - **Claude:** Settings, then Profile, in the preferences field
+   - **Claude:** Settings, in "Instructions for Claude"
    - **ChatGPT, Gemini, Grok, or any other assistant:** its custom instructions or personalization setting
    - Each assistant also needs a connector to wherever the Cortex lives (Notion or Google Drive, for example), or it can't read the Map. Obsidian and local folders are reachable only from assistants with access to that computer.
 4. Ask them to paste it now, before moving on. It's the step that makes the Cortex work everywhere.
