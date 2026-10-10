@@ -184,6 +184,7 @@ Active and Dormant records. Archived: [People Catalog (Archive)]. 42 rows. Rebui
 | Jane Rivera | Jane R | Active | Acme CRO; renewal decision owner; wants short written updates | 2026-10-10 | <link> |
 ```
 
+- **Key columns.** A collection may add up to three columns it is commonly filtered by, between Status and Summary (Tasks: Due, Priority, Week). List them in the Map's Collections table under Key fields.
 - **Every write updates the catalog row** in the same step as the record. A record missing from its catalog is invisible to readers.
 - **Archive split.** Records with a closed status (Archived, Done, Dropped, Reversed, Superseded, Filed, Discarded) move to "[Collection] Catalog (Archive)". Default reads skip it. Read it only when the question is about history.
 - **Sharding.** When a catalog passes 300 rows, split it by a field that divides it well (Type, Stage, Year) into "[Collection] Catalog: [value]" pages, and list the shards in the Map's Collections table.
