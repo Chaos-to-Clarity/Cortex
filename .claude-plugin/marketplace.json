@@ -1,0 +1,15 @@
+{
+  "name": "cortex",
+  "description": "Cortex, the context layer for founders and their AI, from Chaos to Clarity.",
+  "owner": {
+    "name": "Eric Weiss",
+    "url": "https://chaostoclarity.io"
+  },
+  "plugins": [
+    {
+      "name": "cortex",
+      "source": "./plugins/cortex",
+      "description": "Cortex: the context layer your AI reads first. A Map, catalogs, and records for your people, initiatives, decisions, and strategy, in Notion, Obsidian, or Google Drive."
+    }
+  ]
+}

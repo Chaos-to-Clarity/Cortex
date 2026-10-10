@@ -1,0 +1,18 @@
+{
+  "name": "cortex",
+  "displayName": "Cortex",
+  "description": "Cortex: the context layer your AI reads first. A Map, catalogs, and records for your people, initiatives, decisions, and strategy, in Notion, Obsidian, or Google Drive.",
+  "author": {
+    "name": "Eric Weiss, Chaos to Clarity",
+    "url": "https://chaostoclarity.io"
+  },
+  "homepage": "https://github.com/chaostoclarity/Cortex",
+  "repository": "https://github.com/chaostoclarity/Cortex",
+  "keywords": [
+    "context",
+    "second-brain",
+    "knowledge-base",
+    "notion",
+    "obsidian"
+  ]
+}

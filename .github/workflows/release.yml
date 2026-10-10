@@ -1,0 +1,47 @@
+name: Release skills
+
+# Every push to main that changes a skill builds fresh ZIPs and publishes
+# them as the latest release. Download links of the form
+#   https://github.com/<owner>/<repo>/releases/latest/download/<skill>.zip
+# always point at the newest version.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "plugins/**"
+      - "spec/**"
+      - ".claude-plugin/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check and package skills
+        run: python scripts/build_zips.py
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="v$(date -u +%Y.%m.%d)-$(git rev-parse --short HEAD)"
+          NOTES="Cortex skills updated in this release:
+          $(git diff --name-only HEAD~1 HEAD -- plugins/ 2>/dev/null | cut -d/ -f2 | sort -u | grep -v "^$" | sed 's/^/- /')
+
+          Install: download a ZIP below, then in Claude open Customize, Skills, Create skill, Upload a skill."
+          gh release create "$TAG" dist/*.zip \
+            --title "Cortex $(date -u +%b\ %d,\ %Y)" \
+            --notes "$NOTES" \
+            --latest
