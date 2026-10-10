@@ -1,6 +1,6 @@
 ---
 name: cortex-map
-description: Builds or repairs the user's Cortex Map and catalogs by reading what's actually in their store. Use to adopt an existing setup, register new collections, or fix a broken or bloated Map.
+description: Builds or repairs the user's Cortex Map and catalogs from what's in their store, and regenerates their custom instructions. Use to adopt a setup, register collections, or fix the Map.
 ---
 
 # Cortex Map
@@ -91,4 +91,4 @@ Report:
 - Fields and pages added
 - Catalogs built, and any shards
 - Likely duplicates and unclear collections that need a decision
-- On adopt or first build: the custom-instructions text (spec section 12) with the Map's direct link filled in, and where to paste it
+- On adopt or first build, or whenever the user asks for their custom instructions: the filled-in text from spec section 12 (Map link and Snapshot included, no brackets), ready to paste, and where to paste it

@@ -36,7 +36,12 @@ Already have a "second brain" in Notion or Obsidian? In step 2, say **"Adopt my 
 
 ## Custom instructions: make every AI aware of your Cortex
 
-Setup gives you this text with your details and Map link already filled in. Here's the template:
+**You don't write these yourself.** At the end of setup, Claude gives you your own version, filled in with your Map link and details, ready to copy and paste. Nothing in brackets.
+
+If you lose it, say **"Give me my Cortex custom instructions"** and Claude regenerates it.
+
+<details>
+<summary>See what it looks like</summary>
 
 ```text
 ## My Cortex
@@ -48,6 +53,8 @@ When to look: only when my request is about my business, people, clients, projec
 
 How: read the Map once per chat and reuse it. Use its Glossary and Catalogs to open only the few records you need; never search my whole workspace. Cite what you used and its date. If it isn't there, say so. If you can't reach it, tell me once and carry on.
 ```
+
+</details>
 
 **Where to paste it**
 
