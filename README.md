@@ -34,7 +34,7 @@ This is what makes Cortex universal. See the next section. Paste once per assist
 
 That's it. From then on, ask anything: "Prep me for my call with Sam," "What's at risk this week?", "Here's a doc, add it to my Cortex." Schedule **cortex-update** weekly when setup offers, and the Cortex keeps itself current.
 
-Already have a "second brain" in Notion or Obsidian? In step 2, say **"Adopt my existing setup as a Cortex"** instead. Nothing gets moved or renamed.
+Already have a "second brain" in Notion or Obsidian? In step 2, say **"Adopt my existing setup as a Cortex"** instead. Nothing gets moved or renamed. Have a CRM or LinkedIn export? Say **"Import my contacts into my Cortex"** to start with real people and companies.
 
 ## Custom instructions: make every AI aware of your Cortex
 
@@ -92,6 +92,8 @@ Cortex reads in three layers, top-down:
 | **Catalogs** | One compact line per record: name, aliases, status, one-line summary | To pick records |
 | **Records** | The full detail, current state on top, dated history below | Only the ones picked |
 
+It stays lean as it grows. People and companies start as one-line stubs and earn a full record once they show up in three sources or become a real relationship. When a record's history outgrows its summary, the summary is rewritten. The most-connected records surface first. And when a name isn't in the Map or catalogs, one search inside the Cortex, never your whole workspace, catches anything an index missed.
+
 Writes follow the same Map: route it, match it to the existing record by name or alias, update it in place, update its catalog line, log it. Anything unclear goes to an **Inbox** instead of being guessed. A weekly health check keeps catalogs accurate, flags stale records and likely duplicates, and keeps the Map small.
 
 The rules are universal and live in the skills. Your Map, catalogs, and glossary are unique to your business and grow with it.
@@ -101,6 +103,7 @@ The rules are universal and live in the skills. Your Map, catalogs, and glossary
 | Collection | Holds |
 | --- | --- |
 | People | Everyone you deal with regularly, the one thing worth remembering, and the open thread |
+| Companies | Customers, investors, partners, and competitors: the relationship, the people, and the open thread |
 | Initiatives | What you're driving: why it matters, blocker, next action |
 | Decisions | Calls made and questions open, with the reasoning |
 | Inbox | Anything that didn't clearly fit, waiting to be filed |
@@ -117,7 +120,7 @@ You choose during setup: **Notion**, **Obsidian**, **Markdown in Google Drive**,
 | Skill | Use it | Download |
 | --- | --- | --- |
 | cortex-setup | Once, to build your Cortex and Map | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-setup.zip) |
-| cortex-map | To adopt an existing setup, or rebuild and repair the Map | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-map.zip) |
+| cortex-map | To adopt an existing setup, import contacts, upgrade, or rebuild and repair the Map | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-map.zip) |
 | add-to-cortex | Any time you have a doc worth keeping | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/add-to-cortex.zip) |
 | strategy-digest | When a strategy doc changes | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/strategy-digest.zip) |
 | cortex-update | Weekly, on a schedule | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-update.zip) |

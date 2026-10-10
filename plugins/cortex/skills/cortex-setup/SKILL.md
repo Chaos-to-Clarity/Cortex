@@ -30,6 +30,7 @@ Then confirm access:
 
 - Check the matching connector or folder tool is available. If not, search the connector registry and suggest it. For Obsidian or a local folder, the Claude desktop app must connect the folder; explain how, and that scheduled runs need that computer on.
 - Ask where to put it. Default: a page or folder named "Cortex".
+- For Obsidian or a local folder, suggest Obsidian's Git plugin or a synced folder for version history (optional).
 - Test write: create the parent. If it fails, report the error plainly and stop until access works.
 
 ## Step 3. Connect sources
@@ -47,14 +48,14 @@ Test each with one small read. Report each as connected or not. For failures, na
 
 Under the parent, create (spec sections 2, 5, and 9):
 
-1. **People**, **Initiatives**, **Decisions**, and **Inbox** collections, each with its fields plus Summary, Aliases, Status, Last Updated, and Source.
+1. **People**, **Companies**, **Initiatives**, **Decisions**, and **Inbox** collections, each with its fields plus Summary, Aliases, Status, Last Updated, and Source. People and Companies also get Depth (Stub, Full) and Mentions.
 2. **Ingest Log** collection.
 3. **Standing Context** and **Strategy** pages. Strategy starts empty with a note that strategy-digest fills it.
-4. **One catalog per collection** (People, Initiatives, Decisions, Inbox), each with just its header and an Archive catalog.
+4. **One catalog per collection** (People, Companies, Initiatives, Decisions, Inbox), each with just its header and an Archive catalog.
 
 Relations:
 
-- Notion: Initiatives gets "Owner / Involved" (two-way with People, shown there as "Initiatives"). Decisions gets "Affects" (two-way with Initiatives, shown there as "Decisions").
+- Notion: People gets "Company" (two-way with Companies, shown there as "People"). Companies gets "Owner" (relation to People). Initiatives gets "Owner / Involved" (two-way with People, shown there as "Initiatives") and "Companies" (two-way with Companies, shown there as "Initiatives"). Decisions gets "Affects" (two-way with Initiatives, shown there as "Decisions").
 - Markdown: wikilink lists in frontmatter.
 
 ## Step 5. Ask two settings
@@ -70,23 +71,25 @@ Create the Cortex Map page or file at the top of the parent, in the exact format
 
 ## Step 7. Fill it with real context
 
-1. **Draft from sources.** If meeting notes or calendar are connected, scan the last 30 days. Draft People from recurring names and Initiatives from recurring themes. Show both lists before writing.
-2. **Interview, one collection at a time:** People, Initiatives, Decisions, Standing Context. Three to seven records each to start. Push for specifics:
-   - Every person needs the one thing worth remembering.
+1. **Seed from what they have.** Offer to import a CRM export or a LinkedIn connections CSV (spec section 11) through cortex-map; it's the fastest way to start with real People and Companies. Skip if they have none.
+2. **Draft from sources.** If meeting notes or calendar are connected, scan the last 30 days. Draft People and Companies from recurring names and Initiatives from recurring themes. Show both lists before writing.
+3. **Interview, one collection at a time:** People, Companies, Initiatives, Decisions, Standing Context. Three to seven records each to start. Push for specifics:
+   - Every person needs the one thing worth remembering, and their company.
+   - Every company needs its relationship to the owner (customer, investor, partner) and the open thread.
    - Every initiative needs a Next Action.
    - Every decision needs its reasoning.
    - Ask for nicknames and abbreviations they use ("we call it Realm"). Those become Aliases.
    - If an answer is vague, say so and ask them to sharpen it.
-3. **Write** each record per spec section 7: Summary, Aliases, Status Active, Last Updated today, Source "Setup interview" or the meeting it came from, a body with Current and History. Update the catalog row with each write. Link relations where obvious.
-4. **Glossary.** Add each Active person and initiative a user would refer to by name or nickname, up to 50.
-5. **Synthesis and Freshness.** Write a one-paragraph Synthesis and fill Freshness.
-6. **Log** one Ingest Log row: Source "Cortex setup", Type Document, What Changed = counts per collection.
+4. **Write** each record per spec section 7: Summary, Aliases, Status Active, Last Updated today, Source "Setup interview" or the meeting it came from, a body with Current and History. Interviewed people and companies start as Full; ones only found in sources start as Stubs. Update the catalog row with each write. Link relations where obvious.
+5. **Glossary.** Add each Active person and initiative a user would refer to by name or nickname, up to 50.
+6. **Synthesis and Freshness.** Write a one-paragraph Synthesis and fill Freshness.
+7. **Log** one Ingest Log row: Source "Cortex setup", Type Document, What Changed = counts per collection.
 
 ## Step 8. Custom instructions
 
 This step gives every AI conversation, on any platform, awareness of the Cortex without a lookup in every chat.
 
-1. Fill in the template from spec section 12: the backend, the Map's direct link, and a two-line Snapshot from the Synthesis and the top Active people and initiatives. Keep the whole text under 1,000 characters.
+1. Fill in the template from spec section 14: the backend, the Map's direct link, and a two-line Snapshot from the Synthesis and the top Active people and initiatives. Keep the whole text under 1,000 characters.
 2. Show it in a code block, ready to copy.
 3. Tell them where it goes, in one short list:
    - **Claude:** Settings, then Profile, in the preferences field

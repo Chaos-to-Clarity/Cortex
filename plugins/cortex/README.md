@@ -9,7 +9,7 @@ The skills for [Cortex](../../README.md), the context layer your AI reads first.
 | Skill | Run it | What it does |
 | --- | --- | --- |
 | `cortex-setup` | Once | Asks where to store it, connects sources, builds the collections, catalogs, and Map, interviews you to fill it, and gives you custom instructions |
-| `cortex-map` | When needed | Adopts an existing setup, registers new collections, rebuilds catalogs, or repairs the Map |
+| `cortex-map` | When needed | Adopts an existing setup, imports CRM or LinkedIn exports, upgrades older Maps, rebuilds catalogs, or repairs the Map |
 | `add-to-cortex` | Any time | Digests one document into the right records, without duplicates |
 | `strategy-digest` | When a strategy doc changes | Condenses plans, decks, personas, and brand docs into Strategy |
 | `cortex-update` | Weekly, scheduled | Updates records from recent meetings, email, and calendar, triages the Inbox, and runs the health check |

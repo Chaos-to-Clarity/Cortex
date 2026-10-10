@@ -38,6 +38,7 @@ From each new source, keep only what stays true for weeks or months. Route each 
 | What changed | Typical home |
 | --- | --- |
 | A person they now deal with, or whose role or context shifted | People |
+| A company relationship that started, changed, or ended (customer, investor, partner) | Companies |
 | An initiative that started, shifted, stalled, or finished | Initiatives |
 | A decision made, or a question that opened or closed | Decisions |
 | A durable fact about the business or their role | Standing Context |
@@ -46,7 +47,8 @@ From each new source, keep only what stays true for weeks or months. Route each 
 
 For each item, resolve identity through the Glossary and catalogs (spec section 7, step 5):
 
-- **People:** new (Active); context changed (update, History line); relationship paused or ended (Dormant or Archived).
+- **People:** new (a Stub on first mention); seen in another source (add a Mention, promote to Full when it qualifies); context changed (update, History line); relationship paused or ended (Dormant or Archived).
+- **Companies:** same as People. Link each person to their company.
 - **Initiatives:** new (Active, with Next Action and Blocker if known); shifted (update in place); finished or dropped (Done or Dropped).
 - **Decisions:** new (Decided or Open, Date today); reversed or replaced (old one Reversed or Superseded, new one with Supersedes).
 - **Standing Context:** surgical edits only.
@@ -73,12 +75,12 @@ In `required` mode, include triage in the approval list.
 
 ## Step 8. Health check
 
-Run every check in spec section 10. Fix what's safe: catalog drift, missing Summaries, Map size. Report the rest: stale records, alias collisions, unregistered collections, broken pointers. Log one Ingest Log row, Type Health Check.
+Run every check in spec section 10. Fix what's safe: catalog drift and order, missing Summaries, compaction of records whose History has outrun Current, Stub promotion and expiry, Map size. Report the rest: stale records, alias collisions, unregistered collections, broken pointers. Log one Ingest Log row, Type Health Check.
 
 ## Step 9. Refresh the Map
 
 - **Freshness:** last processed date per source, record counts, Inbox count, today's date.
-- **Synthesis:** if the week shifted the big picture, rewrite the paragraph and draft a refreshed Snapshot for the user's custom instructions (spec section 12). Otherwise leave it.
+- **Synthesis:** if the week shifted the big picture, rewrite the paragraph and draft a refreshed Snapshot for the user's custom instructions (spec section 14). Otherwise leave it.
 
 Don't change the Map's structure here. If a new collection or broken pointer needs it, recommend cortex-map.
 
@@ -89,6 +91,6 @@ A short table or a tight paragraph:
 - Sources scanned, and skipped as already ingested
 - Records created, updated, superseded
 - Inbox: filed, discarded, waiting (with the questions)
-- Health: fixed, and what needs the user (stale records, likely duplicates)
+- Health: fixed (compacted, promoted, expired), and what needs the user (stale records, likely duplicates, orphans to archive)
 - Sources that were unavailable
 - If priorities shifted: the refreshed Snapshot line, ready to paste into their custom instructions

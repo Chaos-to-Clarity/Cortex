@@ -31,8 +31,9 @@ A typical question costs one Map read, one or two catalog reads, and two or thre
 
 | Collection | Identity | Fields |
 | --- | --- | --- |
-| People | Name | Role, Context (the one thing worth remembering), Cadence, Open Thread, Initiatives (relation) |
-| Initiatives | Name | Why It Matters, Blocker, Next Action, Start, Target, Owner / Involved (relation to People), Decisions (relation) |
+| People | Name | Role, Context (the one thing worth remembering), Cadence, Open Thread, Company (relation to Companies), Initiatives (relation), Depth, Mentions |
+| Companies | Name | Relationship (Customer, Prospect, Investor, Partner, Vendor, Competitor, Portfolio, Other), Stage or Size, What They Do, Open Thread, Owner (relation to People, who on the owner's side holds the relationship), People (relation), Initiatives (relation), Depth, Mentions |
+| Initiatives | Name | Why It Matters, Blocker, Next Action, Start, Target, Owner / Involved (relation to People), Companies (relation), Decisions (relation) |
 | Decisions | Title | Reasoning, Date, Supersedes (title of the earlier decision), Affects (relation to Initiatives) |
 | Inbox | Title | Content, Suggested Collection, Candidates (possible matching records), Date |
 | Ingest Log | Source | Type (Meeting Notes, Email, Document, Strategy, Query Insight, Health Check), Date Ingested, What Changed |
@@ -44,6 +45,7 @@ A typical question costs one Map read, one or two catalog reads, and two or thre
 | Collection | Values |
 | --- | --- |
 | People | Active, Dormant, Archived |
+| Companies | Active, Dormant, Archived |
 | Initiatives | Active, Paused, Done, Dropped |
 | Decisions | Decided, Open, Reversed, Superseded |
 | Inbox | New, Filed, Discarded |
@@ -67,6 +69,19 @@ What's true now, in a few lines.
 
 When a fact changes, update the field and the Summary, and add a dated History line. Readers get the truth from the top without reading history. History is never deleted.
 
+**Compaction.** History grows; Current must not fall behind it. When a record has five or more History lines dated after its Current section was last rewritten, rewrite Current from the full record, refresh the Summary, and add a History line "Current rewritten". Writers may compact when they notice it; the weekly health check guarantees it. Never shorten or delete History lines while compacting.
+
+**Depth (People and Companies).** Not everyone mentioned once deserves a full record. Depth keeps the Cortex lean:
+
+| Depth | When | What it holds |
+| --- | --- | --- |
+| **Stub** | First mention in a source, no working relationship yet | Name, Summary, Company (for people), Source, Mentions. No body beyond one History line. No glossary entry |
+| **Full** | A third mention in separate sources, a working relationship (client, investor, teammate, active deal), or the user asks | Every field, a Current section, History, and a glossary entry if the user refers to them by name |
+
+**Mentions** counts the separate sources (meetings, emails, documents) that referenced the record. Writers add one per new source and promote a Stub to Full when it qualifies. A Stub that never reaches a second mention in `health.stub_expire_days` is archived by the health check.
+
+**Link weight.** A record's importance is how connected it is: the number of records it relates to plus the number that relate to it. Catalogs list their rows most-linked first, the glossary keeps the most-linked terms, and readers open the most-linked match first when two records fit. Nothing stores the count; it's computed from relations when a catalog is rebuilt.
+
 **Added collections.** Businesses add their own (Customers, Pipeline, Portfolio, Coaching Sessions). Each one has a title identity plus Summary, Aliases, Status, Last Updated, and Source, gets a catalog, and is registered in the Map with routing rules. Plugins that build on Cortex (Founder OS, for example) register their collections the same way.
 
 ## 3. Backends
@@ -80,7 +95,7 @@ When a fact changes, update the field and the Summary, and add a dated History l
 
 For any other tool with a connector (Airtable, Coda, Confluence), map the same model as closely as it allows and record the mapping in the Map's field map.
 
-Obsidian and local folders live on the user's computer. Scheduled runs reach them only while that computer is on with the Claude desktop app open.
+Obsidian and local folders live on the user's computer. Scheduled runs reach them only while that computer is on with the Claude desktop app open. For version history on Markdown backends, suggest Obsidian's community Git plugin or a synced folder with file history; Cortex works the same either way.
 
 ## 4. The Map
 
@@ -105,7 +120,7 @@ This is the map of [Owner]'s Cortex: what's in it, where each thing lives, and w
 
 ## Settings
 ```text
-map_version: 1
+map_version: 2
 owner: <first name>
 time_zone: <IANA zone>
 backend: <notion | google-drive | obsidian | local-folder | other: name>
@@ -122,6 +137,8 @@ sources.strategy_folder: <folder, or none>
 update.lookback_days: 7
 update.approval: <autonomous | required>
 health.stale_after_days: 60
+health.stub_expire_days: 90
+health.orphan_after_days: 90
 ```
 
 ## Synthesis
@@ -130,18 +147,21 @@ health.stale_after_days: 60
 ## Collections
 | Collection | Holds | Identity | Key fields | Statuses | Catalog | Location |
 | --- | --- | --- | --- | --- | --- | --- |
-| People | Everyone the owner deals with regularly | Name | Role, Context, Open Thread | Active, Dormant, Archived | <link> | <link> |
+| People | Everyone the owner deals with regularly | Name | Role, Company, Context, Open Thread, Depth | Active, Dormant, Archived | <link> | <link> |
+| Companies | Customers, investors, partners, vendors, competitors | Name | Relationship, What They Do, Open Thread, Depth | Active, Dormant, Archived | <link> | <link> |
 
 ## Routing
 **Find it**
-- Who someone is, a relationship, meeting prep → People, then their linked Initiatives
+- Who someone is, a relationship, meeting prep → People, then their Company and linked Initiatives
+- A customer, investor, partner, or competitor; "what's going on with [company]" → Companies, then its People and Initiatives
 - What's being driven, status, blockers → Initiatives
 - What was decided and why → Decisions
 - Positioning, ICP, GTM, brand, targets → Strategy
 - Durable facts about the business or role → Standing Context
 
 **File it**
-- A new person, or a change about a person → People
+- A new person, or a change about a person → People (a Stub on first mention)
+- A new company, or a change in a relationship with one → Companies (a Stub on first mention)
 - Something the owner is driving, or a change to it → Initiatives
 - A call made, a question opened or closed → Decisions
 - A durable fact about the business → Standing Context
@@ -179,11 +199,14 @@ One per collection. In Notion, a page titled "[Collection] Catalog" under the Co
 # People Catalog
 Active and Dormant records. Archived: [People Catalog (Archive)]. 42 rows. Rebuilt 2026-10-10.
 
-| Name | Aliases | Status | Summary | Updated | Link |
-| --- | --- | --- | --- | --- | --- |
-| Jane Rivera | Jane R | Active | Acme CRO; renewal decision owner; wants short written updates | 2026-10-10 | <link> |
+| Name | Aliases | Status | Depth | Summary | Updated | Link |
+| --- | --- | --- | --- | --- | --- | --- |
+| Jane Rivera | Jane R | Active | Full | Acme CRO; renewal decision owner; wants short written updates | 2026-10-10 | <link> |
 ```
 
+Rows are ordered most-linked first (see Link weight), then by most recently updated.
+
+- **Depth column.** People and Companies catalogs show Depth, so readers can tell a one-line stub from a full record.
 - **Key columns.** A collection may add up to three columns it is commonly filtered by, between Status and Summary (Tasks: Due, Priority, Week). List them in the Map's Collections table under Key fields.
 - **Every write updates the catalog row** in the same step as the record. A record missing from its catalog is invisible to readers.
 - **Archive split.** Records with a closed status (Archived, Done, Dropped, Reversed, Superseded, Filed, Discarded) move to "[Collection] Catalog (Archive)". Default reads skip it. Read it only when the question is about history.
@@ -198,9 +221,10 @@ Active and Dormant records. Archived: [People Catalog (Archive)]. 42 rows. Rebui
 4. **Open only what's needed.** Open the chosen records. Follow relations one hop (a person's initiatives, an initiative's decisions), no further unless the question demands it. If the answer needs more than about 10 records, answer from catalog summaries and say so.
 5. **Check freshness.** Compare record dates and the Map's Freshness to what the question needs. For time-sensitive questions, pull live sources too. When live data is newer and conflicts with a record, the live data wins for the answer, and the conflict is flagged.
 6. **Answer with provenance.** Cite each record used and its Last Updated date.
-7. **Absence is not evidence.** If it isn't in the Cortex, say "not in the Cortex," never "doesn't exist" or "hasn't happened."
+7. **Scoped search, only on a miss.** If the Glossary and catalogs found nothing for a name or topic the question depends on, run one keyword search limited to the Cortex itself: the Cortex parent page in Notion, the Cortex folder in Drive or a local folder. Use the two or three most distinctive words. Open at most three hits. If something turns up that a catalog should have found, fix that record's Summary or Aliases so the next read finds it directly.
+8. **Absence is not evidence.** If the scoped search also misses, say "not in the Cortex," never "doesn't exist" or "hasn't happened."
 
-Never list whole databases, search the workspace broadly, or load every record "to be safe." That's what the Map and catalogs replace. If the Map is missing or broken, say so and offer cortex-map; don't fall back to sifting.
+Never list whole databases, search the workspace outside the Cortex, or load every record "to be safe." That's what the Map and catalogs replace. If the Map is missing or broken, say so and offer cortex-map; don't fall back to sifting.
 
 ## 7. Writing (any agent, any source)
 
@@ -212,12 +236,14 @@ Never list whole databases, search the workspace broadly, or load every record "
    - One clear match: update it.
    - No match: create a new record.
    - Two or more plausible matches, or you're unsure: don't guess. Put it in the Inbox with the candidates listed.
-6. **Write the record.**
-   - New: all fields, Summary, Aliases if known, Status Active (Open for an undecided question), Last Updated today, Source.
+6. **Write the record.** If History now has five or more lines since Current was rewritten, compact it (section 2).
+   - New: all fields, Summary, Aliases if known, Status Active (Open for an undecided question), Last Updated today, Source. People and Companies start as a Stub unless they already qualify as Full (section 2, Depth).
+   - Existing People or Companies record from a new source: add one to Mentions, and promote a Stub to Full when it qualifies.
+   - A person tied to a company: link them, creating the company as a Stub if it doesn't exist.
    - Change: re-read the record first, update the fields and Summary, add a dated History line, refresh Last Updated and Source.
    - Ended or reversed: set the closing status and add a History line. Decisions: create the new one and set Supersedes. Never delete; delete only a true accidental duplicate.
 7. **Update the catalog row** in the same step. Moving to a closed status moves the row to the Archive catalog.
-8. **Glossary.** If a new key entity or nickname appeared and the glossary has room, add a row.
+8. **Glossary.** If a new key entity or nickname appeared and the glossary has room, add a row. Stubs never get glossary rows.
 9. **Log it:** one Ingest Log row per source with what changed.
 10. **New category?** If content clearly needs a collection that doesn't exist, put it in the Inbox and propose the collection. Create it only after the user approves, even in autonomous runs.
 
@@ -252,6 +278,7 @@ Cortex/
     _catalog.md
     _catalog-archive.md
     Jane Rivera.md
+  Companies/
   Initiatives/
   Decisions/
   Inbox/
@@ -266,7 +293,10 @@ Added collections get their own folder, for example `Founder OS/Tasks/`.
 name: Jane Rivera
 summary: Acme CRO; renewal decision owner; wants short written updates
 aliases: [Jane R]
-role: CRO, Acme
+role: CRO
+company: "[[Acme]]"
+depth: Full
+mentions: 6
 context: Decides on renewals; prefers short written updates
 cadence: Biweekly
 open_thread: Waiting on Q3 pricing proposal
@@ -295,6 +325,11 @@ Run by cortex-update each week and by cortex-map on demand. Fix what's safe to f
 | --- | --- |
 | Catalog drift: rows missing, extra, or out of date | Rebuild the catalog from the records |
 | Records missing a Summary | Write one from the record |
+| Records with five or more History lines since Current was rewritten | Compact them (section 2) |
+| Stubs mentioned in three or more sources, or tied to an active relationship | Promote to Full |
+| Stubs with one mention older than `health.stub_expire_days` | Archive them |
+| Orphans: Active records with no relations, no glossary entry, and no update in `health.orphan_after_days` | List them as archive candidates; archive only with a yes |
+| Catalog order | Re-sort by link weight |
 | Active records not updated in `health.stale_after_days` | List them for the user to confirm, close, or refresh |
 | Alias collisions (two records share a name or alias) | Report as likely duplicates; merge only with a yes |
 | Inbox items waiting | Triage: file the clear ones, report the rest |
@@ -304,13 +339,32 @@ Run by cortex-update each week and by cortex-map on demand. Fix what's safe to f
 
 Log one Ingest Log row, Type Health Check, with what was fixed and what needs the user.
 
-## 11. Rules
+## 11. Imports
+
+To seed a Cortex from what the user already has, cortex-map imports exports:
+
+| Export | Becomes |
+| --- | --- |
+| CRM contacts or accounts (CSV) | People and Companies, as Stubs unless marked as active relationships |
+| LinkedIn connections (CSV) | People Stubs with Company links. Import only the ones the user selects, never the whole network |
+| A notes vault (Obsidian, Notion, Logseq, Roam, plain Markdown) | Registered or mapped collections, through cortex-map adopt |
+| JSON or spreadsheets of records | The matching collection, with fields mapped and confirmed first |
+
+Every import resolves identity against existing records first, sets Source to the file name, logs one Ingest Log row, and rebuilds the affected catalogs.
+
+## 12. Upgrading from map version 1
+
+Maps with `map_version: 1` have no Companies collection and no Depth. cortex-map upgrades them on request: it adds Companies (and offers to create Company records from People roles), adds Depth and Mentions to People, marks existing People as Full, rebuilds catalogs, and sets `map_version: 2`. Skills keep working on version 1 Maps until then; they skip Depth rules where the fields are missing.
+
+## 13. Rules
 
 These apply to every read and write. If the user keeps a Cortex Schema page with extra rules, read it once and follow it too; theirs win where they differ.
 
 - **Map first.** Every use starts at the Map. Never sift the store.
 - **Identity first.** Find the existing record by name or alias before writing. Never create a second record for the same thing.
 - **Unsure goes to the Inbox.** An unclear fit or an unclear match is never guessed.
+- **Earn depth.** First mentions are Stubs. Records grow as relationships do.
+- **Keep Current current.** Compact when History outruns it.
 - **Supersede, don't delete.** Close with a status and keep history.
 - **Catalog with every write.** The record and its catalog row change together.
 - **Stamp every write.** Last Updated and Source, every time.
@@ -318,7 +372,7 @@ These apply to every read and write. If the user keeps a Cortex Schema page with
 - **Durable only.** Task noise belongs in Founder OS or a task tool.
 - **Cite and date.** Answers name the records they used and how fresh they are.
 
-## 12. Global awareness: custom instructions
+## 14. Global awareness: custom instructions
 
 Any AI assistant that can reach the user's store can use a Cortex. Custom instructions give every conversation, on any platform, awareness that the Cortex exists, without making every chat pay for a lookup.
 

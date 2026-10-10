@@ -23,7 +23,8 @@ Find and validate the Cortex Map (spec section 4). If there isn't one, answer fr
 | Question | Start in | Live supplement |
 | --- | --- | --- |
 | Positioning, ICP, brand, GTM | Strategy | |
-| A person: role, context, history | People, then their initiatives | Recent meetings and threads with them |
+| A person: role, context, history | People, then their company and initiatives | Recent meetings and threads with them |
+| A company: where things stand with a customer, investor, or partner | Companies, then its people and initiatives | Recent meetings and threads with them |
 | An initiative: status, blocker, next action | Initiatives, then its decisions | Recent mentions, upcoming events |
 | A decision: what and why | Decisions | |
 | Risk or overcommitment this week | Initiatives and People catalogs | Upcoming calendar, open meeting actions |
@@ -31,7 +32,7 @@ Find and validate the Cortex Map (spec section 4). If there isn't one, answer fr
 
 ## Step 3. Pick and open records
 
-Read the relevant catalogs. Choose records from their Summaries. Open only those, and follow relations one hop. If more than about 10 records would be needed, answer from catalog summaries and say so.
+Read the relevant catalogs. Choose records from their Summaries, most-linked first when two fit. Open only those, and follow relations one hop. A Stub has only a line of context; say so rather than overstating what the Cortex knows. If more than about 10 records would be needed, answer from catalog summaries and say so.
 
 ## Step 4. Pull live data when it's time-sensitive
 
@@ -51,7 +52,7 @@ When a question touches strategy, people, and schedule, pull from each and synth
 - **Prep:** (1) where things stand, from the Cortex; (2) what the last meeting or thread showed; (3) what to raise, given their priorities and open threads.
 - **Synthesis:** the pattern or risk, the evidence across sources, the implication. Name the one thing most likely to slip or compound if left alone.
 
-If something isn't in the Cortex, say "not in the Cortex," never "doesn't exist."
+If a name or topic the question depends on wasn't in the Glossary or catalogs, run the scoped search (spec section 6, step 7) before concluding. If that also misses, say "not in the Cortex," never "doesn't exist."
 
 ## Step 6. Fix what's stale
 

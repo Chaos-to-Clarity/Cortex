@@ -38,7 +38,8 @@ For each item, follow spec section 7, steps 5 to 8:
 
 - Resolve the identity through the Glossary, then catalog Names and Aliases.
 - One clear match: update it (fields, Summary, a dated History line, Last Updated, Source).
-- No match: create it, with Summary and Aliases.
+- No match: create it, with Summary and Aliases. A person or company seen only in this document starts as a Stub; one the document shows a real working relationship with starts as Full. Link each person to their company.
+- Existing person or company: add a Mention, and promote a Stub to Full when it qualifies.
 - Unclear match, or no clear home: put it in the Inbox with the candidates and the suggested collection. Don't guess.
 - Changed or reversed: close the old state with a status; for Decisions, create the new record and set Supersedes.
 - **Strategy:** add a dated section for this document; refresh the Strategy summary only if positioning, ICP, GTM, targets, or brand changed.
@@ -46,7 +47,7 @@ For each item, follow spec section 7, steps 5 to 8:
 - Update each catalog row in the same step as its record. Add Glossary rows for new key names if there's room.
 - Link relations where the document makes them obvious.
 
-A clearly new category (Customers, Competitors): put the items in the Inbox and propose the collection in one line. Create it only after a yes, then register it in the Map with cortex-map.
+A clearly new category (Pipeline, Portfolio, Hiring): put the items in the Inbox and propose the collection in one line. Create it only after a yes, then register it in the Map with cortex-map.
 
 ## Step 6. Log
 
