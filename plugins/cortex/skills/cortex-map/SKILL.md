@@ -103,4 +103,4 @@ Report:
 - Fields and pages added
 - Catalogs built, and any shards
 - Likely duplicates and unclear collections that need a decision
-- On adopt or first build, or whenever the user asks for their custom instructions: the filled-in text from spec section 14 (Map link and Snapshot included, no brackets), ready to paste, and where to paste it
+- On adopt or first build, or whenever the user asks for their custom instructions: the filled-in text from spec section 14 (Map link and the line about the user filled in, no brackets), ready to paste, and where to paste it

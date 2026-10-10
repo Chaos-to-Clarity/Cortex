@@ -49,7 +49,7 @@ If you lose it, say **"Give me my Cortex custom instructions"** and Claude regen
 ## My Cortex
 My business context lives in my Cortex, a structured knowledge base in [Notion]. Map: [link to your Cortex Map]
 
-Snapshot (no lookup needed): [Name], [role] at [company]. Focus now: [top 2-3 priorities]. Key people: [3-5 names].
+About me: [Name], [role] at [company], which [what the business does, in a few words].
 
 When to look: only when my request is about my business, people, clients, projects, decisions, or priorities AND the answer would be clearly better or safer with that context (I name someone or something, want advice on my situation, or ask you to draft, plan, or prep). Skip it for general questions, generic writing, or code, or when this chat already has what you need. If unsure, ask me in one line instead of looking.
 
@@ -73,12 +73,12 @@ How: read the Map once per chat and reuse it. Use its Glossary and Catalogs to o
 
 Most chats don't need your business context, and none should pay for a lookup they don't need. The instructions are built for that:
 
-- **The Snapshot** answers basic "who am I, what's my focus" context with no lookup at all.
+- **One line about you** answers "who am I" with no lookup at all. Everything that changes, your priorities, clients, and people, stays in the Cortex.
 - **The gate** means the AI looks only when your request is about your business and the answer would be clearly better with the context. If it's unsure, it asks you in one line instead of fetching.
 - **Cheapest step first.** One Map read per chat, reused after that. Catalogs only for names that matched, and records only for the few that matter. No searching your workspace.
 - **It fits.** Under 1,000 characters, so it fits every platform's limit with room for your other preferences.
 
-When your priorities shift, the weekly update gives you a refreshed Snapshot line to paste.
+You paste it once. Nothing in it goes stale, so there's nothing to update when your priorities shift.
 
 ## How it works
 

@@ -89,7 +89,7 @@ Create the Cortex Map page or file at the top of the parent, in the exact format
 
 This step gives every AI conversation, on any platform, awareness of the Cortex without a lookup in every chat.
 
-1. Fill in the template from spec section 14: the backend, the Map's direct link, and a two-line Snapshot from the Synthesis and the top Active people and initiatives. Keep the whole text under 1,000 characters.
+1. Fill in the template from spec section 14: the backend, the Map's direct link, and one durable line about the user (name, role, company, what it does). No priorities or names of clients or people: those change and belong in the Cortex. Keep the whole text under 1,000 characters.
 2. Show it in a code block, ready to copy.
 3. Tell them where it goes, in one short list:
    - **Claude:** Settings, then Profile, in the preferences field

@@ -380,24 +380,25 @@ Any AI assistant that can reach the user's store can use a Cortex. Custom instru
 
 **Design rules**
 
-- **Aware always, fetch rarely.** Most chats don't need business context. The instructions carry a tiny Snapshot the assistant can use with no lookup, plus a gate for when a lookup is worth it.
+- **Aware always, fetch rarely.** Most chats don't need business context. The instructions carry one line about who the user is, plus a gate for when a lookup is worth it.
 - **The gate.** Look only when the request is about the user's business, people, clients, projects, decisions, or priorities, *and* the answer would be clearly better or safer with that context. If unsure, ask in one line instead of fetching.
 - **Cheapest step first.** The Map, once per conversation, reused after that. Catalogs only for names or topics that matched. Records only for the few that matter.
 - **Direct link.** The Map's URL is in the instructions, so finding it never takes a search.
 - **Under 1,000 characters,** so it fits every platform's custom-instructions limit with room for the user's own preferences.
 - **Fail quietly.** If the assistant can't reach the store, it says so once and carries on.
+- **Set once.** Nothing in them changes week to week. Priorities, clients, and key people live in the Map and records, so the instructions never go stale and never expose names.
 
-**Template.** cortex-setup fills in the brackets: the backend, the Map's direct link, and a Snapshot drawn from the Map's Synthesis and the top Active people and initiatives. Keep the Snapshot to two short lines.
+**Template.** cortex-setup fills in the brackets: the backend, the Map's direct link, and one durable line about the user. Never put priorities, client names, or anything else that changes into it.
 
 ```text
 ## My Cortex
 My business context lives in my Cortex, a structured knowledge base in [Notion]. Map: [link to your Cortex Map]
 
-Snapshot (no lookup needed): [Name], [role] at [company]. Focus now: [top 2-3 priorities]. Key people: [3-5 names].
+About me: [Name], [role] at [company], which [what the business does, in a few words].
 
 When to look: only when my request is about my business, people, clients, projects, decisions, or priorities AND the answer would be clearly better or safer with that context (I name someone or something, want advice on my situation, or ask you to draft, plan, or prep). Skip it for general questions, generic writing, or code, or when this chat already has what you need. If unsure, ask me in one line instead of looking.
 
 How: read the Map once per chat and reuse it. Use its Glossary and Catalogs to open only the few records you need; never search my whole workspace. Cite what you used and its date. If it isn't there, say so. If you can't reach it, tell me once and carry on.
 ```
 
-**Keeping it current.** The Snapshot is the only part that goes stale. When cortex-update rewrites the Synthesis because priorities shifted, it includes a refreshed Snapshot line in its report for the user to paste. The Map link changes only if the Map moves; cortex-map reports the new text when it does.
+**Keeping it current.** There is nothing to keep current. Current priorities live in the Map's Synthesis, which cortex-update maintains. The text changes only if the Map moves or the user's role changes; cortex-map reports the new text when the Map moves.
