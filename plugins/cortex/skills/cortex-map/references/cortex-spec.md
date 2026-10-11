@@ -84,6 +84,10 @@ When a fact changes, update the field and the Summary, and add a dated History l
 
 **Added collections.** Businesses add their own (Customers, Pipeline, Portfolio, Coaching Sessions). Each one has a title identity plus Summary, Aliases, Status, Last Updated, and Source, gets a catalog, and is registered in the Map with routing rules. Plugins that build on Cortex (Founder OS, for example) register their collections the same way.
 
+**Logs.** Some collections are logs rather than records: the Ingest Log, and plugin logs such as Cortex Gnome's Gnome Runs and Gnome Jobs. Logs skip the catalog, the Summary, and the Current and History body. They're registered on the Map like any collection, marked "log" in the Catalog column, and read through saved views or a folder listing, newest first.
+
+**Cortex Gnome.** The overnight worker registers Gnome Registry, Gnome Runs, Gnome Jobs, and a Gnome Manifesto page under a "Cortex Gnome" page or folder. Any skill or person hands work to it by adding a Gnome Jobs row with Status Queued. Gnomes read the Cortex with the Reading protocol and write to core collections only through the Inbox.
+
 ## 3. Backends
 
 | Backend | Where it lives | How the skill reaches it |
@@ -371,7 +375,7 @@ These apply to every read and write. If the user keeps a Cortex Schema page with
 - **Catalog with every write.** The record and its catalog row change together.
 - **Stamp every write.** Last Updated and Source, every time.
 - **Log every ingest.** Check the log before, add a row after.
-- **Durable only.** Task noise belongs in Founder OS or a task tool.
+- **Durable only.** Task noise belongs in Founder OS or a task tool, and overnight work in Gnome Jobs.
 - **Cite and date.** Answers name the records they used and how fresh they are.
 
 ## 14. Global awareness: custom instructions

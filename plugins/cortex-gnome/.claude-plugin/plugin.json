@@ -1,0 +1,18 @@
+{
+  "name": "cortex-gnome",
+  "displayName": "Cortex Gnome",
+  "description": "The overnight worker. Runs nightly on your context and task tools, builds ship-ready work, logs it, sends a brief, and learns from your feedback.",
+  "author": {
+    "name": "Eric Weiss, Chaos to Clarity",
+    "url": "https://chaostoclarity.io"
+  },
+  "homepage": "https://github.com/chaostoclarity/Cortex",
+  "repository": "https://github.com/chaostoclarity/Cortex",
+  "keywords": [
+    "agent",
+    "scheduled",
+    "overnight",
+    "automation",
+    "cortex"
+  ]
+}

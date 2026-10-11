@@ -10,6 +10,11 @@
       "name": "cortex",
       "source": "./plugins/cortex",
       "description": "Cortex: the context layer your AI reads first. A Map, catalogs, and records for your people, initiatives, decisions, and strategy, in Notion, Obsidian, or Google Drive."
+    },
+    {
+      "name": "cortex-gnome",
+      "source": "./plugins/cortex-gnome",
+      "description": "Cortex Gnome: the overnight worker. Runs nightly on your context and task tools, builds ship-ready work, logs it, sends a brief, and learns from your feedback."
     }
   ]
 }
