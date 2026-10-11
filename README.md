@@ -136,7 +136,20 @@ For free plans, or if you only want some skills:
 
 **Claude Code:** `/plugin install cortex --marketplace chaostoclarity/cortex`
 
-Cortex is also in the [Chaos to Clarity skills marketplace](https://github.com/chaostoclarity/C2C-skills), next to **Founder OS**, the weekly operating system that runs on it.
+## Built on Cortex: the Cortex Suite
+
+Cortex is the foundation. The [Chaos to Clarity skills marketplace](https://github.com/chaostoclarity/C2C-skills) holds the skills that run on it. Each one reads your Cortex, does the work, and writes back what it learned, so every skill gets sharper as the others run. Add the marketplace (`chaostoclarity/C2C-skills`) and it installs Cortex along with them.
+
+| Plugin | What it does |
+| --- | --- |
+| [**Founder OS**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/founder-os) | Your weekly operating cycle. Plan Monday, brief each morning, reflect Friday. |
+| [**Investor Update**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/investor-update) | Your monthly investor update, drafted from your Cortex. Metrics with deltas, required lowlights, what you promised last time, and specific asks. Always a draft. |
+| [**Customer Signal**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/customer-signal) | Every customer and prospect call becomes evidence. Pains, requests, objections, churn risks, and praise, counted across accounts, with a weekly brief. |
+| [**One-on-Ones**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/one-on-ones) | Prep and debrief every 1:1 with your direct reports. Commitments both ways, recurring themes, and a monthly team review. Private by design. |
+| [**Recap**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/recap) | Every meeting becomes done work: a recap email, your to-dos with time booked, follow-ups drafted, and context saved to your Cortex. |
+| [**Content Engine**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/content-engine) | Last week's meetings become this week's framework, newsletter issue, and LinkedIn post, in your voice and kept confidential. |
+
+Each suite skill registers its own collection on your Map the first time it runs, so you never set up the structure by hand. Building your own skill on Cortex? Follow [the spec](#the-spec) and register your collection the same way.
 
 ## The spec
 
