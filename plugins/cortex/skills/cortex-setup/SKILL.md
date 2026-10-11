@@ -109,4 +109,4 @@ Short:
 - Records created per collection
 - Sources connected, and any that failed
 - What's thin and worth filling next
-- Next steps: strategy-digest to fill Strategy, add-to-cortex for any document, ask-cortex to query it, and Founder OS for the weekly operating cycle
+- Next steps: strategy-digest to fill Strategy, add-to-cortex for any document, ask-cortex to query it, Founder OS for the weekly operating cycle, and Cortex Gnome for overnight work once the Cortex has a few weeks of context

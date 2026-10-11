@@ -126,6 +126,16 @@ You choose during setup: **Notion**, **Obsidian**, **Markdown in Google Drive**,
 | cortex-update | Weekly, on a schedule | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-update.zip) |
 | ask-cortex | Any question about your work | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/ask-cortex.zip) |
 
+### Cortex Gnome: the overnight worker
+
+A separate plugin in this repo. Every night it reads what changed across your Cortex, task tool, idea inbox, meetings, and repos, builds the work worth doing (decks, docs, landing pages, research, code with pull requests, drafts), logs it in your Cortex, and sends you a brief. Your feedback becomes rules in its Manifesto, so it gets better every night. Teams can run several gnomes; they share one queue and claim work before building it. It also runs without a Cortex.
+
+**Read this first:** it costs tokens every night whether or not it produces anything useful, and it's only as good as your feedback. Start it reined in and give it more room once it proves itself. Best on high-limit plans such as Claude Max. [Details](plugins/cortex-gnome/README.md).
+
+| Skill | Use it | Download |
+| --- | --- | --- |
+| cortex-gnome | Once to set up, then nightly on a schedule; review its brief each morning | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-gnome.zip) |
+
 ## Install one skill at a time
 
 For free plans, or if you only want some skills:
@@ -134,7 +144,7 @@ For free plans, or if you only want some skills:
 2. In Claude, open **Customize**, then **Skills**, then **Create skill**, then **Upload a skill**, and choose the ZIP.
 3. Repeat for each skill. Start with cortex-setup.
 
-**Claude Code:** `/plugin install cortex --marketplace chaostoclarity/cortex`
+**Claude Code:** `/plugin install cortex --marketplace chaostoclarity/cortex`, and `/plugin install cortex-gnome --marketplace chaostoclarity/cortex` for the gnome.
 
 ## Built on Cortex: the Cortex Suite
 
