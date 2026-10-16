@@ -15,7 +15,7 @@ Want help putting this to work in your company? [Work with Eric.](#work-with-eri
 In the Claude app, open **Customize**, then **Plugins**, then **Add**, **Add marketplace**, **Add from a repository**. Enter:
 
 ```
-chaostoclarity/Cortex
+Chaos-to-Clarity/Cortex
 ```
 
 Then add the **Cortex** plugin. On a free plan, or if you prefer single skills, see [Install one skill at a time](#install-one-skill-at-a-time).
@@ -119,12 +119,12 @@ You choose during setup: **Notion**, **Obsidian**, **Markdown in Google Drive**,
 
 | Skill | Use it | Download |
 | --- | --- | --- |
-| cortex-setup | Once, to build your Cortex and Map | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-setup.zip) |
-| cortex-map | To adopt an existing setup, import contacts, upgrade, or rebuild and repair the Map | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-map.zip) |
-| add-to-cortex | Any time you have a doc worth keeping | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/add-to-cortex.zip) |
-| strategy-digest | When a strategy doc changes | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/strategy-digest.zip) |
-| cortex-update | Weekly, on a schedule | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-update.zip) |
-| ask-cortex | Any question about your work | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/ask-cortex.zip) |
+| cortex-setup | Once, to build your Cortex and Map | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-setup.zip) |
+| cortex-map | To adopt an existing setup, import contacts, upgrade, or rebuild and repair the Map | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-map.zip) |
+| add-to-cortex | Any time you have a doc worth keeping | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/add-to-cortex.zip) |
+| strategy-digest | When a strategy doc changes | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/strategy-digest.zip) |
+| cortex-update | Weekly, on a schedule | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-update.zip) |
+| ask-cortex | Any question about your work | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/ask-cortex.zip) |
 
 ### Cortex Gnome: the overnight worker
 
@@ -134,7 +134,7 @@ A separate plugin in this repo. Every night it reads what changed across your Co
 
 | Skill | Use it | Download |
 | --- | --- | --- |
-| cortex-gnome | Once to set up, then nightly on a schedule; review its brief each morning | [ZIP](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-gnome.zip) |
+| cortex-gnome | Once to set up, then nightly on a schedule; review its brief each morning | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-gnome.zip) |
 
 ## Install one skill at a time
 
@@ -144,20 +144,20 @@ For free plans, or if you only want some skills:
 2. In Claude, open **Customize**, then **Skills**, then **Create skill**, then **Upload a skill**, and choose the ZIP.
 3. Repeat for each skill. Start with cortex-setup.
 
-**Claude Code:** `/plugin install cortex --marketplace chaostoclarity/cortex`, and `/plugin install cortex-gnome --marketplace chaostoclarity/cortex` for the gnome.
+**Claude Code:** `/plugin install cortex --marketplace Chaos-to-Clarity/cortex`, and `/plugin install cortex-gnome --marketplace Chaos-to-Clarity/cortex` for the gnome.
 
 ## Built on Cortex: the Cortex Suite
 
-Cortex is the foundation. The [Chaos to Clarity skills marketplace](https://github.com/chaostoclarity/C2C-skills) holds the skills that run on it. Each one reads your Cortex, does the work, and writes back what it learned, so every skill gets sharper as the others run. Add the marketplace (`chaostoclarity/C2C-skills`) and it installs Cortex along with them.
+Cortex is the foundation. The [Chaos to Clarity skills marketplace](https://github.com/Chaos-to-Clarity/C2C-skills) holds the skills that run on it. Each one reads your Cortex, does the work, and writes back what it learned, so every skill gets sharper as the others run. Add the marketplace (`Chaos-to-Clarity/C2C-skills`) and it installs Cortex along with them.
 
 | Plugin | What it does |
 | --- | --- |
-| [**Founder OS**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/founder-os) | Your weekly operating cycle. Plan Monday, brief each morning, reflect Friday. |
-| [**Investor Update**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/investor-update) | Your monthly investor update, drafted from your Cortex. Metrics with deltas, required lowlights, what you promised last time, and specific asks. Always a draft. |
-| [**Customer Signal**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/customer-signal) | Every customer and prospect call becomes evidence. Pains, requests, objections, churn risks, and praise, counted across accounts, with a weekly brief. |
-| [**One-on-Ones**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/one-on-ones) | Prep and debrief every 1:1 with your direct reports. Commitments both ways, recurring themes, and a monthly team review. Private by design. |
-| [**Recap**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/recap) | Every meeting becomes done work: a recap email, your to-dos with time booked, follow-ups drafted, and context saved to your Cortex. |
-| [**Content Engine**](https://github.com/chaostoclarity/C2C-skills/tree/main/plugins/content-engine) | Last week's meetings become this week's framework, newsletter issue, and LinkedIn post, in your voice and kept confidential. |
+| [**Founder OS**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/founder-os) | Your weekly operating cycle. Plan Monday, brief each morning, reflect Friday. |
+| [**Investor Update**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/investor-update) | Your monthly investor update, drafted from your Cortex. Metrics with deltas, required lowlights, what you promised last time, and specific asks. Always a draft. |
+| [**Customer Signal**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/customer-signal) | Every customer and prospect call becomes evidence. Pains, requests, objections, churn risks, and praise, counted across accounts, with a weekly brief. |
+| [**One-on-Ones**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/one-on-ones) | Prep and debrief every 1:1 with your direct reports. Commitments both ways, recurring themes, and a monthly team review. Private by design. |
+| [**Recap**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/recap) | Every meeting becomes done work: a recap email, your to-dos with time booked, follow-ups drafted, and context saved to your Cortex. |
+| [**Content Engine**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/content-engine) | Last week's meetings become this week's framework, newsletter issue, and LinkedIn post, in your voice and kept confidential. |
 
 Each suite skill registers its own collection on your Map the first time it runs, so you never set up the structure by hand. Building your own skill on Cortex? Follow [the spec](#the-spec) and register your collection the same way.
 

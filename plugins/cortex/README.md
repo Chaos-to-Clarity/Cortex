@@ -3,7 +3,7 @@
 The skills for [Cortex](../../README.md), the context layer your AI reads first.
 
 ```
-/plugin install cortex --marketplace chaostoclarity/cortex
+/plugin install cortex --marketplace Chaos-to-Clarity/cortex
 ```
 
 | Skill | Run it | What it does |

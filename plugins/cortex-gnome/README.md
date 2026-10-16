@@ -3,10 +3,10 @@
 **The overnight worker.** Every night it reads what changed across your company's context, picks the work worth doing, builds it to a ship-ready standard, stores it for review, logs everything, and sends you a brief. Every morning you review it. Your feedback becomes rules in the Manifesto, so the next night is better.
 
 ```
-/plugin install cortex-gnome --marketplace chaostoclarity/cortex
+/plugin install cortex-gnome --marketplace Chaos-to-Clarity/cortex
 ```
 
-Or download the single skill: [cortex-gnome.zip](https://github.com/chaostoclarity/Cortex/releases/latest/download/cortex-gnome.zip)
+Or download the single skill: [cortex-gnome.zip](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-gnome.zip)
 
 ## Read this first
 
