@@ -13,7 +13,7 @@ Keep the user moving. Use AskUserQuestion for choices (up to 4 per call, recomme
 
 ## Step 1. Check for an existing Cortex
 
-Look for a Cortex Map (spec section 4). If one exists and validates, say the Cortex is already set up, show where, and offer to: fill thin collections (Step 7), add a source, change a setting, or repair the Map with cortex-map. Stop there unless they pick one.
+Look for a Cortex Map (spec section 4). If one exists and validates, say the Cortex is already set up, show where, and offer to: fill thin collections (Step 7), add a source, change a setting, schedule the nightly dream and weekly update if they aren't scheduled yet (Step 9), or repair the Map with cortex-map. Stop there unless they pick one.
 
 Also look for an older setup: a page named like "Brain", "Second Brain", or "My Brain" holding People, Initiatives, or Decisions databases, or a folder of notes organized the same way. If found, offer to adopt it: hand off to cortex-map in adopt mode, which registers what exists without moving or renaming anything.
 
@@ -50,7 +50,7 @@ Under the parent, create (spec sections 2, 5, and 9):
 
 1. **People**, **Companies**, **Initiatives**, **Decisions**, and **Inbox** collections, each with its fields plus Summary, Aliases, Status, Last Updated, and Source. People and Companies also get Depth (Stub, Full) and Mentions.
 2. **Ingest Log** collection.
-3. **Standing Context** and **Strategy** pages. Strategy starts empty with a note that strategy-digest fills it.
+3. **Standing Context**, **Strategy**, and **Dream Journal** pages. Strategy starts empty with a note that strategy-digest fills it. Dream Journal starts with empty Questions for you and Patterns sections (spec section 15).
 4. **One catalog per collection** (People, Companies, Initiatives, Decisions, Inbox), each with just its header and an Archive catalog.
 
 Relations:
@@ -67,7 +67,7 @@ In one AskUserQuestion call:
 
 ## Step 6. Write the Map
 
-Create the Cortex Map page or file at the top of the parent, in the exact format in spec section 4: the self-describing header, Settings, an empty Synthesis, Collections (with catalog and location links for every collection), the default Routing rules, an empty Glossary, Freshness, and Field map: none.
+Create the Cortex Map page or file at the top of the parent, in the exact format in spec section 4: the self-describing header, Settings (with `page.dream_journal` linked, `dream.sources` set to `meeting-notes` if a meeting-notes source is connected, and `dream.started`, `dream.last_run` at `never`), an empty Synthesis, Collections (with catalog and location links for every collection), the default Routing rules, an empty Glossary, Freshness, and Field map: none.
 
 ## Step 7. Fill it with real context
 
@@ -83,7 +83,7 @@ Create the Cortex Map page or file at the top of the parent, in the exact format
 4. **Write** each record per spec section 7: Summary, Aliases, Status Active, Last Updated today, Source "Setup interview" or the meeting it came from, a body with Current and History. Interviewed people and companies start as Full; ones only found in sources start as Stubs. Update the catalog row with each write. Link relations where obvious.
 5. **Glossary.** Add each Active person and initiative a user would refer to by name or nickname, up to 50.
 6. **Synthesis and Freshness.** Write a one-paragraph Synthesis and fill Freshness.
-7. **Log** one Ingest Log row: Source "Cortex setup", Type Document, What Changed = counts per collection.
+7. **Log** one Ingest Log row: Source "Cortex setup", Type Document, What Changed = counts per collection. Add one row per meeting used in step 2 (Type Meeting Notes), so neither the dream nor cortex-update ingests it again.
 
 ## Step 8. Custom instructions
 
@@ -97,9 +97,32 @@ This step gives every AI conversation, on any platform, awareness of the Cortex 
    - Each assistant also needs a connector to wherever the Cortex lives (Notion or Google Drive, for example), or it can't read the Map. Obsidian and local folders are reachable only from assistants with access to that computer.
 4. Ask them to paste it now, before moving on. It's the step that makes the Cortex work everywhere.
 
-## Step 9. Offer the weekly routine
+## Step 9. Schedule the routines
 
-Offer to schedule **cortex-update** weekly (suggest Sunday at 5pm their time). It keeps the Cortex current and runs the health check. If scheduling tools are available, create a scheduled task with the prompt "Run my cortex-update skill." Otherwise give the steps. Scheduled runs need `update.approval: autonomous`.
+A Cortex stays useful only if it's maintained. Two scheduled tasks do that, and the dream is the core one:
+
+| Routine | When | What it does |
+| --- | --- | --- |
+| **cortex-dream** | Nightly, about 2am their time | Replays the day's meetings, resolves contradictions, flags what time has made stale, compacts records, spots patterns, keeps catalogs and the Map lean, and leaves a morning note |
+| **cortex-update** | Weekly, Sunday about 5pm | Email and calendar, the full health check across every record, and the review list |
+
+1. **Say the cost in one line.** The dream runs every night and uses tokens each time. Quiet nights are cheap because it only touches what changed. On plans with lower usage limits, offer weeknights only.
+2. **Check the computer.** With Obsidian or a local folder, scheduled runs reach the Cortex only while that computer is on with the Claude desktop app open. Pick a dream time when it will be, or say plainly that nights it's off are skipped.
+3. **Ask once** (AskUserQuestion): both (recommended), the dream only, the update only, or neither for now. Confirm the dream time.
+4. **Create the scheduled tasks** with the session's scheduling tools, following the tool's own guidance on the exact minute. Each run starts a fresh session with no memory of this chat, so each prompt stands alone:
+
+   ```text
+   Run my cortex-dream skill. Cortex Map: <link>. Time zone: <IANA zone>.
+   ```
+
+   ```text
+   Run my cortex-update skill. Cortex Map: <link>. Time zone: <IANA zone>.
+   ```
+
+   If no scheduling tools are available, give the two prompts and the times, and tell them to set them up as scheduled tasks.
+5. **Run the first dream now** if they're willing, so they see the morning note and the Dream Journal before the first night. It creates the Dream Journal and adds its settings to the Map.
+
+Scheduled runs need `update.approval: autonomous`. With `required`, the dream still runs but only proposes; its edits wait in the Dream Journal for approval.
 
 ## Step 10. Report
 
@@ -109,4 +132,5 @@ Short:
 - Records created per collection
 - Sources connected, and any that failed
 - What's thin and worth filling next
+- Which routines are scheduled, and when the first dream runs
 - Next steps: strategy-digest to fill Strategy, add-to-cortex for any document, ask-cortex to query it, Founder OS for the weekly operating cycle, and Cortex Gnome for overnight work once the Cortex has a few weeks of context

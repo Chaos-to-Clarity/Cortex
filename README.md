@@ -32,7 +32,7 @@ Claude asks where to keep it (Notion, Obsidian, or Google Drive), connects your 
 
 This is what makes Cortex universal. See the next section. Paste once per assistant and you're done.
 
-That's it. From then on, ask anything: "Prep me for my call with Sam," "What's at risk this week?", "Here's a doc, add it to my Cortex." Schedule **cortex-update** weekly when setup offers, and the Cortex keeps itself current.
+That's it. From then on, ask anything: "Prep me for my call with Sam," "What's at risk this week?", "Here's a doc, add it to my Cortex." Setup schedules **cortex-dream** nightly and **cortex-update** weekly, and the Cortex keeps itself current.
 
 Already have a "second brain" in Notion or Obsidian? In step 2, say **"Adopt my existing setup as a Cortex"** instead. Nothing gets moved or renamed. Have a CRM or LinkedIn export? Say **"Import my contacts into my Cortex"** to start with real people and companies.
 
@@ -94,7 +94,21 @@ Cortex reads in three layers, top-down:
 
 It stays lean as it grows. People and companies start as one-line stubs and earn a full record once they show up in three sources or become a real relationship. When a record's history outgrows its summary, the summary is rewritten. The most-connected records surface first. And when a name isn't in the Map or catalogs, one search inside the Cortex, never your whole workspace, catches anything an index missed.
 
-Writes follow the same Map: route it, match it to the existing record by name or alias, update it in place, update its catalog line, log it. Anything unclear goes to an **Inbox** instead of being guessed. A weekly health check keeps catalogs accurate, flags stale records and likely duplicates, and keeps the Map small.
+Writes follow the same Map: route it, match it to the existing record by name or alias, update it in place, update its catalog line, log it. Anything unclear goes to an **Inbox** instead of being guessed.
+
+### It dreams
+
+Every write adds a little, and a store that only grows drifts: the same fact ends up in two places with two values, "waiting on the proposal next week" is still there a month later, and summaries fall behind the history under them. So every night, while you sleep, **cortex-dream** does what sleep does for memory:
+
+- **Replays the day.** New meeting notes become updates to the right records.
+- **Consolidates.** When two facts disagree, the newer one wins and the old one is closed with a date, never erased. Relative dates become real ones. Records whose history has outgrown their summary are rewritten, keeping every name, number, and commitment.
+- **Notices time.** Deadlines that passed, threads waiting too long, initiatives past their target, decisions left open. It asks you instead of guessing.
+- **Spots patterns.** What no single record shows, like a topic coming up across four meetings that nothing in the Cortex tracks. Labeled as inferred until you confirm it.
+- **Downscales.** Expires one-off mentions, fixes catalogs, and keeps the Map small, so reads stay fast as the Cortex grows.
+
+It works on what changed plus a rolling few records each night, never the whole store, so quiet nights cost little and every record still gets revisited every few weeks. Every change is stamped and reversible, and anything consequential, like merging two records or closing one, waits for your yes. Each morning you get a short note: what changed overnight, what needs you, and what it noticed. The full record lives in your **Dream Journal**.
+
+A weekly **cortex-update** does the wide sweep the dream doesn't: email and calendar, a health check across every record, and the review list.
 
 The rules are universal and live in the skills. Your Map, catalogs, and glossary are unique to your business and grow with it.
 
@@ -109,7 +123,7 @@ The rules are universal and live in the skills. Your Map, catalogs, and glossary
 | Inbox | Anything that didn't clearly fit, waiting to be filed |
 | Ingest Log | What's been processed, so nothing is ingested twice |
 
-Plus **Strategy** and **Standing Context** pages, and any collections you add (Customers, Pipeline, Portfolio). Register them on the Map and every skill uses them.
+Plus **Strategy**, **Standing Context**, and **Dream Journal** pages, and any collections you add (Customers, Pipeline, Portfolio). Register them on the Map and every skill uses them.
 
 ### Where it lives
 
@@ -123,6 +137,7 @@ You choose during setup: **Notion**, **Obsidian**, **Markdown in Google Drive**,
 | cortex-map | To adopt an existing setup, import contacts, upgrade, or rebuild and repair the Map | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-map.zip) |
 | add-to-cortex | Any time you have a doc worth keeping | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/add-to-cortex.zip) |
 | strategy-digest | When a strategy doc changes | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/strategy-digest.zip) |
+| cortex-dream | Nightly, on a schedule. The core routine that keeps it current and lean | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-dream.zip) |
 | cortex-update | Weekly, on a schedule | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-update.zip) |
 | ask-cortex | Any question about your work | [ZIP](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/ask-cortex.zip) |
 

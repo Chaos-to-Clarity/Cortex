@@ -36,9 +36,9 @@ A typical question costs one Map read, one or two catalog reads, and two or thre
 | Initiatives | Name | Why It Matters, Blocker, Next Action, Start, Target, Owner / Involved (relation to People), Companies (relation), Decisions (relation) |
 | Decisions | Title | Reasoning, Date, Supersedes (title of the earlier decision), Affects (relation to Initiatives) |
 | Inbox | Title | Content, Suggested Collection, Candidates (possible matching records), Date |
-| Ingest Log | Source | Type (Meeting Notes, Email, Document, Strategy, Query Insight, Health Check), Date Ingested, What Changed |
+| Ingest Log | Source | Type (Meeting Notes, Email, Document, Strategy, Query Insight, Health Check, Dream), Date Ingested, What Changed |
 
-**Core pages:** Map, Standing Context (durable facts about the business and the user's role), Strategy (a summary at the top, then one dated section per strategy document).
+**Core pages:** Map, Standing Context (durable facts about the business and the user's role), Strategy (a summary at the top, then one dated section per strategy document), Dream Journal (what each night's dream changed, noticed, and needs the owner to decide; section 15).
 
 **Status values**
 
@@ -132,6 +132,7 @@ root: <Notion page URL, or folder path / Drive folder ID>
 page.standing_context: <link>
 page.strategy: <link>
 page.schema: <link, or none>
+page.dream_journal: <link, or none>
 sources.meeting_notes: <granola | fireflies | otter | fathom | notion-meetings | folder: path | none>
 sources.calendar: <google-calendar | outlook | device | none>
 sources.calendar_id: <primary or id>
@@ -143,6 +144,11 @@ update.approval: <autonomous | required>
 health.stale_after_days: 60
 health.stub_expire_days: 90
 health.orphan_after_days: 90
+dream.sources: <meeting-notes | none>
+dream.max_records: 40
+dream.started: <ISO datetime, or never>
+dream.last_run: <ISO datetime, or never>
+dream.cursor: <Collection: Identity, or start>
 ```
 
 ## Synthesis
@@ -193,7 +199,7 @@ Records: <People 42 active, 10 archived; Initiatives 9 active; ...>. Inbox: <n> 
 - Keep the Map under 10,000 characters (about 2,500 tokens), counting any table markup the backend adds. The glossary holds the 50 terms that matter most; when it's full, the least-referenced Archived or Dormant terms drop first (their records keep their Aliases, so catalogs still find them).
 - **Structure** (Settings, Collections, Routing, Field map) changes only through cortex-setup or cortex-map, or when a user approves a new collection.
 - **Any writer** may add a Glossary row for a new key entity or nickname, while the glossary has room.
-- **cortex-update** maintains Synthesis and Freshness.
+- **cortex-update** and **cortex-dream** maintain Synthesis and Freshness. cortex-dream also owns the `dream.*` settings and `page.dream_journal`, and may add them to a Map that lacks them.
 
 ## 5. Catalogs
 
@@ -278,6 +284,7 @@ Cortex/
   Cortex Map.md
   Standing Context.md
   Strategy.md
+  Dream Journal.md
   Cortex Schema.md        (optional; user's own extra rules)
   Ingest Log.md
   People/
@@ -325,7 +332,7 @@ Catalog link cells use wikilinks: `[[Jane Rivera]]`. `Ingest Log.md` is one tabl
 
 ## 10. Health check
 
-Run by cortex-update each week and by cortex-map on demand. Fix what's safe to fix; report the rest.
+Run in full by cortex-update each week and by cortex-map on demand. cortex-dream runs the same checks nightly, but only on the records in its working set (section 15). Fix what's safe to fix; report the rest.
 
 | Check | Action |
 | --- | --- |
@@ -373,10 +380,11 @@ These apply to every read and write. If the user keeps a Cortex Schema page with
 - **Keep Current current.** Compact when History outruns it.
 - **Supersede, don't delete.** Close with a status and keep history.
 - **Catalog with every write.** The record and its catalog row change together.
-- **Stamp every write.** Last Updated and Source, every time.
+- **Stamp every write.** Last Updated and Source, every time. The dream's maintenance edits stamp a History line instead (section 15).
 - **Log every ingest.** Check the log before, add a row after.
 - **Durable only.** Task noise belongs in Founder OS or a task tool, and overnight work in Gnome Jobs.
 - **Cite and date.** Answers name the records they used and how fresh they are.
+- **Inferred stays labeled.** Patterns an agent infers live in the Dream Journal with their evidence. They enter records only when the owner confirms them.
 
 ## 14. Global awareness: custom instructions
 
@@ -406,3 +414,65 @@ How: read the Map once per chat and reuse it. Use its Glossary and Catalogs to o
 ```
 
 **Keeping it current.** There is nothing to keep current. Current priorities live in the Map's Synthesis, which cortex-update maintains. The text changes only if the Map moves or the user's role changes; cortex-map reports the new text when the Map moves.
+
+## 15. Dreaming: nightly consolidation
+
+Every write adds a little: a History line, a Stub, a catalog row, an Inbox item. Without a pass that steps back, the Cortex drifts. Current falls behind History, the same fact lives in two places with two values, "waiting on the proposal next week" is still on a record a month later, and catalogs and the glossary slowly stop matching what's in the records. cortex-dream is that pass. It runs nightly while no one is working, so daytime reads hit a store that is already clean.
+
+It works like sleep: replay the day, fold it into what's already known, notice patterns, downscale what no longer matters, and leave a short note for the morning.
+
+**Localized, not global.** A dream opens a bounded working set, never the whole Cortex. Rewriting everything every night costs the most and loses the most detail. In priority order, up to `dream.max_records` records:
+
+1. Last night's carryover: what didn't fit, listed in the last journal entry
+2. Meeting notes from the last `update.lookback_days` days not yet in the Ingest Log (when `dream.sources` includes them)
+3. Records written since `dream.last_run`, named in the Ingest Log rows since then or found by the catalogs' Updated column
+4. New Inbox items, and Ingest Log rows of Type Query Insight since the last dream
+5. One-hop neighbors of the records in 3 (a changed person's company and initiatives)
+6. A rolling slice: the next Active records after `dream.cursor`, walking the catalogs in Map order, so every record is revisited every few weeks even when nothing touches it
+
+What doesn't fit carries to the next night. The cursor moves past what was reviewed. A dream reads the Map, the journal, and the Ingest Log first, and only the catalogs they point to.
+
+**The phases**
+
+| Phase | What it does |
+| --- | --- |
+| Orient | Read the Map, the Dream Journal, the Ingest Log since the last dream, and only the catalogs those point to; build the working set. No writes |
+| Replay | Ingest the new meeting notes with the Writing protocol (section 7). Email and calendar stay with the weekly cortex-update |
+| Consolidate | In the working set: resolve contradictions by superseding, turn relative dates into absolute ones, flag what time has made stale, compact, promote and expire Stubs, add relations the text makes obvious, triage clear Inbox items, apply alias fixes from Query Insights |
+| Abstract | Look across the working set and recent journal entries for patterns no single record shows. Write them to the Dream Journal, labeled inferred, with evidence. Refresh Synthesis if the picture shifted |
+| Downscale | Fix catalog rows for the working set, re-sort only changed catalogs, trim the glossary and Map to budget, update Freshness and the `dream.*` settings |
+| Journal | Add the night's entry to the Dream Journal and one Ingest Log row, Type Dream |
+
+**Contradictions.** Two claims about the same thing in the records: the newer dated source wins, and the older claim is closed, never erased. The field takes the new value and History gets "Was [old] until [date] ([source])", so the Cortex can still answer what was true then. If the dates tie, the sources are different in kind (a record says one thing, a strategy doc another), or the claim is about a person's private context, the dream doesn't choose. It asks the owner.
+
+**Time.** Relative dates in Current and the short fields are rewritten as absolute ones, anchored to the History line that introduced them ("next Friday" added on 2026-10-10 becomes "Oct 16, 2026"). With no clear anchor, the dream asks. Then the dream flags what time has passed by: an Open Thread or Next Action that names a date already gone, a "waiting on" older than 14 days, an Active initiative past its Target, an Open decision older than 30 days. Flags go to the owner. The dream never closes a record because a date passed.
+
+**What a dream may do on its own:** supersede a contradicted field with a dated History line, rewrite relative dates, compact Current and refresh Summaries, promote Stubs, archive Stubs past `health.stub_expire_days`, add obvious relations, file clear Inbox items, discard exact duplicate Inbox items, add aliases and glossary rows, fix catalogs, trim the Map, update Synthesis and Freshness. Every change gets a History line with Source "Dream, [date]", so each one is visible and reversible. Last Updated moves only when a change brings in a new fact (a replayed meeting, an owner's answer). Maintenance alone leaves it, so stale and orphan checks still measure real activity. This is the one exception to stamping every write.
+
+**What needs the owner's yes:** merging records, archiving or closing anything that isn't an expired Stub, changing a status on inference, saving an inferred pattern to a record, Standing Context, Strategy, or Decisions, and any change to Map structure. These go to the journal's Questions for you.
+
+**Compaction keeps specifics.** A rewritten Current keeps every name, number, date, amount, and commitment that is still true. It drops repetition, not detail. Abstracting "Jane wants the Q3 pricing proposal by Oct 30" into "Jane wants updates" is information loss, not consolidation.
+
+**Approval.** With `update.approval: required`, a dream changes nothing except the Dream Journal, the Ingest Log, and its own `dream.*` settings. The journal lists the edits it would make.
+
+**One at a time.** A dream sets `dream.started` before its first write and `dream.last_run` when it finishes. If `dream.started` is newer than `dream.last_run` and under two hours old, another dream is running: stop. If `dream.last_run` is under 12 hours old, the night's work is done: stop, unless the owner asks for another pass.
+
+**Light nights.** If nothing new arrived and no records changed, a dream reviews only the rolling slice and writes a one-line entry. Most nights should cost little.
+
+**Dream Journal.** One page (`Dream Journal.md` in Markdown), newest entry first:
+
+```markdown
+# Dream Journal
+
+## Questions for you
+- [ ] Acme renewal: Initiative target was Oct 15 and it's still Active. Done, or new date? (Initiatives: Acme Renewal)
+- [ ] "Sam" and "Sam Ortiz" look like one person. Merge? (People: Sam, Sam Ortiz)
+
+## Patterns
+- Hiring came up in 4 meetings with 3 people this week, and no initiative holds it. Seen 3 nights. (Inferred. Evidence: ...)
+
+## 2026-10-20
+Replayed 3 meetings. Updated 7 records, superseded 2 facts, compacted 2, promoted 1 Stub, filed 2 Inbox items. Reviewed People A to D.
+```
+
+Questions stay until the owner answers them, then they are applied and removed. The same question is never listed twice. One unanswered for 14 nights is dropped and noted once, and returns only if its record changes. A pattern seen on three or more nights, or one the owner confirms, becomes a question proposing where to save it. Keep 14 nightly entries; roll older ones into one line per month under "Earlier". Keep the page under 6,000 characters.

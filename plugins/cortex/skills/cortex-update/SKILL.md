@@ -7,13 +7,15 @@ description: Keeps the user's Cortex current and clean. Scans recent meetings, e
 
 Keep the Cortex current and clean. Scan every connected source from the look-back window, update records in place, triage the Inbox, run the health check, and refresh the Map's Synthesis and Freshness. Safe to repeat: the Ingest Log guarantees each source is processed once. For a single document, use add-to-cortex.
 
+If cortex-dream runs nightly, most meetings are already ingested and recently changed records already consolidated. This weekly pass is the wide sweep the dream never does: email and calendar, the health check across every record rather than tonight's slice, and the review list for the user. Read the Dream Journal's open questions and include the ones still unanswered in the report.
+
 Read `references/cortex-spec.md` first. Every write follows the Writing protocol in section 7.
 
 ## Step 1. Load the Map
 
 Find and validate the Cortex Map (spec section 4). If there isn't one, say so and stop. In a scheduled run there's no one to run setup, so just report it.
 
-Settings it uses: `update.lookback_days` (default 7), `update.approval`, `health.stale_after_days` (default 60).
+Settings it uses: `update.lookback_days` (default 7), `update.approval`, `health.stale_after_days` (default 60), and `page.dream_journal` if set.
 
 - `autonomous`: apply edits and report.
 - `required`: show the edit list and wait for approval.
@@ -92,4 +94,5 @@ A short table or a tight paragraph:
 - Records created, updated, superseded
 - Inbox: filed, discarded, waiting (with the questions)
 - Health: fixed (compacted, promoted, expired), and what needs the user (stale records, likely duplicates, orphans to archive)
+- Dream Journal questions still waiting on the user
 - Sources that were unavailable

@@ -12,6 +12,7 @@ The skills for [Cortex](../../README.md), the context layer your AI reads first.
 | `cortex-map` | When needed | Adopts an existing setup, imports CRM or LinkedIn exports, upgrades older Maps, rebuilds catalogs, or repairs the Map |
 | `add-to-cortex` | Any time | Digests one document into the right records, without duplicates |
 | `strategy-digest` | When a strategy doc changes | Condenses plans, decks, personas, and brand docs into Strategy |
+| `cortex-dream` | Nightly, scheduled | The core routine. Replays the day's meetings, resolves contradictions, flags what time made stale, compacts records, spots patterns, keeps catalogs and the Map lean, and leaves a morning note in the Dream Journal |
 | `cortex-update` | Weekly, scheduled | Updates records from recent meetings, email, and calendar, triages the Inbox, and runs the health check |
 | `ask-cortex` | Any time | Answers from the Map, catalogs, and records, plus your live calendar, meetings, and email |
 
