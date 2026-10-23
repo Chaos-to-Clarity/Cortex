@@ -163,16 +163,17 @@ For free plans, or if you only want some skills:
 
 ## Built on Cortex: the Cortex Suite
 
-Cortex is the foundation. The [Chaos to Clarity skills marketplace](https://github.com/Chaos-to-Clarity/C2C-skills) holds the skills that run on it. Each one reads your Cortex, does the work, and writes back what it learned, so every skill gets sharper as the others run. Add the marketplace (`Chaos-to-Clarity/C2C-skills`) and it installs Cortex along with them.
+Cortex is the foundation. The Cortex Suite holds the skills that run on it. Each one reads your Cortex, does the work, and writes back what it learned, so every skill gets sharper as the others run. The suite lives in a private repo, [cortex-skills](https://github.com/Chaos-to-Clarity/cortex-skills), for Eric's workshop attendees, Realm members, and coaching clients. Once you have access, add the marketplace (`Chaos-to-Clarity/cortex-skills`) and it installs Cortex along with the suite. [Join a workshop](https://chaostoclarity.io) or [book a call](https://calendly.com/emweiss/clarity) to get access.
 
 | Plugin | What it does |
 | --- | --- |
-| [**Founder OS**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/founder-os) | Your weekly operating cycle. Plan Monday, brief each morning, reflect Friday. |
-| [**Investor Update**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/investor-update) | Your monthly investor update, drafted from your Cortex. Metrics with deltas, required lowlights, what you promised last time, and specific asks. Always a draft. |
-| [**Customer Signal**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/customer-signal) | Every customer and prospect call becomes evidence. Pains, requests, objections, churn risks, and praise, counted across accounts, with a weekly brief. |
-| [**One-on-Ones**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/one-on-ones) | Prep and debrief every 1:1 with your direct reports. Commitments both ways, recurring themes, and a monthly team review. Private by design. |
-| [**Recap**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/recap) | Every meeting becomes done work: a recap email, your to-dos with time booked, follow-ups drafted, and context saved to your Cortex. |
-| [**Content Engine**](https://github.com/Chaos-to-Clarity/C2C-skills/tree/main/plugins/content-engine) | Last week's meetings become this week's framework, newsletter issue, and LinkedIn post, in your voice and kept confidential. |
+| [**Founder OS**](https://github.com/Chaos-to-Clarity/cortex-skills/tree/main/plugins/founder-os) | Your weekly operating cycle. Plan Monday, brief each morning, reflect Friday. |
+| [**Investor Update**](https://github.com/Chaos-to-Clarity/cortex-skills/tree/main/plugins/investor-update) | Your monthly investor update, drafted from your Cortex. Metrics with deltas, required lowlights, what you promised last time, and specific asks. Always a draft. |
+| [**Customer Signal**](https://github.com/Chaos-to-Clarity/cortex-skills/tree/main/plugins/customer-signal) | Every customer and prospect call becomes evidence. Pains, requests, objections, churn risks, and praise, counted across accounts, with a weekly brief. |
+| [**One-on-Ones**](https://github.com/Chaos-to-Clarity/cortex-skills/tree/main/plugins/one-on-ones) | Prep and debrief every 1:1 with your direct reports. Commitments both ways, recurring themes, and a monthly team review. Private by design. |
+| [**Recap**](https://github.com/Chaos-to-Clarity/cortex-skills/tree/main/plugins/recap) | Every meeting becomes done work: a recap email, your to-dos with time booked, follow-ups drafted, and context saved to your Cortex. |
+| [**Content Engine**](https://github.com/Chaos-to-Clarity/cortex-skills/tree/main/plugins/content-engine) | Last week's meetings become this week's framework, newsletter issue, and LinkedIn post, in your voice and kept confidential. |
+| [**Handwritten Notes**](https://github.com/Chaos-to-Clarity/cortex-skills/tree/main/plugins/handwritten-notes) | Photograph a page of notes. Checkbox items become tasks with time booked; everything else is filed as notes linked to the right people and projects. |
 
 Each suite skill registers its own collection on your Map the first time it runs, so you never set up the structure by hand. Building your own skill on Cortex? Follow [the spec](#the-spec) and register your collection the same way.
 
