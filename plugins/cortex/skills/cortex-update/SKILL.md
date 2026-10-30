@@ -11,6 +11,8 @@ If cortex-dream runs nightly, most meetings are already ingested and recently ch
 
 Read `references/cortex-spec.md` first. Every write follows the Writing protocol in section 7.
 
+If the Map has `pack.company: 1`, also read `references/company-pack.md`: run email and calendar per member with each member's sources, add the pack's health checks (its section 9), and report to `company.reviewer`.
+
 ## Step 1. Load the Map
 
 Find and validate the Cortex Map (spec section 4). If there isn't one, say so and stop. In a scheduled run there's no one to run setup, so just report it.

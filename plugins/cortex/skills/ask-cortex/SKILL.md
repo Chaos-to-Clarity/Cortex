@@ -9,6 +9,8 @@ Answer questions about the user's business, people, priorities, and schedule. Th
 
 Read `references/cortex-spec.md` first. Every read follows the Reading protocol in section 6: Map, then catalogs, then only the records needed. Never list whole databases or search the workspace broadly.
 
+If the Map has `pack.company: 1`, also read `references/company-pack.md`. Act for the asking member (its section 5): read only what their role and spaces allow, and never quote Private content to anyone but its owner.
+
 If the user hasn't asked a question yet, ask what they want to know.
 
 ## Step 1. Load the Map

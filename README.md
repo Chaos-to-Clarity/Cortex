@@ -179,7 +179,13 @@ Each suite skill registers its own collection on your Map the first time it runs
 
 ## The spec
 
-[`spec/cortex-spec.md`](spec/cortex-spec.md) is the full contract: the Map format, record and catalog formats, the reading and writing protocols, backends, and the health check. Any agent that follows it can use a Cortex.
+[`spec/cortex-spec.md`](spec/cortex-spec.md) is the full contract: the Map format, record and catalog formats, the reading and writing protocols, backends, and the health check. Any agent that follows it can use a Cortex. [`spec/company-pack.md`](spec/company-pack.md) adds what a company Cortex needs.
+
+## Cortex for a company
+
+A Cortex can serve one founder or a whole exec team. When you run setup, Claude asks, "Is this for you, or for your company?" Choose the company and it installs the [Company Pack](spec/company-pack.md): departments, the numbers you manage to, what each exec has promised and by when, the org chart and open roles, the board, and the risks. Each person gets their own private space, so 1:1 notes and personal reflections never land where the team can read them.
+
+Already built your own Cortex? Ask Claude to "turn my Cortex into a company Cortex." It moves your private records first, then adds the pack.
 
 ## Work with Eric
 

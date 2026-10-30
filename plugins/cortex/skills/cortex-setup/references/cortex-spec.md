@@ -84,6 +84,8 @@ When a fact changes, update the field and the Summary, and add a dated History l
 
 **Added collections.** Businesses add their own (Customers, Pipeline, Portfolio, Coaching Sessions). Each one has a title identity plus Summary, Aliases, Status, Last Updated, and Source, gets a catalog, and is registered in the Map with routing rules. Plugins that build on Cortex (Founder OS, for example) register their collections the same way.
 
+**Packs.** A pack is a set of added collections and rules that ships with Cortex for a common need. The **Company Pack** (`company-pack.md`, beside this file) turns a founder's Cortex into a company's: Departments, Metrics, Company Commitments, Org, Board, Risks, a Visibility field, a Members table on the Map, and spaces that set who can read what. A Map with `pack.company: 1` uses it; skills then follow `company-pack.md` as well as this spec.
+
 **Logs.** Some collections are logs rather than records: the Ingest Log, and plugin logs such as Cortex Gnome's Gnome Runs and Gnome Jobs. Logs skip the catalog, the Summary, and the Current and History body. They're registered on the Map like any collection, marked "log" in the Catalog column, and read through saved views or a folder listing, newest first.
 
 **Cortex Gnome.** The overnight worker registers Gnome Registry, Gnome Runs, Gnome Jobs, and a Gnome Manifesto page under a "Cortex Gnome" page or folder. Any skill or person hands work to it by adding a Gnome Jobs row with Status Queued. Gnomes read the Cortex with the Reading protocol and write to core collections only through the Inbox.

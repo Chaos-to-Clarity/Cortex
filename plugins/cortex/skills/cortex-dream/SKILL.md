@@ -11,6 +11,8 @@ It works like sleep: replay the day, fold it into what's already known, notice p
 
 Read `references/cortex-spec.md` first, especially section 15 (Dreaming), section 7 (Writing), and section 10 (Health check). Section 15 is the contract; this file is the procedure.
 
+If the Map has `pack.company: 1`, also read `references/company-pack.md`, sections 9 and 10: the dream runs once for the company, reads every member's meeting notes with that member's access, flags passed Due dates and stale Metrics, and routes its questions to `company.reviewer`. Questions about Private records go only to their owner.
+
 **Division of labor.** cortex-dream runs nightly and works on a small, bounded slice: what changed today, its neighbors, and a rolling few. cortex-update runs weekly and does the wide sweep: email and calendar, the full health check across every record, and the review list. They share the Ingest Log, so nothing is processed twice. cortex-gnome builds work; the dream only maintains the Cortex. It never sends messages, never touches anything outside the Cortex root, and never deletes.
 
 ## Step 0. Wake check

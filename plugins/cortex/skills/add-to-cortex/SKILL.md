@@ -9,6 +9,8 @@ Digest one document into the user's Cortex. For a folder of strategy documents, 
 
 Read `references/cortex-spec.md` first. Every write follows the Writing protocol in section 7.
 
+If the Map has `pack.company: 1`, also read `references/company-pack.md`. Act for one member (its section 5): route with the pack's rules, and write anything from a 1:1 or anything private to that member's Private space, never a shared collection.
+
 ## Step 1. Load the Map
 
 Find and validate the Cortex Map (spec section 4). If there isn't one, offer cortex-setup and stop. The Map tells you what collections exist, where they live, how to route, and what names mean.

@@ -9,6 +9,8 @@ Generate the Map and catalogs from the user's real store, so retrieval never dep
 
 Read `references/cortex-spec.md` first, especially sections 4, 5, and 10.
 
+If the Map has `pack.company: 1`, also read `references/company-pack.md`: register pack collections (with both locations for split ones), keep the Members table, and repair space links. To add the pack to an existing Cortex, follow its section 12.
+
 ## Modes
 
 Pick from the request:

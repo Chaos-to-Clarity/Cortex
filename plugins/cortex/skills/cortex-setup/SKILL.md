@@ -1,13 +1,13 @@
 ---
 name: cortex-setup
-description: Builds the user's Cortex, the context layer their AI reads first, in Notion, Obsidian, or Google Drive, then fills it and generates their Map and custom instructions. Run once.
+description: Builds a Cortex, the context layer AI reads first, for one founder or a whole company, in Notion, Obsidian, or Google Drive. Fills it, writes the Map and custom instructions. Run once.
 ---
 
 # Cortex Setup
 
 Build the user's Cortex: a structured store of what stays true about their work, with a Map that every AI reads first. Then fill it with real context. Run once. If a Cortex already exists, build on it and never overwrite.
 
-Read `references/cortex-spec.md` first. It defines the layers, the Map format, the record format, the backends, and the rules.
+Read `references/cortex-spec.md` first. It defines the layers, the Map format, the record format, the backends, and the rules. On the company branch (Step 1b), also read `references/company-pack.md`.
 
 Keep the user moving. Use AskUserQuestion for choices (up to 4 per call, recommended option first). Do discovery silently before asking.
 
@@ -15,7 +15,18 @@ Keep the user moving. Use AskUserQuestion for choices (up to 4 per call, recomme
 
 Look for a Cortex Map (spec section 4). If one exists and validates, say the Cortex is already set up, show where, and offer to: fill thin collections (Step 7), add a source, change a setting, schedule the nightly dream and weekly update if they aren't scheduled yet (Step 9), or repair the Map with cortex-map. Stop there unless they pick one.
 
+If the Cortex exists, has no `pack.company` setting, and the user says it should now serve their company, offer the migration in company-pack section 12. Walk it step by step and never invite a second person before the private records have moved.
+
 Also look for an older setup: a page named like "Brain", "Second Brain", or "My Brain" holding People, Initiatives, or Decisions databases, or a folder of notes organized the same way. If found, offer to adopt it: hand off to cortex-map in adopt mode, which registers what exists without moving or renaming anything.
+
+## Step 1b. For you, or for your company?
+
+Ask one question (AskUserQuestion): **"Is this Cortex for you, or for your company?"**
+
+- **For me** (recommended for a founder working alone, or anyone in a bootcamp): a founder Cortex. Follow the steps below as written.
+- **For my company:** a company Cortex that the exec team shares. Follow the steps below with the company additions marked **Company:** in each step. They come from `references/company-pack.md`.
+
+**Company:** before going on, confirm who's setting it up (the CEO, the Chief of Staff, or an advisor working for them) and the company name. Explain in two lines that a company Cortex gives each person their own private space and that access is set by who joins which space.
 
 ## Step 2. Choose where it lives
 
@@ -32,6 +43,7 @@ Then confirm access:
 - Ask where to put it. Default: a page or folder named "Cortex".
 - For Obsidian or a local folder, suggest Obsidian's Git plugin or a synced folder for version history (optional).
 - Test write: create the parent. If it fails, report the error plainly and stop until access works.
+- **Company:** recommend Notion, because teamspaces enforce who sees what. With Google Drive, folders are shared per space. With Obsidian or a local folder, say plainly that the folder can't restrict access, and recommend Notion or Drive instead. Then create the spaces (company-pack section 6): the Company teamspace or folder, the Exec teamspace or folder, and a Private space for the person setting it up. Ask them to make each teamspace closed or private.
 
 ## Step 3. Connect sources
 
@@ -44,6 +56,8 @@ Ask which tools they use, pre-selecting what's already connected:
 
 Test each with one small read. Report each as connected or not. For failures, name the connector, suggest it from the registry, and continue. Missing sources limit what the Cortex learns; they don't block setup.
 
+**Company:** these are the first member's sources. Each other member connects their own when they join (Step 8).
+
 ## Step 4. Build the structure
 
 Under the parent, create (spec sections 2, 5, and 9):
@@ -53,10 +67,13 @@ Under the parent, create (spec sections 2, 5, and 9):
 3. **Standing Context**, **Strategy**, and **Dream Journal** pages. Strategy starts empty with a note that strategy-digest fills it. Dream Journal starts with empty Questions for you and Patterns sections (spec section 15).
 4. **One catalog per collection** (People, Companies, Initiatives, Decisions, Inbox), each with just its header and an Archive catalog.
 
+**Company:** also create the pack (company-pack section 3): Departments, Metrics, Metric Values (a log), Company Commitments, Org, Board, and Risks, each with its fields, statuses, catalog, and Archive catalog. Add a Visibility field (Company, Exec, Private) to Initiatives and Decisions. Put each collection in the space section 6 names; Initiatives, Decisions, and Company Commitments get one database in Company and one in Exec. The Dream Journal, Inbox, and Ingest Log go in the Company space.
+
 Relations:
 
 - Notion: People gets "Company" (two-way with Companies, shown there as "People"). Companies gets "Owner" (relation to People). Initiatives gets "Owner / Involved" (two-way with People, shown there as "Initiatives") and "Companies" (two-way with Companies, shown there as "Initiatives"). Decisions gets "Affects" (two-way with Initiatives, shown there as "Decisions").
 - Markdown: wikilink lists in frontmatter.
+- **Company:** Departments get Head (People), Metrics (two-way with Metrics), and Dependencies (Departments). Metrics get Owner (People) and Department. Metric Values get Metric. Company Commitments get Owner and Made To (People) and Department. Org gets Holder (People), Reports To (Org), and Department. Board gets Members (People) and Follow-ups (Company Commitments). Risks get Owner (People) and Related (Initiatives, Metrics, Departments).
 
 ## Step 5. Ask two settings
 
@@ -64,10 +81,13 @@ In one AskUserQuestion call:
 
 - **Updates:** apply and report (recommended, needed for scheduled runs), or show edits first. This sets `update.approval`.
 - **Time zone:** confirm the one detected from their calendar.
+- **Company:** the reviewer, who answers the dream's questions: the Chief of Staff (recommended), or the CEO if there is none.
 
 ## Step 6. Write the Map
 
-Create the Cortex Map page or file at the top of the parent, in the exact format in spec section 4: the self-describing header, Settings (with `page.dream_journal` linked, `dream.sources` set to `meeting-notes` if a meeting-notes source is connected, and `dream.started`, `dream.last_run` at `never`), an empty Synthesis, Collections (with catalog and location links for every collection), the default Routing rules, an empty Glossary, Freshness, and Field map: none.
+Create the Cortex Map page or file at the top of the parent (**Company:** in the Company space), in the exact format in spec section 4: the self-describing header, Settings (with `page.dream_journal` linked, `dream.sources` set to `meeting-notes` if a meeting-notes source is connected, and `dream.started`, `dream.last_run` at `never`), an empty Synthesis, Collections (with catalog and location links for every collection), the default Routing rules, an empty Glossary, Freshness, and Field map: none.
+
+**Company:** add `pack.company: 1`, `company.name`, and `company.reviewer` to Settings; add the Members section with the first member's row (company-pack section 5); add the pack's Collections rows, with both locations for split collections and `log` for Metric Values; and add the pack's Routing lines (company-pack section 7).
 
 ## Step 7. Fill it with real context
 
@@ -85,6 +105,8 @@ Create the Cortex Map page or file at the top of the parent, in the exact format
 6. **Synthesis and Freshness.** Write a one-paragraph Synthesis and fill Freshness.
 7. **Log** one Ingest Log row: Source "Cortex setup", Type Document, What Changed = counts per collection. Add one row per meeting used in step 2 (Type Meeting Notes), so neither the dream nor cortex-update ingests it again.
 
+**Company:** if the cortex-intake skill is installed, offer it instead of the interview in item 3: it runs a structured interview with each exec and a batch intake of the company's documents, and drafts every pack record into the Inbox for review. Without it, interview the person setting up for Departments (head, goals, health only if they set it), the five to ten Metrics they manage to with the latest values, open Company Commitments with owners and dates, senior Org seats and open roles, the next Board meeting, and the top three Risks. Departments' Health is theirs to set; never infer it.
+
 ## Step 8. Custom instructions
 
 This step gives every AI conversation, on any platform, awareness of the Cortex without a lookup in every chat.
@@ -96,6 +118,7 @@ This step gives every AI conversation, on any platform, awareness of the Cortex 
    - **ChatGPT, Gemini, Grok, or any other assistant:** its custom instructions or personalization setting
    - Each assistant also needs a connector to wherever the Cortex lives (Notion or Google Drive, for example), or it can't read the Map. Obsidian and local folders are reachable only from assistants with access to that computer.
 4. Ask them to paste it now, before moving on. It's the step that makes the Cortex work everywhere.
+5. **Company:** use the company template (company-pack section 11) for each member. For every other member, write an invite checklist: join the Company teamspace (and Exec, if their role has it), get a Private space, connect their own calendar, email, and meeting notes, add their Members row, and paste their own custom instructions. Offer to add each member now or later; never add one to a space their role doesn't allow.
 
 ## Step 9. Schedule the routines
 
@@ -121,6 +144,8 @@ A Cortex stays useful only if it's maintained. Two scheduled tasks do that, and 
 
    If no scheduling tools are available, give the two prompts and the times, and tell them to set them up as scheduled tasks.
 5. **Run the first dream now** if they're willing, so they see the morning note and the Dream Journal before the first night. It creates the Dream Journal and adds its settings to the Map.
+
+**Company:** the dream and the update run once for the company, scheduled by the reviewer (company-pack section 10). Each member schedules their own per-member routines (Founder OS, Recap) from their own account.
 
 Scheduled runs need `update.approval: autonomous`. With `required`, the dream still runs but only proposes; its edits wait in the Dream Journal for approval.
 

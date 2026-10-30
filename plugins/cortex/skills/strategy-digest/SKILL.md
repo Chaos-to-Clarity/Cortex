@@ -9,6 +9,8 @@ Pull the durable strategy out of the user's documents and leave the noise behind
 
 Read `references/cortex-spec.md` first, then find and validate the Cortex Map (spec section 4). If there isn't one, offer cortex-setup and stop. Writes follow the Writing protocol in spec section 7.
 
+If the Map has `pack.company: 1`, also read `references/company-pack.md`: Strategy lives in the Exec space, and nothing from a strategy document goes to the Company space unless the CEO says so.
+
 ## Step 1. Find the documents
 
 - If the user named or attached documents, use those.
