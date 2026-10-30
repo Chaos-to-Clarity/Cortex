@@ -7,7 +7,7 @@ It's a complete company Cortex on the Markdown backend, with the [Company Pack](
 ## What's in it
 
 - A Map with `pack.company: 1`, a Members table, split Company and Exec locations, routing, and a glossary
-- 42 records across People, Companies, Departments, Initiatives, Company Commitments, Org, Decisions, Metrics, Board, Risks, and the Inbox
+- 43 records across People, Companies, Departments, Initiatives, Company Commitments, Org, Decisions, Metrics, Board, Risks, and the Inbox
 - Three months of readings (July to September 2026) for five Metrics
 - A Dream Journal with two nights and questions routed to the reviewer
 - An Ingest Log covering the intake interviews, documents, a meeting, and two dreams

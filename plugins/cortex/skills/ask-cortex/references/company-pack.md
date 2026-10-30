@@ -189,7 +189,7 @@ A Visibility field sits on Company Commitments, Decisions, Initiatives, and Risk
 | Value | Who can read it |
 | --- | --- |
 | Company | Every member |
-| Exec | The CEO, the Chief of Staff, and the execs |
+| Exec | The CEO, the Chief of Staff, the execs, and the Advisor seat (section 5) |
 | Private | Only the member whose Private space holds it |
 
 **Defaults when a writer isn't told:** Company Commitments, Initiatives, Departments: Company. Decisions, Risks, Metrics, Board: Exec. Anything from a 1:1, a performance conversation, or a personal remark about someone: Private, in the speaker's Private space, never in a shared collection.
@@ -209,12 +209,13 @@ The Map gains a Members section after Settings:
 | Dana Kim | CEO | calendar: google-calendar, email: gmail, meeting_notes: granola | <link> | autonomous | daily |
 | Luis Moreno | Chief of Staff | calendar: google-calendar, meeting_notes: granola | <link> | autonomous | daily |
 | Priya Shah | Exec: Engineering | calendar: google-calendar, meeting_notes: granola | <link> | required | weekly |
+| Eric Weiss | Advisor | none | none | required | monthly |
 ````
 
 | Column | Meaning |
 | --- | --- |
 | Member | The person's name, matching their People record |
-| Role | CEO, Chief of Staff, or Exec: <Department> |
+| Role | CEO, Chief of Staff, Exec: <Department>, or Advisor |
 | Sources | Their own calendar, email, and meeting-notes sources, in the spec's source names. Scheduled skills run per member with these |
 | Private space | Link to their Private space, or none |
 | Approval | autonomous or required, for writes made on their behalf |
@@ -227,10 +228,16 @@ The Map gains a Members section after Settings:
 | CEO | Company, Exec, their own Private | Anything in Company and Exec, their own Private |
 | Chief of Staff | Company, Exec, their own Private | Company pack collections, Board, Company Commitments, their own Private |
 | Exec | Company, Exec, their own Private (and their Team records, which live there) | Their Department, their Metrics, their own Company Commitments, their own Private |
+| Advisor | Company and Exec, never any Private space | Standing Context, Strategy, the Dream Journal, the Ingest Log, and monthly refresh writes |
 
 The Members table records intent. The spaces (section 6) are what enforce it.
 
-**No outside seats.** Every member works at the company. A coach, consultant, or vendor helping the company is never a member and is never added to any space, as a guest or otherwise. They work from what members choose to show them in a session. The monthly refresh is run by the reviewer (`company.reviewer`) with cortex-dream.
+**The Advisor works in the company's instance.** The Advisor seat is for someone outside the company who builds and maintains the Cortex for it. They work only inside the company's own accounts:
+
+- A Claude seat in the company's Claude organization, so every conversation and its history stay with the company. Never the Advisor's own Claude account connected to the company's workspace.
+- Guest or member access to the company's workspace, granted by the CEO, limited to the Company and Exec spaces, and removable by the company at any time.
+- Nothing copied out: no exports, downloads, or copies of records, documents, or transcripts into the Advisor's own accounts or devices.
+- When the engagement ends, the company removes the Advisor's seat and access, and the Advisor's row comes off the Members table.
 
 **Acting for a member.** Every skill run on a company Cortex knows which member it is acting for: the member whose session or scheduled task is running. It reads only what that member can read and writes only what they can write. A run that can't tell whose it is asks once, then uses the answer for the rest of the run.
 
@@ -245,7 +252,7 @@ The Members table records intent. The spaces (section 6) are what enforce it.
 | Teamspace | Members | Holds |
 | --- | --- | --- |
 | `<Company> Cortex` | Everyone | The Map, Standing Context, Dream Journal, Ingest Log, Inbox, catalogs, People, Companies, Departments, Initiatives, Company Commitments, Org, and Visibility-Company records |
-| `<Company> Exec` | CEO, Chief of Staff, execs | Board, Risks, Metrics, Metric Values, Decisions, Strategy, and Visibility-Exec records |
+| `<Company> Exec` | CEO, Chief of Staff, execs, Advisor | Board, Risks, Metrics, Metric Values, Decisions, Strategy, and Visibility-Exec records |
 | `<Member> Private` | That member only | Their Team records (One-on-Ones), Founder OS reflections and commitments, private notes, Private records |
 
 Set each teamspace to closed or private so membership is the access list. The Map lives in the Company teamspace and links into the Exec teamspace; members without Exec access see a link they can't open, which is the intended behavior.
