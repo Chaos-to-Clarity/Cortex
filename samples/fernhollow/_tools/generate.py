@@ -92,8 +92,6 @@ for name, f, cur, hist, _ in people:
 catalog("Company/People", "People Catalog", ["Name", "Aliases", "Status", "Depth", "Summary", "Updated", "Link"], people_rows,
         "Active and Dormant records. Archived: `_catalog-archive.md`. ")
 
-record("Company/People", "Alex Morgan", dict(name="Alex Morgan", summary="Outside advisor running the Cortex build and monthly refresh", aliases=[], role="Advisor", company="", depth="Stub", mentions=1, status="Active", last_updated="2026-10-06", source="Cortex setup"), "Advisor seat on the Members table. Reads Company and Exec spaces, never Private.", ["2026-10-06: First added (Cortex setup)"])
-people_rows.append(["Alex Morgan", "", "Active", "Stub", "Outside advisor running the Cortex build and monthly refresh", "2026-10-06", wl("Alex Morgan")])
 catalog("Company/People", "People Catalog", ["Name", "Aliases", "Status", "Depth", "Summary", "Updated", "Link"], people_rows,
         "Active and Dormant records. Archived: `_catalog-archive.md`. ")
 for folder, title, header in [("Company/People", "People Catalog (Archive)", ["Name", "Aliases", "Status", "Depth", "Summary", "Updated", "Link"])]:
@@ -361,7 +359,6 @@ dream.cursor: Departments: Sales
 | Marcus Bell | Exec: Sales | calendar, granola | Private/Marcus Bell | required | weekly |
 | Hana Sato | Exec: Customer Success | calendar, granola | Private/Hana Sato | required | weekly |
 | Daniel Reyes | Exec: Finance and Ops | calendar, email | Private/Daniel Reyes | required | weekly |
-| Alex Morgan | Advisor | none | none | required | monthly |
 
 ## Synthesis
 Fernhollow is at $7.75M ARR (Sept 30) against $10M by June 2027, with a Series C planned to close by April 2027. Retention is the story: NRR fell from 112% to 106% in two months and logo churn rose to 1.9%. Sales is Red with no VP Sales since July and coverage at 2.2x. The board's August asks (churn cohorts, VP Sales finalists) are both still open for the Nov 18 meeting. Pricing v2 keeps slipping on a sales decision. Runway is 17 months.

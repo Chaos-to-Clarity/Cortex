@@ -1,5 +1,5 @@
 # People Catalog
-Active and Dormant records. Archived: `_catalog-archive.md`. 9 rows. Rebuilt 2026-10-28.
+Active and Dormant records. Archived: `_catalog-archive.md`. 8 rows. Rebuilt 2026-10-28.
 
 | Name | Aliases | Status | Depth | Summary | Updated | Link |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -11,4 +11,3 @@ Active and Dormant records. Archived: `_catalog-archive.md`. 9 rows. Rebuilt 202
 | Hana Sato |  | Active | Full | VP CS; owes the board the churn cohort analysis | 2026-10-09 | [[Hana Sato]] |
 | Daniel Reyes |  | Active | Full | VP Finance; runway 17 months; wants raise started in January | 2026-10-10 | [[Daniel Reyes]] |
 | Rachel Stein |  | Active | Full | Northgate director; asked for churn cohorts in August | 2026-10-12 | [[Rachel Stein]] |
-| Alex Morgan |  | Active | Stub | Outside advisor running the Cortex build and monthly refresh | 2026-10-06 | [[Alex Morgan]] |

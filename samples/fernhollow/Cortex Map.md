@@ -46,7 +46,6 @@ dream.cursor: Departments: Sales
 | Marcus Bell | Exec: Sales | calendar, granola | Private/Marcus Bell | required | weekly |
 | Hana Sato | Exec: Customer Success | calendar, granola | Private/Hana Sato | required | weekly |
 | Daniel Reyes | Exec: Finance and Ops | calendar, email | Private/Daniel Reyes | required | weekly |
-| Alex Morgan | Advisor | none | none | required | monthly |
 
 ## Synthesis
 Fernhollow is at $7.75M ARR (Sept 30) against $10M by June 2027, with a Series C planned to close by April 2027. Retention is the story: NRR fell from 112% to 106% in two months and logo churn rose to 1.9%. Sales is Red with no VP Sales since July and coverage at 2.2x. The board's August asks (churn cohorts, VP Sales finalists) are both still open for the Nov 18 meeting. Pricing v2 keeps slipping on a sales decision. Runway is 17 months.

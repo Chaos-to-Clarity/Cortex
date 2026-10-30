@@ -26,7 +26,7 @@ Ask one question (AskUserQuestion): **"Is this Cortex for you, or for your compa
 - **For me** (recommended for a founder working alone, or anyone in a bootcamp): a founder Cortex. Follow the steps below as written.
 - **For my company:** a company Cortex that the exec team shares. Follow the steps below with the company additions marked **Company:** in each step. They come from `references/company-pack.md`.
 
-**Company:** before going on, confirm who's setting it up (the CEO, the Chief of Staff, or an advisor working for them) and the company name. Explain in two lines that a company Cortex gives each person their own private space and that access is set by who joins which space.
+**Company:** before going on, confirm who's setting it up (the CEO or the Chief of Staff; never an outside coach or consultant, who doesn't get a seat) and the company name. Explain in two lines that a company Cortex gives each person their own private space and that access is set by who joins which space.
 
 ## Step 2. Choose where it lives
 
