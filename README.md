@@ -191,7 +191,7 @@ Already built your own Cortex? Ask Claude to "turn my Cortex into a company Cort
 
 Cortex is one of the systems teams build in the Full-Stack AI Operating System, alongside a working AI strategy for the whole company.
 
-I'm Eric Weiss, founder of Chaos to Clarity. I've spent ten years coaching more than 70 technical founders and CTOs at venture-backed companies, and every skill here came out of that work. There are a few ways I can help you go further.
+I'm Eric Weiss, founder of Chaos to Clarity. I've spent more than 15 years coaching 75+ founders and technical leaders at venture-backed companies, and every skill here came out of that work. There are a few ways I can help you go further.
 
 **Executive coaching.** I coach founders and CTOs whose companies are growing faster than their leadership. Together we find the real bottleneck, name what you're tolerating, and build the habits and systems that let the company scale without routing everything through you.
 
