@@ -139,7 +139,7 @@ Statuses: Filled, Open, Closed (the seat no longer exists).
 
 Catalog line: `VP Sales | Open | Reports to: CEO | open since 2026-09-01 | scorecard drafted; two finalists`. Key columns: Holder, Reports To.
 
-Org holds senior seats and open roles, not every employee. Headcount lives on Departments.
+Org holds senior seats and open roles, not every employee. Headcount lives on Departments. A person covering an open seat doesn't get a seat of their own unless the title is a real role on the org chart; the open seat's Current names who is covering it.
 
 ### 3.6 Board
 
@@ -171,8 +171,8 @@ Something that could hurt the company, with a trigger and a plan.
 | --- | --- |
 | Title (identity) | "Runway under 12 months if the raise slips" |
 | Owner | Relation to People |
-| Likelihood | Low, Medium, High |
-| Impact | Low, Medium, High |
+| Likelihood | Low, Medium, High, or Unrated until the owner rates it |
+| Impact | Low, Medium, High, or Unrated until the owner rates it |
 | Trigger | What would turn it from watching to active, as specific as possible |
 | Mitigation | What's being done, one or two lines |
 | Related | Relation to Initiatives, Metrics, or Departments |
