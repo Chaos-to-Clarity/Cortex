@@ -89,7 +89,7 @@ brief.share_level: <owner | team>
 trust.rung: <starter | trusted | proven>
 budget.max_jobs: 3
 budget.max_points: 5
-infer.max_auto: 0
+infer.max_auto: 2
 infer.max_size: S
 
 spend.cap_usd: 0
@@ -101,7 +101,7 @@ manifesto.consolidate_day: <monday ... sunday>
 manifesto.max_chars: 8000
 ```
 
-Defaults shown are the Starter rung (`setup.md`, Trust ladder); a Trusted gnome typically runs 5 jobs, 8 points, and `infer.max_auto: 2`.
+Defaults shown are the Starter rung (`setup.md`, Trust ladder); a Trusted gnome typically runs 5 jobs, 8 points, and `infer.max_auto: 3`. On Starter, inferred builds are limited to the Starter kinds (`harvest-and-triage.md`, Decide what's inferred).
 
 Settings are owned by setup and status mode, and change only on the owner's yes. A run reads them and never edits them, except Last Run. When the Trust ladder calls for a demotion, the run applies it as a temporary override for that run only (`setup.md`, Trust ladder) and recommends the settings change in the brief.
 

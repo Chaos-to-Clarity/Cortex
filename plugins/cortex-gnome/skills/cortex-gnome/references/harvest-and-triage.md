@@ -67,6 +67,7 @@ Priority = Value × Confidence × Fit. Tagged and Skill jobs add 10, so asked-fo
 Inferred jobs (nobody asked) follow the gnome's Trust ladder rung and Inference setting first (on Starter, propose them all), then the Manifesto's Inference rules. Without a rule, on a rung that allows building:
 
 - **Build it** if it's size S (or up to `infer.max_size`), one output, low cost to make, and Confidence is 4 or more. At most `infer.max_auto` a night.
+- **On Starter, only two kinds are built:** a follow-up email the owner promised in a meeting or email (posted as an email item, never sent), and prep for an external meeting in the next 2 working days. Use what's known and mark assumptions; no blanks. Prefer the most revenue- or client-relevant. Everything else inferred is proposed.
 - **Propose it** otherwise: Status Proposed, with a one-line why and its size. Proposals cost nothing tonight and teach the gnome what to infer next time.
 
 ### 5. Fill the slate

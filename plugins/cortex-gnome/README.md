@@ -13,7 +13,7 @@ Or download the single skill: [cortex-gnome.zip](https://github.com/Chaos-to-Cla
 
 - **It costs tokens every night, useful or not.** Out of the box the gnome doesn't know what's valuable to you. Early runs may produce work you don't want.
 - **Teaching it is your job.** Read each brief and reply keep, tweak, or kill, with a reason. That's what makes it good. An unreviewed gnome doesn't improve.
-- **Start it reined in.** It begins on the Starter rung: tagged work only, a small budget, and proposals instead of builds for anything it infers. It earns more room as you keep its work.
+- **Start it reined in.** It begins on the Starter rung: a small budget, the work you tag, and up to 2 small drafts a night it spots itself (follow-ups you promised and prep for upcoming meetings). Anything bigger it proposes instead. Nothing goes out until you press Send. It earns more room as you keep its work.
 - **Best on high-limit plans** such as Claude Max. On smaller plans a nightly run can eat a big share of your limit; keep it on Starter and weekdays only.
 
 ## How a night works
