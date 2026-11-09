@@ -5,7 +5,7 @@ The owner's one place to see and act on everything the gnome did. A private page
 | List | What's in it | Buttons |
 | --- | --- | --- |
 | **Waiting on you** | Built work that needs the owner: drafts, decks, proposals, and every email to someone else, with its full text | Docs: Approve, Changes, Drop. Emails: Send, Copy text, Changes, Don't send |
-| **Ideas, not built yet** | Proposals | Go, Go with a note, Not now |
+| **Ideas, not built yet** | Proposals | Go, Go with a note, Not now. Go starts building right away |
 | **Sent** | Every email that went out to another person, and when | None |
 | **FYI** | Finished work that needs nothing | Got it |
 
@@ -31,15 +31,19 @@ During setup (`setup.md`, Step 5b):
    {
      "db": {"rules": [{"path": "", "read": "interact", "write": "owner"}]},
      "user": {},
-     "mcp": {"servers": [{"server": "Gmail", "tools": ["send_message"]}]}
+     "mcp": {"servers": [
+       {"server": "Gmail", "tools": ["send_message"]},
+       {"server": "Claude Code Remote", "tools": ["fire_trigger"]}
+     ]}
    }
    ```
 
-   No Gmail connector: publish with the same `db` and `user` but no `mcp` entry. The page then shows Copy text and "I sent it" instead of Send.
-2. Write `meta/run` with `gnomeName` and `runLabel: "not run yet"`, `headline: "Your gnome posts its first work here after tonight's run."`
-3. Put the link in the Registry Settings as `dispatch:`.
-4. Offer once to pin it to the owner's sidebar. Pin only on a yes.
-5. Tell the owner: the first Send asks them once to let the page use Gmail.
+   No Gmail connector: leave the Gmail entry out. The page then shows Copy text and "I sent it" instead of Send. No scheduling tools: leave the Claude Code Remote entry out; Changes and Go then wait for the nightly run, and the page offers to copy instructions for a chat.
+2. Create the **Quick Fix** scheduled task (Instant revisions, below) and note its id.
+3. Write `meta/run` with `gnomeName`, `quickTriggerId` and `runLabel: "not run yet"`, `headline: "Your gnome posts its first work here after tonight's run."`
+4. Put the link in the Registry Settings as `dispatch:` and the Quick Fix id as `dispatch.quick_fix:`.
+5. Offer once to pin it to the owner's sidebar. Pin only on a yes.
+6. Tell the owner: the first Send asks them once to let the page use Gmail, and the first Changes asks once to let it start their gnome.
 
 Only the owner can write (the access rule above). If the owner shares the page, others see it read-only.
 
@@ -73,6 +77,23 @@ Read and write it with the host's artifact-database tool (`ArtifactData` in Clau
 
 **Emails.** Every email a job produces for someone else is its own `email` item, one per recipient, with the full ready-to-send text, as well as any doc that holds it. Never post an email to someone the owner hasn't corresponded with unless the owner named them (`guardrails.md`, Never). Never put an email to anyone in the owner's Gmail Drafts unless the job asked for it: the Dispatch is where drafts wait.
 
+## Instant revisions
+
+Changes and Go shouldn't wait for night: the proposal is for this afternoon's call. So the Dispatch starts the work the moment the owner clicks.
+
+**The Quick Fix task.** Setup creates a second scheduled task with no schedule (it runs only when started), named "<gnome name> Quick Fix", with automatic approval where the host allows it. Its prompt stands alone and says, in order:
+
+1. Read the Dispatch's `items`. Take the item named in the appended message ("Dispatch item <id>") and every item with status `changes` or `go` and no `processedAt`.
+2. Load this skill and the Manifesto, and follow the playbooks, quality bars, voice, and guardrails.
+3. `changes`: edit the output in place so the same link shows the new version (a doc with its doc tools, a deck or design by republishing to the same link, an email item by rewriting `email.body`). Apply exactly what was asked. Then set the item back to `open` with `processedAt`, `revisedAt`, `lastFeedback`, a new `did` saying what changed, and the `todo` left.
+4. `go`: build the idea, post the result as a new `review` item, and set the idea's `processedAt`.
+5. Log it on the job (Verdict Tweak with the owner's words, Learned unchecked so the nightly run learns from it; or Answer Do Now and the output link).
+6. Never send anything to anyone. Blocked by missing information: set the item to `open` with a `todo` that says exactly what's needed.
+
+**The page.** On Changes or Go it saves the decision, then calls `fire_trigger` on the Claude Code Remote connector with `meta/run.quickTriggerId` and the text "Dispatch item <id>". The item shows "Working on it now" until the task sets `processedAt`, and the revised card comes back marked "Revised". If the call fails, the decision stays saved for the nightly run, and the page offers "Copy instructions": a ready prompt to paste into a new chat.
+
+The nightly run skips any item that already has `processedAt`.
+
 ## Statuses the owner sets, and what the gnome does with them
 
 Run Step 2 reads every item whose `status` isn't `open` and that has no `processedAt`, applies it to Gnome Jobs, then sets `processedAt`. Record each in the job's Feedback as "<the owner's words, if any> (via Dispatch, <decidedAt>)".
@@ -80,9 +101,9 @@ Run Step 2 reads every item whose `status` isn't `open` and that has no `process
 | Status | Set by | Gnome does |
 | --- | --- | --- |
 | `approved` | Approve | Verdict Keep; Status Closed |
-| `changes` | Changes, with `feedback` | Verdict Tweak; queue a Revision job with the feedback (`review-and-learning.md`) |
+| `changes` | Changes, with `feedback` | Quick Fix revises it now (above). If it's still unprocessed at night: Verdict Tweak; queue a Revision job with the feedback (`review-and-learning.md`) |
 | `dropped` | Drop, Don't send | Verdict Kill; Status Closed |
-| `go` | Go, or Go with a note | Answer Do Now; Status Queued; the note goes in the job's Note. It leads tonight's slate |
+| `go` | Go, or Go with a note | Quick Fix builds it now. If it's still unprocessed at night: Answer Do Now; Status Queued; the note in the job's Note; it leads tonight's slate |
 | `notnow` | Not now | Answer Don't; Status Closed |
 | `seen` | Got it | Nothing beyond processedAt |
 | `sent` | Send, or "I sent it" | Ship Shipped, Status Shipped, the send time in Note |

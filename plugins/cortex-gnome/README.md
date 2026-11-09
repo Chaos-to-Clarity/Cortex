@@ -33,7 +33,7 @@ Setup publishes your **Gnome Dispatch**, one private page you open each morning:
 - **Sent:** everything that went out, and when. The gnome never sends on its own; only your Send button does.
 - **FYI:** done for you, nothing to do.
 
-Your clicks are the feedback: the next night applies them and learns from them. The nightly email is a short list with the Dispatch link on top. Needs the Claude app (claude.ai or Cowork); elsewhere you review in each run's chat.
+**Changes** and **Go** start right away: your gnome revises the draft or builds the idea within minutes, and the new version replaces the card. Your clicks are also the feedback the next night learns from. The nightly email is a short list with the Dispatch link on top. Needs the Claude app (claude.ai or Cowork); elsewhere you review in each run's chat.
 
 ## What it may do on its own
 

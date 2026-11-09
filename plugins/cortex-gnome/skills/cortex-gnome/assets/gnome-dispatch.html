@@ -90,7 +90,7 @@ button:disabled{opacity:.55;cursor:default}
   </section>
 
   <section id="s-ideas" aria-labelledby="h-ideas">
-    <div class="sec-h"><h2 id="h-ideas">Ideas, not built yet</h2><span class="hint">Press Go and your gnome builds it tonight.</span></div>
+    <div class="sec-h"><h2 id="h-ideas">Ideas, not built yet</h2><span class="hint">Press Go and your gnome starts on it right away.</span></div>
     <div id="l-ideas" class="empty">No ideas waiting.</div>
   </section>
 
@@ -111,7 +111,7 @@ button:disabled{opacity:.55;cursor:default}
 
   <div class="howto">
     <p><b>How this works.</b> Each night your gnome builds drafts and posts them here. Nothing reaches anyone until you press Send.</p>
-    <p><b>Send</b> sends that email from your Gmail right away, as a reply in its thread. Without Gmail connected, <b>Copy text</b> lets you send it yourself. <b>Approve</b> means the draft is good and you'll use it yourself. <b>Changes</b> sends your note back; your gnome revises tonight. <b>Go</b> tells your gnome to build an idea tonight.</p>
+    <p><b>Send</b> sends that email from your Gmail right away, as a reply in its thread. Without Gmail connected, <b>Copy text</b> lets you send it yourself. <b>Approve</b> means the draft is good and you'll use it yourself. <b>Changes</b> sends your note back and your gnome starts revising right away; the new version replaces the card, usually within 15 minutes. <b>Go</b> starts building an idea right away.</p>
   </div>
 </div>
 
@@ -165,13 +165,18 @@ button:disabled{opacity:.55;cursor:default}
   function card(it){
     const cls = it.section==="idea"?"idea":(it.section==="review"?"wait":"");
     const chip = it.kind==="email"?`<span class="chip wait">Email, ready to send</span>`:it.kind==="idea"?`<span class="chip info">Idea${it.size?" · "+esc(it.size):""}</span>`:it.kind==="fyi"?`<span class="chip">FYI</span>`:`<span class="chip wait">${esc(it.typeLabel||"Draft")}</span>`;
-    return `<article class="card ${cls}" id="c-${it.id}"><div class="top"><h3>${esc(it.title)}</h3>${chip}</div>${story(it)}${emailBox(it)}${links(it)}${controls(it)}</article>`;
+    const rev = it.revisedAt?`<span class="chip info">Revised ${when(it.revisedAt)}</span>`:"";
+    return `<article class="card ${cls}" id="c-${it.id}"><div class="top"><h3>${esc(it.title)}</h3>${rev}${chip}</div>${story(it)}${emailBox(it)}${links(it)}${controls(it)}</article>`;
   }
   function row(it,sent){
-    const label = sent?`Sent ${when(it.sentAt)} to ${esc((it.email&&it.email.to||[]).join(", "))}`:`${esc(DONE_LABEL[it.status]||it.status)}${it.decidedAt?" · "+when(it.decidedAt):""}${it.feedback?` · “${esc(it.feedback)}”`:""}`;
+    const working = !sent && (it.status==="changes"||it.status==="go") && it.quickStartedAt && !it.processedAt;
+    const label = sent?`Sent ${when(it.sentAt)} to ${esc((it.email&&it.email.to||[]).join(", "))}`:working?`Working on it now (started ${when(it.quickStartedAt)}). It comes back here when done, usually within 15 minutes.${it.feedback?` Your note: “${esc(it.feedback)}”`:""}`:`${esc(DONE_LABEL[it.status]||it.status)}${it.decidedAt?" · "+when(it.decidedAt):""}${it.feedback?` · “${esc(it.feedback)}”`:""}`;
+    const ui=state.ui[it.id]||{};
+    const fb = (!sent && ui.fallback && state.isOwner)?`<button class="quiet" data-act="copy-prompt" data-id="${it.id}">Copy instructions</button>`:"";
+    const note = (!sent && ui.msg)?`<span class="status ${ui.ok?"ok":"err"}" role="status" style="flex-basis:100%">${esc(ui.msg)}</span>`:"";
     const undo = (!sent && state.isOwner && it.status!=="send_unknown")?`<button class="quiet" data-act="undo" data-id="${it.id}">Undo</button>`:"";
     const firstLink = it.links&&it.links[0]?`<a href="${esc(it.links[0].url)}" target="_blank" rel="noopener" class="chip">Open</a>`:"";
-    return `<div class="row"><div class="t"><b>${esc(it.title)}</b><span>${label}</span></div>${firstLink}${undo}</div>`;
+    return `<div class="row"><div class="t"><b>${esc(it.title)}</b><span>${label}</span></div>${firstLink}${fb}${undo}${note}</div>`;
   }
 
   function render(){
@@ -234,6 +239,22 @@ button:disabled{opacity:.55;cursor:default}
     }
   }
 
+  function promptFor(it){
+    return `Use my cortex-gnome skill. On my Gnome Dispatch (${location.href.split("#")[0]}), ${it.kind==="idea"?"build this idea now":"revise this item now"}: "${it.title}" (Dispatch item ${it.id}).${it.feedback?` My note: ${it.feedback}`:""} Edit the output in place, update the Dispatch item, and don't send anything to anyone.`;
+  }
+  async function quickFix(it){
+    const qt = state.meta && state.meta.quickTriggerId;
+    if(!qt || !state.mcp){ state.ui[it.id]={msg:"Saved. Your gnome does this on its next run, or copy the instructions to do it now in a chat.",ok:true,fallback:true}; render(); return; }
+    state.ui[it.id]={msg:"Starting now…",ok:true}; render();
+    try{
+      await state.mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:qt, text:`Dispatch item ${it.id}`});
+      await patch(it.id,{quickStartedAt:new Date().toISOString()});
+      state.ui[it.id]={}; render();
+    }catch(e){
+      state.ui[it.id]={msg:"Couldn't start it right away. It's saved for tonight's run, or copy the instructions to do it now in a chat.",ok:false,fallback:true}; render();
+    }
+  }
+
   document.addEventListener("click", async ev=>{
     const b=ev.target.closest("button[data-act]"); if(!b) return;
     const id=b.dataset.id, act=b.dataset.act, it=state.items.find(i=>i.id===id); if(!it) return;
@@ -250,11 +271,19 @@ button:disabled{opacity:.55;cursor:default}
     if(act==="cancel"){ state.ui[id]={}; render(); return; }
     if(act==="changes"){ state.ui[id]={mode:"feedback"}; render(); const t=$("#fb-"+id); t&&t.focus(); return; }
     if(act==="fb-save"){
-      const v=($("#fb-"+id)||{}).value||""; state.ui[id]={};
-      return patch(id,{status: it.kind==="idea"?"go":"changes", feedback:v.trim(), decidedAt:now});
+      const v=(($("#fb-"+id)||{}).value||"").trim(); state.ui[id]={};
+      if(it.kind!=="idea" && !v){ state.ui[id]={mode:"feedback"}; render(); return; }
+      await patch(id,{status: it.kind==="idea"?"go":"changes", feedback:v, decidedAt:now, processedAt:null});
+      return quickFix(it);
+    }
+    if(act==="copy-prompt"){
+      const text=promptFor(it);
+      try{ await navigator.clipboard.writeText(text); state.ui[id]={msg:"Copied. Paste it into a new Claude chat.",ok:true}; }
+      catch(e){ state.ui[id]={msg:text,ok:true}; }
+      render(); return;
     }
     const map={approve:"approved",drop:"dropped",go:"go",notnow:"notnow",seen:"seen"};
-    if(map[act]){ state.ui[id]={}; return patch(id,{status:map[act], decidedAt:now}); }
+    if(map[act]){ state.ui[id]={}; await patch(id,{status:map[act], decidedAt:now, processedAt:null}); if(act==="go") return quickFix(it); return; }
     if(act==="undo"){ return patch(id,{status:"open", decidedAt:null}); }
   });
 
