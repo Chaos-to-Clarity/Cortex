@@ -59,7 +59,7 @@ Read and write it with the host's artifact-database tool (`ArtifactData` in Clau
 | --- | --- |
 | `section` | `review`, `idea`, or `fyi` |
 | `kind` | `doc`, `email`, `idea`, or `fyi` |
-| `title` | What it is, for whom: "Coaching proposal for Youssef Zayed (Implentio)" |
+| `title` | What it is, for whom: "Proposal for Sam Lee (Acme)" |
 | `noticed`, `did`, `why`, `todo` | One plain sentence each: the trigger with its source and date, what the gnome made, why it matters to revenue, a client, or a commitment, and the one action the owner takes. No job names, IDs, or gnome jargon |
 | `links` | `[{label, url}]`, only links returned by tools in the run. Label them by action: "Open proposal", "Workshop copy" |
 | `typeLabel` | Docs: "Proposal draft", "Deck draft" |

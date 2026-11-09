@@ -52,7 +52,7 @@ Ask in one or two calls:
 
 - **Name:** default "<Owner>'s Gnome". Must be unique in the Registry.
 - **Lanes:** which areas this gnome owns. With other gnomes, show their lanes and avoid overlap. Solo: leave empty (anything).
-- **Starting rung:** every new gnome starts on Starter (3 jobs, 5 points, inferred work proposed, per-job ship approvals only). The only choice here is going lighter: 1 or 2 jobs a night, or tagged work only with no proposals. Explain sizes in one line: small 1 point, medium 2, large 4. Say plainly that the budget counts jobs, not tokens: it limits how much the gnome builds, which is the main driver of cost, but it isn't a hard token cap.
+- **Starting rung:** every new gnome starts on Starter (3 jobs, 5 points, up to 2 small jobs a night it spots itself, per-job ship approvals only). Say it plainly: it may build small things on its own, such as follow-up drafts, meeting prep, and research, but it never sends, invites, publishes, or books anything. Everything waits on the Dispatch until the owner presses Send. The only choice here is going lighter: 1 or 2 jobs a night, no inferred drafts (`infer.max_auto: 0`), or tagged work only with no proposals. Explain sizes in one line: small 1 point, medium 2, large 4. Say plainly that the budget counts jobs, not tokens: it limits how much the gnome builds, which is the main driver of cost, but it isn't a hard token cap.
 - **Who can tag work:** anyone on the team (recommended) or named people.
 - **Brief:** where it goes. The chat of each run always gets it, and review happens there. Add email to the owner, a Slack channel, or both. If the brief goes to a shared channel, set `brief.share_level: team`.
 - **Cortex Inbox:** may the gnome drop durable context it finds into the Cortex Inbox? (Only with a Cortex.)
@@ -97,12 +97,12 @@ If no scheduling tool is available, say so plainly and give the prompt above so 
 
 ## Trust ladder
 
-New gnomes start reined in. They earn room through review, never by default. Rung settings: Starter sets `trust.rung: starter`, `budget.max_jobs: 3`, `budget.max_points: 5`, `infer.max_auto: 0`; Trusted raises them to 5, 8, and 2. The weekly consolidation checks the ladder and offers the next rung in the brief; the owner decides in a live review.
+New gnomes start reined in. They earn room through review, never by default. Rung settings: Starter sets `trust.rung: starter`, `budget.max_jobs: 3`, `budget.max_points: 5`, `infer.max_auto: 2`; Trusted raises them to 5, 8, and 3. The weekly consolidation checks the ladder and offers the next rung in the brief; the owner decides in a live review.
 
 | Rung | Budget | Inference | Ship | Move up when |
 | --- | --- | --- | --- | --- |
-| **1. Starter** (default) | 3 jobs, 5 points | Propose only; build tagged work | Nothing standing; per-job approvals only | 10 or more jobs reviewed and at least 70% kept, over at least 7 runs |
-| **2. Trusted** | 5 jobs, 8 points | Build small one-shot work, propose the rest | Standing permissions the owner grants, one at a time | 25 or more reviewed, 80% or more kept, no guardrail incidents |
+| **1. Starter** (default) | 3 jobs, 5 points | Build tagged work, plus up to 2 small jobs it spots itself (follow-ups, prep, research). Propose the rest | Nothing standing; per-job approvals only | 10 or more jobs reviewed and at least 70% kept, over at least 7 runs |
+| **2. Trusted** | 5 jobs, 8 points | Build up to 3 small jobs it spots itself, propose the rest | Standing permissions the owner grants, one at a time | 25 or more reviewed, 80% or more kept, no guardrail incidents |
 | **3. Proven** | Owner's choice | Owner's Inference rules | Standing permissions as granted | The owner says so |
 
 - **Down a rung, automatically for the night.** At the start of every run (SKILL.md, Step 0), the gnome drops to Starter for that run if it has Ready jobs older than 7 days and nothing was reviewed in that time, the keep rate over the last 10 reviewed jobs is under 50%, or a run in the last 14 days recorded an Incident. It records the override on the run's Rung field and recommends the settings change in the brief. An ignored gnome stops spending on builds nobody reads.

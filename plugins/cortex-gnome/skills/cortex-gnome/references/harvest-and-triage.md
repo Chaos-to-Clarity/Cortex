@@ -48,6 +48,7 @@ Read the Manifesto's Valuable, Skip, and Inference sections. Then for each job:
 
 - **Ruled out** by a Skip rule: Skipped, Note names the rule.
 - **Duplicate** of a job that's Ready, Shipped, or claimed by a live gnome: Skipped or Yielded.
+- **Already handled by another skill:** a follow-up, recap, or reply that is already in the owner's Sent mail or Drafts for that thread, or logged in a Recap Log or the Cortex Ingest Log for that meeting: Skipped, with the link in the Note. Never draft a second version of something another skill already wrote.
 - **In another gnome's lane**: leave it (`coordination.md`, Lanes).
 - **Needs something only a person has** (a password, a decision, a file not shared): Needs Decision, Note says what.
 
@@ -66,6 +67,7 @@ Priority = Value × Confidence × Fit. Tagged and Skill jobs add 10, so asked-fo
 Inferred jobs (nobody asked) follow the gnome's Trust ladder rung and Inference setting first (on Starter, propose them all), then the Manifesto's Inference rules. Without a rule, on a rung that allows building:
 
 - **Build it** if it's size S (or up to `infer.max_size`), one output, low cost to make, and Confidence is 4 or more. At most `infer.max_auto` a night.
+- **On Starter,** build any small, one-shot job that stays private until the owner acts: an email draft (posted as an email item, never sent), meeting prep, research, a doc or outline, a calendar hold. Favor follow-ups the owner promised and prep for external meetings in the next 2 working days, then whatever is most revenue- or client-relevant. Use what's known and mark assumptions; no blanks. Anything medium or larger is proposed.
 - **Propose it** otherwise: Status Proposed, with a one-line why and its size. Proposals cost nothing tonight and teach the gnome what to infer next time.
 
 ### 5. Fill the slate

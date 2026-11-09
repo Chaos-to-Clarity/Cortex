@@ -3,7 +3,8 @@
 **The overnight worker.** Every night it reads what changed across your company's context, picks the work worth doing, builds it to a ship-ready standard, stores it for review, logs everything, and sends you a brief. Every morning you review it. Your feedback becomes rules in the Manifesto, so the next night is better.
 
 ```
-/plugin install cortex-gnome --marketplace Chaos-to-Clarity/cortex
+/plugin marketplace add Chaos-to-Clarity/Cortex
+/plugin install cortex-gnome@cortex
 ```
 
 Or download the single skill: [cortex-gnome.zip](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-gnome.zip)
@@ -12,7 +13,7 @@ Or download the single skill: [cortex-gnome.zip](https://github.com/Chaos-to-Cla
 
 - **It costs tokens every night, useful or not.** Out of the box the gnome doesn't know what's valuable to you. Early runs may produce work you don't want.
 - **Teaching it is your job.** Read each brief and reply keep, tweak, or kill, with a reason. That's what makes it good. An unreviewed gnome doesn't improve.
-- **Start it reined in.** It begins on the Starter rung: tagged work only, a small budget, and proposals instead of builds for anything it infers. It earns more room as you keep its work.
+- **Start it reined in.** It begins on the Starter rung: a small budget, the work you tag, and up to 2 small jobs a night it spots itself, like follow-up drafts, meeting prep, and research. Anything bigger it proposes instead. It never sends anything: nothing goes out until you press Send. It earns more room as you keep its work.
 - **Best on high-limit plans** such as Claude Max. On smaller plans a nightly run can eat a big share of your limit; keep it on Starter and weekdays only.
 
 ## How a night works
@@ -29,7 +30,7 @@ Or download the single skill: [cortex-gnome.zip](https://github.com/Chaos-to-Cla
 Setup publishes your **Gnome Dispatch**, one private page you open each morning:
 
 - **Waiting on you:** drafts, decks, and proposals with Approve, Changes, and Drop, and every email to someone else with its full text and a **Send** button. Send goes from your own Gmail, as a reply in the right thread, after you confirm the recipient.
-- **Ideas, not built yet:** press **Go** and it's built tonight.
+- **Ideas, not built yet:** press **Go** and it's built within minutes.
 - **Sent:** everything that went out, and when. The gnome never sends on its own; only your Send button does.
 - **FYI:** done for you, nothing to do.
 
