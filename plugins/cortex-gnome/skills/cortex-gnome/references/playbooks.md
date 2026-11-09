@@ -7,7 +7,7 @@ How to build each kind of job. The Manifesto's Quality bars for a type add to th
 1. Open the job's Source and only the context it needs. With a Cortex, resolve names through the Map and catalogs and open the few records involved.
 2. Write down, for yourself, the job's reader, the decision or action the output should drive, and the deadline.
 3. Use the best format the environment offers. If the host has native output types (a slide deck type, a document type, a design type), use them: they open in an editor the reviewer can change directly and they export to PowerPoint, Word, PDF, or images. Otherwise build files (`.pptx`, `.docx`, `.html`, `.md`) and store them in the Gnome workspace. If a skill exists for the format, follow it.
-4. Use the company's brand if the Cortex, Manifesto, or workspace has one (a design system, brand page, or template).
+4. Use the owner's brand from Settings `brand:` (a design system, brand page, or Recap Config). `neutral` or missing: a clean neutral style with charcoal `#1F2937` and blue `#2563EB`. Never another company's or the plugin author's brand.
 
 ## Deck
 
