@@ -61,6 +61,7 @@ home: <link to the Gnome home>
 cortex_map: <link to the Cortex Map, or none>
 manifesto: <link to the Manifesto page or file>
 workspace: <link to where outputs are stored>
+brand: <link to the owner's brand: a design system, brand page, or Recap Config; or neutral>
 dispatch: <link to the owner's Gnome Dispatch page, or none>
 dispatch.quick_fix: <id of the Quick Fix scheduled task, or none>
 

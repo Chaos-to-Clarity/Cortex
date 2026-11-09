@@ -33,6 +33,7 @@ Ask which they use, pre-selecting what's already connected. Test each with one s
 - **Workspace:** where finished outputs are stored for review. Default: a "Gnome Workspace" page or folder in the Gnome home. With a Cortex in Notion, a page under Cortex Gnome.
 - **Docs and decks:** native output types if the host has them (recommended; they're editable and export to Word, PowerPoint, and PDF), otherwise Notion, Google Drive, or files in a repo.
 - **Design:** native types, Canva if connected, or files.
+- **Brand:** docs, decks, and pages use the owner's own brand. If a Recap Config exists, use its brand and don't ask. Otherwise look silently, stopping at the first hit: a Design System artifact (use the default one), a design system or brand page on the Cortex Map, then the company website from the owner's email domain. Ask once: "Use [what you found]" (recommended), "Clean neutral style", or "I'll point you to it". Save the link, or `neutral`, as `brand:` in Settings. Never use the plugin author's brand.
 - **Email drafts and calendar holds:** the owner's own email and calendar, if connected.
 
 ## Step 4. Build the home (first gnome only)
