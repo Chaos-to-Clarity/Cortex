@@ -1,0 +1,285 @@
+<title>Gnome Dispatch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow work column, sections stacked by urgency; each item a card with its own decision row. */
+:root{
+  --bg:#F5F6F3; --surface:#FFFFFF; --ink:#1C2320; --muted:#5D6862; --line:#DCE1DC;
+  --accent:#2E6A4E; --accent-ink:#FFFFFF; --accent-soft:#E3EFE8;
+  --wait:#9A5B00; --wait-soft:#FBEFD9; --bad:#A3322A; --bad-soft:#F8E3E0; --info:#2F5D8A; --info-soft:#E2ECF6;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121614; --surface:#1A201D; --ink:#E6ECE8; --muted:#9AA69F; --line:#2C3530;
+  --accent:#6FBF95; --accent-ink:#0E1A14; --accent-soft:#1E3328;
+  --wait:#E8B060; --wait-soft:#33281A; --bad:#EE8A80; --bad-soft:#3A221F; --info:#8DB6DE; --info-soft:#1D2A38; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --surface:#1A201D; --ink:#E6ECE8; --muted:#9AA69F; --line:#2C3530;
+  --accent:#6FBF95; --accent-ink:#0E1A14; --accent-soft:#1E3328;
+  --wait:#E8B060; --wait-soft:#33281A; --bad:#EE8A80; --bad-soft:#3A221F; --info:#8DB6DE; --info-soft:#1D2A38; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:6px}
+h1{font-size:26px;font-weight:700;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+.tally{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tally a{font:500 13px var(--f-mono);text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+.tally a b{font-weight:600}
+.notice{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 14px;color:var(--muted);font-size:14px}
+.notice.bad{border-color:var(--bad);color:var(--bad);background:var(--bad-soft)}
+section{display:flex;flex-direction:column;gap:12px}
+.sec-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:0;font-weight:700}
+.sec-h .hint{color:var(--muted);font-size:13px}
+.empty{color:var(--muted);font-size:14px;padding:12px 0;border-top:1px dashed var(--line)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.wait{border-left:4px solid var(--wait)}
+.card.idea{border-left:4px solid var(--info)}
+.top{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.card h3{font-size:17px;margin:0;line-height:1.3;text-wrap:balance;min-width:0;flex:1 1 280px}
+.chip{font:500 12px var(--f-mono);padding:2px 8px;border-radius:999px;white-space:nowrap;background:var(--accent-soft);color:var(--accent)}
+.chip.wait{background:var(--wait-soft);color:var(--wait)} .chip.info{background:var(--info-soft);color:var(--info)} .chip.bad{background:var(--bad-soft);color:var(--bad)}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+dt{font:500 12px var(--f-mono);color:var(--muted);padding-top:2px;white-space:nowrap}
+dd{margin:0;min-width:0}
+@media (max-width:520px){dl{grid-template-columns:1fr;gap:2px}dd{margin-bottom:8px}}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{color:var(--accent);font-weight:600;font-size:14px;text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.links a:hover{border-color:var(--accent)}
+.email{border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;min-width:0}
+.email .meta{font:400 13px var(--f-mono);color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px;overflow-wrap:anywhere}
+.email textarea{border:0;border-radius:0 0 8px 8px;background:transparent;color:var(--ink);font:15px/1.55 var(--f-body);padding:12px;min-height:260px;resize:vertical;width:100%;box-sizing:border-box}
+.email textarea:focus{outline:2px solid var(--accent);outline-offset:-2px}
+.saved{font:12px var(--f-mono);color:var(--muted);padding:0 12px 8px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:600 14px var(--f-body);border-radius:8px;padding:9px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);min-height:40px}
+button:hover{border-color:var(--ink)}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.go{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.go:hover{filter:brightness(1.08)}
+button.quiet{border-color:transparent;color:var(--muted);padding-inline:10px}
+button:disabled{opacity:.55;cursor:default}
+.confirm{background:var(--wait-soft);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.confirm p{margin:0}
+.fb{display:flex;flex-direction:column;gap:8px}
+.fb textarea{font:15px var(--f-body);border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg);color:var(--ink);min-height:80px;width:100%;box-sizing:border-box}
+.status{font-size:14px;color:var(--muted)}
+.status.ok{color:var(--accent)} .status.err{color:var(--bad)}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.row .t{min-width:0;flex:1 1 260px}
+.row .t b{font-weight:600}
+.row .t span{display:block;color:var(--muted);font-size:13px}
+.howto{color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:16px}
+.howto p{margin:0 0 6px}
+@media (prefers-reduced-motion:no-preference){.card,.row{transition:opacity .2s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Gnome Dispatch</h1>
+    <p class="sub" id="sub">Loading your gnome's latest run…</p>
+    <nav class="tally" id="tally" aria-label="Jump to section"></nav>
+  </header>
+  <div id="notices"></div>
+
+  <section id="s-review" aria-labelledby="h-review">
+    <div class="sec-h"><h2 id="h-review">Waiting on you</h2><span class="hint">Built and ready. Nothing here has gone out.</span></div>
+    <div id="l-review" class="empty">Nothing is waiting on you.</div>
+  </section>
+
+  <section id="s-ideas" aria-labelledby="h-ideas">
+    <div class="sec-h"><h2 id="h-ideas">Ideas, not built yet</h2><span class="hint">Press Go and your gnome builds it tonight.</span></div>
+    <div id="l-ideas" class="empty">No ideas waiting.</div>
+  </section>
+
+  <section id="s-sent" aria-labelledby="h-sent">
+    <div class="sec-h"><h2 id="h-sent">Sent</h2><span class="hint">Everything that went out to another person, and when.</span></div>
+    <div id="l-sent" class="empty">Nothing has been sent. Your gnome never sends on its own; only your Send button does.</div>
+  </section>
+
+  <section id="s-fyi" aria-labelledby="h-fyi">
+    <div class="sec-h"><h2 id="h-fyi">FYI</h2><span class="hint">Done for you. No action needed.</span></div>
+    <div id="l-fyi" class="empty">Nothing new.</div>
+  </section>
+
+  <section id="s-done" aria-labelledby="h-done">
+    <div class="sec-h"><h2 id="h-done">Decided</h2><span class="hint">Your calls so far. Your gnome acts on these on its next run.</span></div>
+    <div id="l-done" class="empty">No decisions yet.</div>
+  </section>
+
+  <div class="howto">
+    <p><b>How this works.</b> Each night your gnome builds drafts and posts them here. Nothing reaches anyone until you press Send.</p>
+    <p><b>Send</b> sends that email from your Gmail right away, as a reply in its thread. Without Gmail connected, <b>Copy text</b> lets you send it yourself. <b>Approve</b> means the draft is good and you'll use it yourself. <b>Changes</b> sends your note back; your gnome revises tonight. <b>Go</b> tells your gnome to build an idea tonight.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = (s,el=document)=>el.querySelector(s);
+  const state = { items: [], meta: null, isOwner:false, db:null, mcp:null, ui:{} };
+  const SECT = { review:"l-review", idea:"l-ideas", fyi:"l-fyi" };
+  const DONE_LABEL = {approved:"Approved", changes:"Changes requested", dropped:"Dropped", go:"Go: build tonight", notnow:"Not now", seen:"Seen", send_unknown:"Send status unknown"};
+
+  function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+  function when(iso){ if(!iso) return ""; try{ return new Date(iso).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});}catch(e){return iso} }
+  function notice(msg,bad){ const n=$("#notices"); n.innerHTML = msg ? `<div class="notice${bad?" bad":""}" role="status">${msg}</div>` : ""; }
+
+  function links(it){
+    if(!it.links||!it.links.length) return "";
+    return `<div class="links">${it.links.map(l=>`<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div>`;
+  }
+  function story(it){
+    const rows=[["Noticed",it.noticed],["Did",it.did],["Why it matters",it.why],["You do",it.todo]].filter(r=>r[1]);
+    return rows.length?`<dl>${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join("")}</dl>`:"";
+  }
+  function controls(it){
+    const ui = state.ui[it.id]||{};
+    if(!state.isOwner) return `<p class="status">Only this gnome's owner can act on this.</p>`;
+    if(ui.mode==="confirm"){
+      const to=(it.email.to||[]).join(", ");
+      return `<div class="confirm"><p><b>Send this now</b> to ${esc(to)}${it.email.cc&&it.email.cc.length?` (cc ${esc(it.email.cc.join(", "))})`:""}, from your Gmail?</p>
+        <div class="actions"><button class="go" data-act="send-yes" data-id="${it.id}">Yes, send it</button><button data-act="cancel" data-id="${it.id}">Cancel</button></div></div>`;
+    }
+    if(ui.mode==="feedback"){
+      return `<div class="fb"><label for="fb-${it.id}">What should change?</label><textarea id="fb-${it.id}" placeholder="Shorter, lead with the ask…">${esc(it.feedback||"")}</textarea>
+        <div class="actions"><button class="go" data-act="fb-save" data-id="${it.id}">Send back to your gnome</button><button data-act="cancel" data-id="${it.id}">Cancel</button></div></div>`;
+    }
+    const msg = ui.msg?`<span class="status ${ui.ok?"ok":"err"}" role="status">${esc(ui.msg)}</span>`:"";
+    if(it.kind==="email"){
+      const send = state.mcp ? `<button class="go" data-act="send" data-id="${it.id}" ${ui.busy?"disabled":""}>${ui.busy?"Sending…":"Send"}</button>` : "";
+      return `<div class="actions">${send}<button ${state.mcp?"":'class="go"'} data-act="copy" data-id="${it.id}">Copy text</button><button data-act="changes" data-id="${it.id}">Changes</button><button class="quiet" data-act="drop" data-id="${it.id}">Don't send</button>${state.mcp?"":`<button class="quiet" data-act="mark-sent" data-id="${it.id}">I sent it</button>`}${msg}</div>`;
+    }
+    if(it.kind==="idea") return `<div class="actions"><button class="go" data-act="go" data-id="${it.id}">Go</button><button data-act="changes" data-id="${it.id}">Go, with a note</button><button class="quiet" data-act="notnow" data-id="${it.id}">Not now</button>${msg}</div>`;
+    if(it.kind==="fyi") return `<div class="actions"><button data-act="seen" data-id="${it.id}">Got it</button>${msg}</div>`;
+    return `<div class="actions"><button class="go" data-act="approve" data-id="${it.id}">Approve</button><button data-act="changes" data-id="${it.id}">Changes</button><button class="quiet" data-act="drop" data-id="${it.id}">Drop</button>${msg}</div>`;
+  }
+  function emailBox(it){
+    if(it.kind!=="email"||!it.email) return "";
+    const e=it.email;
+    return `<div class="email"><div class="meta"><span>To: ${esc((e.to||[]).join(", "))}</span>${e.cc&&e.cc.length?`<span>Cc: ${esc(e.cc.join(", "))}</span>`:""}<span>Subject: ${esc(e.subject)}</span>${e.threadId?`<span>Sent as a reply in the existing thread</span>`:""}</div>
+      <textarea aria-label="Email text" id="body-${it.id}" data-body="${it.id}" ${state.isOwner?"":"readonly"}>${esc(e.body)}</textarea>
+      <div class="saved" id="saved-${it.id}">${state.isOwner?"Edit the text here. Your edits save and are what gets sent.":""}</div></div>`;
+  }
+  function card(it){
+    const cls = it.section==="idea"?"idea":(it.section==="review"?"wait":"");
+    const chip = it.kind==="email"?`<span class="chip wait">Email, ready to send</span>`:it.kind==="idea"?`<span class="chip info">Idea${it.size?" · "+esc(it.size):""}</span>`:it.kind==="fyi"?`<span class="chip">FYI</span>`:`<span class="chip wait">${esc(it.typeLabel||"Draft")}</span>`;
+    return `<article class="card ${cls}" id="c-${it.id}"><div class="top"><h3>${esc(it.title)}</h3>${chip}</div>${story(it)}${emailBox(it)}${links(it)}${controls(it)}</article>`;
+  }
+  function row(it,sent){
+    const label = sent?`Sent ${when(it.sentAt)} to ${esc((it.email&&it.email.to||[]).join(", "))}`:`${esc(DONE_LABEL[it.status]||it.status)}${it.decidedAt?" · "+when(it.decidedAt):""}${it.feedback?` · “${esc(it.feedback)}”`:""}`;
+    const undo = (!sent && state.isOwner && it.status!=="send_unknown")?`<button class="quiet" data-act="undo" data-id="${it.id}">Undo</button>`:"";
+    const firstLink = it.links&&it.links[0]?`<a href="${esc(it.links[0].url)}" target="_blank" rel="noopener" class="chip">Open</a>`:"";
+    return `<div class="row"><div class="t"><b>${esc(it.title)}</b><span>${label}</span></div>${firstLink}${undo}</div>`;
+  }
+
+  function render(){
+    const m=state.meta;
+    $("#sub").innerHTML = m ? `${m.gnomeName?esc(m.gnomeName)+" · ":""}Last run ${esc(m.runLabel||"")}. ${esc(m.headline||"")}${m.runUrl?` <a href="${esc(m.runUrl)}" target="_blank" rel="noopener">Run log</a>`:""}` : "Nothing yet. Your gnome posts here after its first night.";
+    const open = it=>it.status==="open";
+    const by = s=>state.items.filter(it=>it.section===s&&open(it)).sort((a,b)=>(a.order||0)-(b.order||0));
+    const lists = {review:by("review"), idea:by("idea"), fyi:by("fyi")};
+    for(const k of Object.keys(SECT)){
+      const el=$("#"+SECT[k]); const arr=lists[k];
+      if(arr.length){ el.className=""; el.style.display="flex"; el.style.flexDirection="column"; el.style.gap="12px"; el.innerHTML=arr.map(card).join(""); }
+      else { el.className="empty"; el.removeAttribute("style"); el.innerHTML = {review:"Nothing is waiting on you.",idea:"No ideas waiting.",fyi:"Nothing new."}[k]; }
+    }
+    const sent = state.items.filter(it=>it.status==="sent").sort((a,b)=>String(b.sentAt).localeCompare(String(a.sentAt)));
+    const sl=$("#l-sent");
+    if(sent.length){ sl.className=""; sl.style.cssText="display:flex;flex-direction:column;gap:8px"; sl.innerHTML=sent.map(i=>row(i,true)).join(""); }
+    else { sl.className="empty"; sl.removeAttribute("style"); sl.textContent="Nothing has been sent. Your gnome never sends on its own; only your Send button does."; }
+    const done = state.items.filter(it=>!open(it)&&it.status!=="sent").sort((a,b)=>String(b.decidedAt).localeCompare(String(a.decidedAt)));
+    const dl=$("#l-done");
+    if(done.length){ dl.className=""; dl.style.cssText="display:flex;flex-direction:column;gap:8px"; dl.innerHTML=done.map(i=>row(i,false)).join(""); }
+    else { dl.className="empty"; dl.removeAttribute("style"); dl.textContent="No decisions yet."; }
+    $("#tally").innerHTML = [["s-review","waiting on you",lists.review.length],["s-ideas","ideas",lists.idea.length],["s-sent","sent",sent.length],["s-fyi","FYI",lists.fyi.length]]
+      .map(([id,l,n])=>`<a href="#${id}"><b>${n}</b> ${l}</a>`).join("");
+  }
+
+  async function patch(id, fields){
+    const it=state.items.find(i=>i.id===id); if(!it) return;
+    Object.assign(it, fields); render();
+    try{ await state.db.doc("items/"+id).update(fields); }
+    catch(e){ state.ui[id]={msg:"Couldn't save that. Try again.",ok:false}; render(); }
+  }
+
+  async function sendEmail(it){
+    const ui=state.ui[it.id]={busy:true}; render();
+    const body = ($("#body-"+it.id)||{}).value ?? it.email.body;
+    const input = {to:it.email.to, subject:it.email.subject, body};
+    if(it.email.cc&&it.email.cc.length) input.cc=it.email.cc;
+    if(it.email.threadId) input.replyThreadId=it.email.threadId;
+    if(!state.mcp){ state.ui[it.id]={msg:"Sending isn't available in this view. Open the page in claude.ai.",ok:false}; render(); return; }
+    try{
+      const r = await state.mcp.callTool("Gmail","send_message",input);
+      const p = r && r.payload && typeof r.payload==="object" ? r.payload : {};
+      state.ui[it.id]={};
+      await patch(it.id,{status:"sent", sentAt:new Date().toISOString(), messageId:String(p.id||""), "email":Object.assign({},it.email,{body})});
+    }catch(e){
+      const code=e&&e.code;
+      let msg;
+      if(code==="needs_reauth") msg="Gmail needs reconnecting: claude.ai Settings, Connectors. Nothing was sent.";
+      else if(code==="server_not_connected"||code==="selection_required") msg="Add or pick your Gmail connector in claude.ai Settings, Connectors. Nothing was sent.";
+      else if(code==="not_in_manifest"||code==="consent_required") msg="This page isn't allowed to use Gmail yet. Press Send again and allow it when asked.";
+      else if(code==="blocked_by_policy"||code==="approval_required") msg="Your organization blocks sending from here. Nothing was sent.";
+      else if(code==="tool_error") msg="Gmail refused it: "+(e.message||"unknown reason");
+      else { // ambiguous: may have gone out
+        state.ui[it.id]={};
+        await patch(it.id,{status:"send_unknown", decidedAt:new Date().toISOString()});
+        notice(`Couldn't confirm whether “${esc(it.title)}” went out. Check your Gmail Sent folder before sending again.`, true);
+        return;
+      }
+      state.ui[it.id]={msg,ok:false}; render();
+    }
+  }
+
+  document.addEventListener("click", async ev=>{
+    const b=ev.target.closest("button[data-act]"); if(!b) return;
+    const id=b.dataset.id, act=b.dataset.act, it=state.items.find(i=>i.id===id); if(!it) return;
+    const now=new Date().toISOString();
+    if(act==="send"){ state.ui[id]={mode:"confirm"}; render(); return; }
+    if(act==="send-yes"){ return sendEmail(it); }
+    if(act==="copy"){
+      const t=$("#body-"+id); const text=(t?t.value:it.email.body);
+      try{ await navigator.clipboard.writeText(text); state.ui[id]={msg:"Copied. Paste it into your email.",ok:true}; }
+      catch(e){ if(t){t.focus();t.select();} state.ui[id]={msg:"Text selected. Copy it with your keyboard.",ok:true}; }
+      render(); return;
+    }
+    if(act==="mark-sent"){ state.ui[id]={}; return patch(id,{status:"sent", sentAt:now, sentBy:"owner, by hand"}); }
+    if(act==="cancel"){ state.ui[id]={}; render(); return; }
+    if(act==="changes"){ state.ui[id]={mode:"feedback"}; render(); const t=$("#fb-"+id); t&&t.focus(); return; }
+    if(act==="fb-save"){
+      const v=($("#fb-"+id)||{}).value||""; state.ui[id]={};
+      return patch(id,{status: it.kind==="idea"?"go":"changes", feedback:v.trim(), decidedAt:now});
+    }
+    const map={approve:"approved",drop:"dropped",go:"go",notnow:"notnow",seen:"seen"};
+    if(map[act]){ state.ui[id]={}; return patch(id,{status:map[act], decidedAt:now}); }
+    if(act==="undo"){ return patch(id,{status:"open", decidedAt:null}); }
+  });
+
+  document.addEventListener("focusout", async ev=>{
+    const t=ev.target; if(!t.matches||!t.matches("textarea[data-body]")) return;
+    const id=t.dataset.body, it=state.items.find(i=>i.id===id); if(!it||!state.isOwner) return;
+    if(t.value===it.email.body) return;
+    it.email=Object.assign({},it.email,{body:t.value});
+    try{ await state.db.doc("items/"+id).update({email:it.email}); const s=$("#saved-"+id); if(s) s.textContent="Edits saved."; }
+    catch(e){ const s=$("#saved-"+id); if(s) s.textContent="Couldn't save your edit. It will still send as shown."; }
+  });
+
+  async function boot(){
+    const claude=window.claude; if(!claude||!claude.use){ $("#sub").textContent="Open this page in claude.ai to see your gnome's work."; return; }
+    const [db,user,mcp]=await Promise.all([claude.use("db"),claude.use("user"),claude.use("mcp")]);
+    state.db=db; state.mcp=mcp;
+    try{ state.isOwner = user ? !!(await user.isOwner()) : false; }catch(e){ state.isOwner=false; }
+    if(!db){ $("#sub").textContent="Your gnome's list can't load in this view. Open the page in claude.ai."; return; }
+    db.doc("meta/run").onSnapshot(s=>{ state.meta=s.exists?s.data():null; render(); }, ()=>{});
+    db.collection("items").onSnapshot(snap=>{
+      const editing = document.activeElement && document.activeElement.matches && document.activeElement.matches("textarea");
+      state.items = snap.docs.map(d=>Object.assign({id:d.id}, JSON.parse(JSON.stringify(d.data()))));
+      if(!editing) render();
+    }, e=>{ notice("Lost the live connection. Reload the page.", true); });
+  }
+  render(); boot();
+})();
+</script>

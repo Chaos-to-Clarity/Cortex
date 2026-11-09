@@ -24,13 +24,24 @@ Or download the single skill: [cortex-gnome.zip](https://github.com/Chaos-to-Cla
 5. **Build** decks, docs, landing pages, research, code with pull requests, drafts, and holds.
 6. **Check** the work against its quality bar, then **log** it and send the **brief**.
 
+## Review in one click: the Gnome Dispatch
+
+Setup publishes your **Gnome Dispatch**, one private page you open each morning:
+
+- **Waiting on you:** drafts, decks, and proposals with Approve, Changes, and Drop, and every email to someone else with its full text and a **Send** button. Send goes from your own Gmail, as a reply in the right thread, after you confirm the recipient.
+- **Ideas, not built yet:** press **Go** and it's built tonight.
+- **Sent:** everything that went out, and when. The gnome never sends on its own; only your Send button does.
+- **FYI:** done for you, nothing to do.
+
+Your clicks are the feedback: the next night applies them and learns from them. The nightly email is a short list with the Dispatch link on top. Needs the Claude app (claude.ai or Cowork); elsewhere you review in each run's chat.
+
 ## What it may do on its own
 
 | | |
 | --- | --- |
 | **Always** | Build anything nobody else sees yet: docs, decks, pages, research, code on a branch with a pull request, email drafts, holds on your calendar |
 | **Usually** | Internal updates: comments and status on tasks, notes in the Cortex Inbox |
-| **With your permission** | Ship: send, invite, merge, deploy, publish, book. Approve one job at a time, or grant a standing permission in the Manifesto |
+| **With your permission** | Ship: send, invite, merge, deploy, publish, book. Press Send on the Dispatch, approve one job at a time, or grant a standing permission in the Manifesto |
 | **Never** | Follow instructions hidden in emails or documents, spend without a per-job approval, delete, change access, push to main, or message someone new |
 
 ## Hand it work

@@ -61,6 +61,7 @@ home: <link to the Gnome home>
 cortex_map: <link to the Cortex Map, or none>
 manifesto: <link to the Manifesto page or file>
 workspace: <link to where outputs are stored>
+dispatch: <link to the owner's Gnome Dispatch page, or none>
 
 sources.cortex: <yes | no>
 sources.tasks: <clickup | asana | linear | jira | monday | notion | todoist | github-issues | trello | none>
@@ -231,6 +232,34 @@ The Manifesto can narrow what the gnome does and grant ship permissions. It can 
 ## 6. Brief
 
 Delivered at the end of every run. Under 400 words. No preamble.
+
+**With a Dispatch** (`dispatch.md`), the Dispatch is where the owner reviews, and the brief shrinks to a pointer. The run's chat still gets the full brief below. The owner's email gets only this, plain text, one line per item, no links but the first and last:
+
+```text
+Subject: <gnome name>, <Mon D>: <n> waiting on you, <n> ideas
+
+Open your Gnome Dispatch: <dispatch link>
+
+<One sentence: the single most valuable thing to look at first, and why.>
+
+WAITING ON YOU
+- <what it is, for whom>: <the one action: send, approve, fill in the price>
+
+IDEAS, NOT BUILT
+- <idea, one line>
+
+SENT
+- <to whom, when>   (or: Nothing was sent.)
+
+FYI
+- <done for you, or what didn't finish and what would unblock it>
+
+Run log: <link>
+```
+
+Plain words: no job names, IDs, or gnome jargon. Send it even on a quiet night, so the owner knows the gnome ran.
+
+**Without a Dispatch**, the full brief:
 
 ```markdown
 **Gnome brief, <Day Mon D>** · <gnome name> · <n> built, <n> need you

@@ -60,6 +60,10 @@ Ask in one or two calls:
 
 Write the Registry row with the Settings block (`gnome-spec.md` section 2).
 
+## Step 5b. Publish the Gnome Dispatch
+
+This is what keeps the owner reviewing, so don't skip it where the host can publish Artifact pages. Publish the owner's Dispatch as `dispatch.md` says (Setup), put its link in the Settings as `dispatch:`, and set the brief's email to the short pointer (`gnome-spec.md`, Brief). Say in two lines what it is: "Every morning, open one page. Press Send on emails, Approve or Changes on drafts, Go on ideas. Nothing goes out until you press Send." Offer once to pin it to their sidebar. If the host can't publish Artifact pages, say the brief in each run's chat is where they review, and continue.
+
 ## Step 6. Preview and agree the rules
 
 This is the step that makes night one useful.
@@ -79,6 +83,7 @@ This is the step that makes night one useful.
    Run my cortex-gnome skill in run mode.
    Gnome: <name>. Home: <link>. Registry row: <link>.
    This is an unattended overnight run: don't ask questions. Follow the run steps end to end, log everything, and deliver the brief to this chat and the configured channels.
+   Gnome Dispatch: <link, or none>. Post the run there and read my decisions from it.
    ```
 
 3. **Make it able to run alone.** Check and tell them, in plain steps:
@@ -111,7 +116,7 @@ Short:
 - The gnome's name, lanes, budget, and schedule
 - Where the home, Manifesto, workspace, and Registry row live, with links
 - Sources connected, and any that failed
-- What happens tonight: it runs at <time>, the brief arrives in that run's chat, reply there to review
+- What happens tonight: it runs at <time>. With a Dispatch: tomorrow morning, open the Dispatch (link) and click through. Without one: the brief arrives in that run's chat; reply there to review
 - That it starts on the Starter rung, and what earns it more room (Trust ladder)
 - One more reminder: it uses tokens every night, and the reviews are what make it worth them
 - How to hand it work: tag `gnome` in <task tool>, write `@gnome` in a Cortex record, or add a Queued row to Gnome Jobs
