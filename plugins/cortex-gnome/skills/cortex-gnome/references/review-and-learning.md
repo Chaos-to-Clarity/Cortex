@@ -4,7 +4,8 @@ Review is where the gnome gets good. Every verdict is a lesson; the Manifesto is
 
 ## Where review happens
 
-- **In the run's own chat** (default). The brief ends with a reply line. The person answers in that chat, and the session continues in review mode.
+- **On the Gnome Dispatch** (default where the host supports it): one click per item, from any device (`dispatch.md`). The next run applies every decision.
+- **In the run's own chat**. The brief ends with a reply line. The person answers in that chat, and the session continues in review mode.
 - **"Review my gnome"** in any chat: load the latest runs with unreviewed jobs.
 - **Directly in the Gnome Jobs collection**: a person sets Verdict and Feedback on rows. The next run folds these in (Unattended learning).
 - **Email or Slack replies**: only if setup configured a way to read them back. Otherwise the brief points to the chat.

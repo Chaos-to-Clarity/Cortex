@@ -9,6 +9,8 @@ The Gnome works while the team sleeps. Every night it reads what changed across 
 
 It runs on any data source. A Cortex makes it sharper, but isn't required.
 
+**Review takes one click.** Where the host can publish Artifact pages (claude.ai, Cowork), the owner reviews everything on the **Gnome Dispatch**: one private page listing what's waiting on them, ideas, what was sent, and FYIs, with Send, Approve, Changes, and Go buttons (`references/dispatch.md`). The nightly email is a short pointer to it. Elsewhere, the brief in the run's chat is the review surface.
+
 **Set expectations honestly.** An untrained gnome can spend a lot of tokens and produce nothing of value. It only knows what's valuable, and how much it may do on its own, from what the team teaches it. Teaching is the owner's job: review the brief, say keep, tweak, or kill, and say why. Start it reined in (tagged work, a small budget, propose instead of build) and give it more room only once it has proven useful (`references/setup.md`, Trust ladder). It fits best on plans with high usage limits, such as Claude Max: a nightly run can use a large share of a smaller plan's limit. On other plans, keep it on Starter and consider weekdays only. Say all of this plainly during setup, before anything is scheduled.
 
 ## Pick the mode
@@ -55,6 +57,7 @@ Before harvesting, fold in what people said about this gnome's past work (`refer
 - Jobs marked Tweak: queue a revision as a Queued job that links the original.
 - Jobs marked Approved to Ship: check the approval (`references/guardrails.md`, Approvals). Valid: queue the ship step. Not valid: leave it a draft and ask for a live approval in the brief.
 - Proposals answered Do Now or Do Next Run: move them to Queued.
+- **Dispatch decisions** (if `dispatch` is set): apply every decided, unprocessed item to its job, then mark it processed (`references/dispatch.md`, Statuses). An email the owner sent from the Dispatch is recorded as Shipped. Approved, Go, and Changes there count as the owner's live decisions.
 - First run of the week (`manifesto.consolidate_day`): run the consolidation pass.
 
 ### Step 3. Harvest
@@ -106,11 +109,13 @@ Record any guardrail incident on the run's Incident field. Update every job row 
 
 Write the brief in the format in `references/gnome-spec.md` (Brief) and deliver it to every channel in `brief.channels`: the owner version to owner-only channels, the team-safe version to shared ones and to the Run row. The run's own chat always gets the owner version: send it as a message the person reads verbatim, because they'll review it there. If nothing was harvested or everything was yielded, still send a three-line brief saying so. Lead with what needs them, end with the feedback line, and keep it short enough to read on a phone.
 
+If `dispatch` is set, post the run to the Dispatch in one batch write before sending the email (`references/dispatch.md`, Posting a run), and make the email the short pointer described there and in `references/gnome-spec.md` (Brief). Never send any email to anyone but the owner: emails for others wait on the Dispatch for the owner's Send button.
+
 Release any claim still open, refresh the Heartbeat one last time, and end.
 
 ## Review mode
 
-Follow `references/review-and-learning.md`. In short: show each job from the latest unreviewed runs, take Keep, Tweak, Kill, or Ship with a reason, answer each Proposal (Do Now, Do Next Run, Don't), write the verdicts to the jobs, propose the Manifesto changes, and apply the ones the person confirms. A person is present, so ship approvals given here can run right away, within the guardrails.
+Follow `references/review-and-learning.md`. If the owner uses the Dispatch, point them there first: most review is a click. In short: show each job from the latest unreviewed runs, take Keep, Tweak, Kill, or Ship with a reason, answer each Proposal (Do Now, Do Next Run, Don't), write the verdicts to the jobs, propose the Manifesto changes, and apply the ones the person confirms. A person is present, so ship approvals given here can run right away, within the guardrails.
 
 ## Status mode
 

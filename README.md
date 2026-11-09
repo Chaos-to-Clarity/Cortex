@@ -143,7 +143,7 @@ You choose during setup: **Notion**, **Obsidian**, **Markdown in Google Drive**,
 
 ### Cortex Gnome: the overnight worker
 
-A separate plugin in this repo. Every night it reads what changed across your Cortex, task tool, idea inbox, meetings, and repos, builds the work worth doing (decks, docs, landing pages, research, code with pull requests, drafts), logs it in your Cortex, and sends you a brief. Your feedback becomes rules in its Manifesto, so it gets better every night. Teams can run several gnomes; they share one queue and claim work before building it. It also runs without a Cortex.
+A separate plugin in this repo. Every night it reads what changed across your Cortex, task tool, idea inbox, meetings, and repos, builds the work worth doing (decks, docs, landing pages, research, code with pull requests, drafts), logs it in your Cortex, and sends you a brief. You review it all on one page, the **Gnome Dispatch**: press Send on emails, Approve or Changes on drafts, Go on ideas. Those clicks become rules in its Manifesto, so it gets better every night. Teams can run several gnomes; they share one queue and claim work before building it. It also runs without a Cortex.
 
 **Read this first:** it costs tokens every night whether or not it produces anything useful, and it's only as good as your feedback. Start it reined in and give it more room once it proves itself. Best on high-limit plans such as Claude Max. [Details](plugins/cortex-gnome/README.md).
 
