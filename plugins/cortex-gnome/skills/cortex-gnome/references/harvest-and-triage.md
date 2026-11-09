@@ -48,6 +48,7 @@ Read the Manifesto's Valuable, Skip, and Inference sections. Then for each job:
 
 - **Ruled out** by a Skip rule: Skipped, Note names the rule.
 - **Duplicate** of a job that's Ready, Shipped, or claimed by a live gnome: Skipped or Yielded.
+- **Already handled by another skill:** a follow-up, recap, or reply that is already in the owner's Sent mail or Drafts for that thread, or logged in a Recap Log or the Cortex Ingest Log for that meeting: Skipped, with the link in the Note. Never draft a second version of something another skill already wrote.
 - **In another gnome's lane**: leave it (`coordination.md`, Lanes).
 - **Needs something only a person has** (a password, a decision, a file not shared): Needs Decision, Note says what.
 

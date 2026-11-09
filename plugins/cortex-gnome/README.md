@@ -3,7 +3,8 @@
 **The overnight worker.** Every night it reads what changed across your company's context, picks the work worth doing, builds it to a ship-ready standard, stores it for review, logs everything, and sends you a brief. Every morning you review it. Your feedback becomes rules in the Manifesto, so the next night is better.
 
 ```
-/plugin install cortex-gnome --marketplace Chaos-to-Clarity/cortex
+/plugin marketplace add Chaos-to-Clarity/Cortex
+/plugin install cortex-gnome@cortex
 ```
 
 Or download the single skill: [cortex-gnome.zip](https://github.com/Chaos-to-Clarity/Cortex/releases/latest/download/cortex-gnome.zip)
@@ -29,7 +30,7 @@ Or download the single skill: [cortex-gnome.zip](https://github.com/Chaos-to-Cla
 Setup publishes your **Gnome Dispatch**, one private page you open each morning:
 
 - **Waiting on you:** drafts, decks, and proposals with Approve, Changes, and Drop, and every email to someone else with its full text and a **Send** button. Send goes from your own Gmail, as a reply in the right thread, after you confirm the recipient.
-- **Ideas, not built yet:** press **Go** and it's built tonight.
+- **Ideas, not built yet:** press **Go** and it's built within minutes.
 - **Sent:** everything that went out, and when. The gnome never sends on its own; only your Send button does.
 - **FYI:** done for you, nothing to do.
 

@@ -38,7 +38,7 @@ One row per gnome. Fields:
 
 | Field | Holds |
 | --- | --- |
-| Name | The gnome's name, unique ("Eric's Gnome", "Platform Gnome") |
+| Name | The gnome's name, unique ("Sam's Gnome", "Platform Gnome") |
 | Owner | The person who set it up and receives its brief |
 | Status | Active, Paused, Retired. Mirrors `status` in Settings; if the two disagree, the more restrictive one wins |
 | Schedule | Plain words: "Daily 7pm America/Los_Angeles" |
@@ -212,7 +212,7 @@ What the gnomes work on, how well, and what they may ship. Built from the team's
 
 ## Permissions
 Standing permissions to ship without a per-job approval. Each names exactly what, where, and who granted it. Anything not listed here stays a draft.
-- <e.g. "Merge pull requests to acme/docs that pass CI and touch only /docs" (granted by Eric, 2026-10-14)>
+- <e.g. "Merge pull requests to acme/docs that pass CI and touch only /docs" (granted by Sam, 2026-10-14)>
 
 ## Provisional
 Rules learned during unattended runs, waiting for confirmation in the next review.
@@ -222,9 +222,9 @@ Rules learned during unattended runs, waiting for confirmation in the next revie
 - 2026-10-12: Added "..." (from [[job]] Kill: "not our ICP")
 ```
 
-Every rule is one line, in the reviewer's words where possible, with a date and the job it came from. A rule can be scoped: "(Eric's Gnome only)" or "(acme/web)". Unscoped rules in Valuable, Skip, Inference, Quality bars, and Voice apply to every gnome.
+Every rule is one line, in the reviewer's words where possible, with a date and the job it came from. A rule can be scoped: "(Sam's Gnome only)" or "(acme/web)". Unscoped rules in Valuable, Skip, Inference, Quality bars, and Voice apply to every gnome.
 
-**Permissions are always scoped** to the gnome of the person who granted them, because each gnome runs on its own owner's credentials: "(Eric's Gnome, granted by Eric 2026-10-14, run <link>)". A permission line is honored only when the matching grant appears in that run's Grants section (section 3). Lines anyone adds by hand are flagged in the brief and ignored until the owner confirms them in a live review.
+**Permissions are always scoped** to the gnome of the person who granted them, because each gnome runs on its own owner's credentials: "(Sam's Gnome, granted by Sam 2026-10-14, run <link>)". A permission line is honored only when the matching grant appears in that run's Grants section (section 3). Lines anyone adds by hand are flagged in the brief and ignored until the owner confirms them in a live review.
 
 The Manifesto can narrow what the gnome does and grant ship permissions. It can never override `guardrails.md`.
 
@@ -316,9 +316,9 @@ Markdown layout:
 Cortex Gnome/
   Gnome Manifesto.md
   Registry/
-    Eric's Gnome.md
+    Sam's Gnome.md
   Runs/
-    Eric's Gnome-2026-10-12-1852.md
+    Sam's Gnome-2026-10-12-1852.md
   Jobs/
     2026-10-12-q4-board-deck.md
   Workspace/

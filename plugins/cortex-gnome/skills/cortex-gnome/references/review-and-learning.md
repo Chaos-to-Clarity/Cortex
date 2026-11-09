@@ -50,7 +50,7 @@ Rules for rules:
 
 - **One lesson, one rule.** If the lesson matches an existing rule, add a confirmation to it ("confirmed 3x") instead of a new line.
 - **Contradiction:** the newer rule replaces the older one. Log the change in the Rule log.
-- **Scope it** when the feedback is about one gnome, repo, client, or type: "(acme/web)", "(Eric's Gnome only)".
+- **Scope it** when the feedback is about one gnome, repo, client, or type: "(acme/web)", "(Sam's Gnome only)".
 - **Permissions only from the person who can grant them**: the owner of the gnome they apply to, said in a live review, never inferred from a Keep. Scope each one to that owner's gnome, record who granted it and when, and add the grant to the run's Grants section. On the Starter rung, record it but mark it "(active from Trusted)".
 - **Never** turn feedback into a rule that weakens `guardrails.md`. If someone asks for that ("just send emails, don't wait"), say which guardrail it hits and offer the nearest thing allowed (for example, a standing permission for one named recipient and one kind of message).
 - Every change gets a Rule log line: date, the change, the job it came from.
